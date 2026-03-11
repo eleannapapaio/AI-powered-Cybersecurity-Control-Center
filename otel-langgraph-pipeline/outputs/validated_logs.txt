@@ -1,0 +1,9591 @@
+{
+  "timestamp": "2026-03-10T10:15:00.123Z",
+  "level": "ERROR",
+  "message": "Failed to connect to database",
+  "service": {
+    "name": "payment-gateway",
+    "version": "2.4.1",
+    "env": "production"
+  },
+  "trace": {
+    "trace_id": "a1b2c3d4e5f6g7h8",
+    "span_id": "z9y8x7w6"
+  },
+  "event": {
+    "category": "database",
+    "action": "connection_attempt",
+    "duration_ms": 450
+  },
+  "user": {
+    "id": "user_9876",
+    "ip": "192.168.1.1"
+  },
+  "error": {
+    "code": "ECONNREFUSED",
+    "stack_trace": "Error: connect ECONNREFUSED at src/db.js:45:10"
+  },
+  "metadata": {
+    "region": "us-east-1",
+    "container_id": "f3a21bc"
+  }
+}
+---
+{
+  "timestamp": "2026-03-10T10:16:30.000Z",
+  "level": "INFO",
+  "message": "User login successful",
+  "service": {
+    "name": "auth-service",
+    "version": "1.2.0",
+    "env": "production"
+  },
+  "trace": {
+    "trace_id": "b2c3d4e5f6g7h8i9",
+    "span_id": "y8x7w6v5"
+  },
+  "event": {
+    "category": "auth",
+    "action": "login",
+    "duration_ms": 120
+  },
+  "user": {
+    "id": "user_1234",
+    "ip": "203.0.113.42"
+  },
+  "error": null,
+  "metadata": {
+    "region": "us-east-1",
+    "container_id": "d4e5f6g"
+  }
+}
+---
+{
+  "timestamp": "2026-03-09T09:36:29+02:00",
+  "level": "notice",
+  "message": "traffic forward accept: srcip=192.168.12.13:30022 dstip=208.91.112.63:123 app=NTP",
+  "service": {
+    "name": "Fortinet-NTP",
+    "version": "",
+    "env": ""
+  },
+  "trace": {
+    "trace_id": "",
+    "span_id": ""
+  },
+  "event": {
+    "category": "traffic",
+    "action": "forward",
+    "duration_ms": 180000
+  },
+  "user": {
+    "id": "",
+    "ip": "192.168.12.13"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Undefined",
+    "container_id": ""
+  }
+}
+---
+{
+  "timestamp": "2024-06-13T10:22:05Z",
+  "level": "WARN",
+  "message": "Slow query",
+  "service": {
+    "name": "analytics",
+    "version": "",
+    "env": ""
+  },
+  "trace": {
+    "trace_id": "abc123",
+    "span_id": "xyz789"
+  },
+  "event": {
+    "category": "",
+    "action": "",
+    "duration_ms": 1200
+  },
+  "user": {
+    "id": "user_0001",
+    "ip": "10.0.0.5"
+  },
+  "error": null,
+  "metadata": {
+    "region": "eu-west-1",
+    "container_id": "a1b2c3d"
+  }
+}
+---
+{
+  "timestamp": "2026-03-10T10:18:45.500Z",
+  "level": "DEBUG",
+  "message": "Cache miss",
+  "service": {
+    "name": "cache-layer",
+    "version": "3.0.0",
+    "env": "staging"
+  },
+  "trace": {
+    "trace_id": "c3d4e5f6g7h8i9j0",
+    "span_id": "x7w6v5u4"
+  },
+  "event": {
+    "category": "cache",
+    "action": "lookup",
+    "duration_ms": 5
+  },
+  "user": {
+    "id": "user_5678",
+    "ip": "10.0.0.99"
+  },
+  "error": null,
+  "metadata": {
+    "region": "ap-southeast-1",
+    "container_id": "e5f6g7h"
+  }
+}
+---
+{
+  "timestamp": "2026-02-21T02:00:01Z",
+  "level": "",
+  "message": "ping Allow Tap Traffic allow",
+  "service": {
+    "name": "TapZone",
+    "version": "",
+    "env": ""
+  },
+  "trace": {
+    "trace_id": "1ffec4dc-f038-4067-a97e-686be5869470",
+    "span_id": ""
+  },
+  "event": {
+    "category": "",
+    "action": "",
+    "duration_ms": 0
+  },
+  "user": {
+    "id": "",
+    "ip": "192.168.10.2"
+  },
+  "error": null,
+  "metadata": {
+    "region": "",
+    "container_id": ""
+  }
+}
+---
+{
+  "timestamp": "2026-03-09T09:36:30+02:00",
+  "level": "INFO",
+  "message": "traffic forward notice: srcip=192.168.12.13:24997 dstip=208.91.112.63:123 action=accept policy=Internet Access service=Fortinet-NTP duration=180ms",
+  "service": {
+    "name": "Fortinet-NTP",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "traffic",
+    "action": "accept",
+    "duration_ms": 180
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "192.168.12.13"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Undefined",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2026-03-09T09:36:29+02:00",
+  "level": "INFO",
+  "message": "traffic forward notice: srcip=192.168.12.13:30022 dstip=208.91.112.63:123 action=accept policy=Internet Access service=Fortinet-NTP duration=180ms",
+  "service": {
+    "name": "Fortinet-NTP",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "traffic",
+    "action": "accept",
+    "duration_ms": 180
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "192.168.12.13"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Undefined",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2026-03-09T09:36:28+02:00",
+  "level": "INFO",
+  "message": "traffic forward notice: srcip=192.168.12.13:39743 dstip=208.91.112.63:123 action=accept policy=Internet Access service=Fortinet-NTP duration=180ms",
+  "service": {
+    "name": "Fortinet-NTP",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "traffic",
+    "action": "accept",
+    "duration_ms": 180
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "192.168.12.13"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Undefined",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2026-03-09T09:36:28+02:00",
+  "level": "INFO",
+  "message": "traffic forward notice: srcip=192.168.12.6:57686 dstip=75.2.52.207:443 action=close policy=Unencrypted access to Claroty svcs service=Amazon-AWS.Global.Accelerator duration=1ms",
+  "service": {
+    "name": "Amazon-AWS.Global.Accelerator",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "traffic",
+    "action": "close",
+    "duration_ms": 1
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "192.168.12.6"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Undefined",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2026-03-09T09:36:27+02:00",
+  "level": "INFO",
+  "message": "traffic forward notice: srcip=192.168.12.13:46713 dstip=208.91.112.63:123 action=accept policy=Internet Access service=Fortinet-NTP duration=180ms",
+  "service": {
+    "name": "Fortinet-NTP",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "traffic",
+    "action": "accept",
+    "duration_ms": 180
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "192.168.12.13"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Undefined",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2026-03-09T09:36:26+02:00",
+  "level": "INFO",
+  "message": "traffic forward notice: srcip=192.168.12.13:58808 dstip=208.91.112.63:123 action=accept policy=Internet Access service=Fortinet-NTP duration=180ms",
+  "service": {
+    "name": "Fortinet-NTP",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "traffic",
+    "action": "accept",
+    "duration_ms": 180
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "192.168.12.13"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Undefined",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2026-03-09T09:36:26+02:00",
+  "level": "INFO",
+  "message": "traffic local notice: srcip=10.240.182.22:14726 dstip=96.45.46.46:853 action=close policy=0 service=tcp/853 duration=187ms",
+  "service": {
+    "name": "tcp/853",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "traffic",
+    "action": "close",
+    "duration_ms": 187
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "10.240.182.22"
+  },
+  "error": null,
+  "metadata": {
+    "region": "unknown",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2026-03-09T09:36:25+02:00",
+  "level": "INFO",
+  "message": "traffic forward notice: srcip=192.168.12.13:58823 dstip=208.91.112.63:123 action=accept policy=Internet Access service=Fortinet-NTP duration=180ms",
+  "service": {
+    "name": "Fortinet-NTP",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "traffic",
+    "action": "accept",
+    "duration_ms": 180
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "192.168.12.13"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Undefined",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2026-03-09T09:36:24+02:00",
+  "level": "INFO",
+  "message": "traffic forward notice: srcip=192.168.12.13:51085 dstip=208.91.112.63:123 action=accept policy=Internet Access service=Fortinet-NTP duration=180ms",
+  "service": {
+    "name": "Fortinet-NTP",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "traffic",
+    "action": "accept",
+    "duration_ms": 180
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "192.168.12.13"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Undefined",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2026-03-09T09:36:23+02:00",
+  "level": "INFO",
+  "message": "traffic forward notice: srcip=192.168.12.13:16142 dstip=208.91.112.52:53 action=accept policy=DNS Access service=Fortinet-DNS duration=180ms",
+  "service": {
+    "name": "Fortinet-DNS",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "traffic",
+    "action": "accept",
+    "duration_ms": 180
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "192.168.12.13"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Undefined",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2026-03-09T09:36:30+02:00",
+  "level": "INFO",
+  "message": "traffic forward notice: srcip=192.168.12.13:24997 dstip=208.91.112.63:123 action=accept policyname=Internet Access app=NTP duration=180ms",
+  "service": {
+    "name": "Fortinet-NTP",
+    "version": "unknown",
+    "env": "root"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "traffic",
+    "action": "accept",
+    "duration_ms": 180
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "192.168.12.13"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Undefined",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2026-03-09T09:36:29+02:00",
+  "level": "INFO",
+  "message": "traffic forward notice: srcip=192.168.12.13:30022 dstip=208.91.112.63:123 action=accept policyname=Internet Access app=NTP duration=180ms",
+  "service": {
+    "name": "Fortinet-NTP",
+    "version": "unknown",
+    "env": "root"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "traffic",
+    "action": "accept",
+    "duration_ms": 180
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "192.168.12.13"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Undefined",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2026-03-09T09:36:28+02:00",
+  "level": "INFO",
+  "message": "traffic forward notice: srcip=192.168.12.13:39743 dstip=208.91.112.63:123 action=accept policyname=Internet Access app=NTP duration=180ms",
+  "service": {
+    "name": "Fortinet-NTP",
+    "version": "unknown",
+    "env": "root"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "traffic",
+    "action": "accept",
+    "duration_ms": 180
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "192.168.12.13"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Undefined",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2026-03-09T09:36:28+02:00",
+  "level": "INFO",
+  "message": "traffic forward notice: srcip=192.168.12.6:57686 dstip=75.2.52.207:443 action=close policyname=Unencrypted access to Claroty svcs app=unknown duration=1ms",
+  "service": {
+    "name": "Amazon-AWS.Global.Accelerator",
+    "version": "unknown",
+    "env": "root"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "traffic",
+    "action": "close",
+    "duration_ms": 1
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "192.168.12.6"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Undefined",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2026-03-09T09:36:27+02:00",
+  "level": "INFO",
+  "message": "traffic forward notice: srcip=192.168.12.13:46713 dstip=208.91.112.63:123 action=accept policyname=Internet Access app=NTP duration=180ms",
+  "service": {
+    "name": "Fortinet-NTP",
+    "version": "unknown",
+    "env": "root"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "traffic",
+    "action": "accept",
+    "duration_ms": 180
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "192.168.12.13"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Undefined",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2026-03-09T09:36:26+02:00",
+  "level": "INFO",
+  "message": "traffic forward notice: srcip=192.168.12.13:58808 dstip=208.91.112.63:123 action=accept policyname=Internet Access app=NTP duration=180ms",
+  "service": {
+    "name": "Fortinet-NTP",
+    "version": "unknown",
+    "env": "root"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "traffic",
+    "action": "accept",
+    "duration_ms": 180
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "192.168.12.13"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Undefined",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2026-03-09T09:36:26+02:00",
+  "level": "INFO",
+  "message": "traffic local notice: srcip=10.240.182.22:14726 dstip=96.45.46.46:853 action=close policyname=unknown app=tcp/853 duration=187ms",
+  "service": {
+    "name": "tcp/853",
+    "version": "unknown",
+    "env": "root"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "traffic",
+    "action": "close",
+    "duration_ms": 187
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "10.240.182.22"
+  },
+  "error": null,
+  "metadata": {
+    "region": "unknown",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2026-03-09T09:36:25+02:00",
+  "level": "INFO",
+  "message": "traffic forward notice: srcip=192.168.12.13:58823 dstip=208.91.112.63:123 action=accept policyname=Internet Access app=NTP duration=180ms",
+  "service": {
+    "name": "Fortinet-NTP",
+    "version": "unknown",
+    "env": "root"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "traffic",
+    "action": "accept",
+    "duration_ms": 180
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "192.168.12.13"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Undefined",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2026-03-09T09:36:24+02:00",
+  "level": "INFO",
+  "message": "traffic forward notice: srcip=192.168.12.13:51085 dstip=208.91.112.63:123 action=accept policyname=Internet Access app=NTP duration=180ms",
+  "service": {
+    "name": "Fortinet-NTP",
+    "version": "unknown",
+    "env": "root"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "traffic",
+    "action": "accept",
+    "duration_ms": 180
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "192.168.12.13"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Undefined",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2026-03-09T09:36:23+02:00",
+  "level": "INFO",
+  "message": "traffic forward notice: srcip=192.168.12.13:16142 dstip=208.91.112.52:53 action=accept policyname=DNS Access app=unknown duration=180ms",
+  "service": {
+    "name": "Fortinet-DNS",
+    "version": "unknown",
+    "env": "root"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "traffic",
+    "action": "accept",
+    "duration_ms": 180
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "192.168.12.13"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Undefined",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2026-03-09T09:36:30+02:00",
+  "level": "INFO",
+  "message": "Traffic forward notice: srcip=192.168.12.13:24997 dstip=208.91.112.63:123 action=accept policy=Internet Access",
+  "service": {
+    "name": "Fortinet-NTP",
+    "version": "unknown",
+    "env": "root"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "traffic",
+    "action": "accept",
+    "duration_ms": 180000
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "192.168.12.13"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Undefined",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2026-03-09T09:36:29+02:00",
+  "level": "INFO",
+  "message": "Traffic forward notice: srcip=192.168.12.13:30022 dstip=208.91.112.63:123 action=accept policy=Internet Access",
+  "service": {
+    "name": "Fortinet-NTP",
+    "version": "unknown",
+    "env": "root"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "traffic",
+    "action": "accept",
+    "duration_ms": 180000
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "192.168.12.13"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Undefined",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2026-03-09T09:36:28+02:00",
+  "level": "INFO",
+  "message": "Traffic forward notice: srcip=192.168.12.13:39743 dstip=208.91.112.63:123 action=accept policy=Internet Access",
+  "service": {
+    "name": "Fortinet-NTP",
+    "version": "unknown",
+    "env": "root"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "traffic",
+    "action": "accept",
+    "duration_ms": 180000
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "192.168.12.13"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Undefined",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2026-03-09T09:36:28+02:00",
+  "level": "INFO",
+  "message": "Traffic forward notice: srcip=192.168.12.6:57686 dstip=75.2.52.207:443 action=close policy=Unencrypted access to Claroty svcs",
+  "service": {
+    "name": "Amazon-AWS.Global.Accelerator",
+    "version": "unknown",
+    "env": "root"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "traffic",
+    "action": "close",
+    "duration_ms": 1000
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "192.168.12.6"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Undefined",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2026-03-09T09:36:27+02:00",
+  "level": "INFO",
+  "message": "Traffic forward notice: srcip=192.168.12.13:46713 dstip=208.91.112.63:123 action=accept policy=Internet Access",
+  "service": {
+    "name": "Fortinet-NTP",
+    "version": "unknown",
+    "env": "root"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "traffic",
+    "action": "accept",
+    "duration_ms": 180000
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "192.168.12.13"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Undefined",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2026-03-09T09:36:26+02:00",
+  "level": "INFO",
+  "message": "Traffic forward notice: srcip=192.168.12.13:58808 dstip=208.91.112.63:123 action=accept policy=Internet Access",
+  "service": {
+    "name": "Fortinet-NTP",
+    "version": "unknown",
+    "env": "root"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "traffic",
+    "action": "accept",
+    "duration_ms": 180000
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "192.168.12.13"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Undefined",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2026-03-09T09:36:26+02:00",
+  "level": "INFO",
+  "message": "Traffic local notice: srcip=10.240.182.22:14726 dstip=96.45.46.46:853 action=close policyid=0",
+  "service": {
+    "name": "tcp/853",
+    "version": "unknown",
+    "env": "root"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "traffic",
+    "action": "close",
+    "duration_ms": 187000
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "10.240.182.22"
+  },
+  "error": null,
+  "metadata": {
+    "region": "unknown",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2026-03-09T09:36:25+02:00",
+  "level": "INFO",
+  "message": "Traffic forward notice: srcip=192.168.12.13:58823 dstip=208.91.112.63:123 action=accept policy=Internet Access",
+  "service": {
+    "name": "Fortinet-NTP",
+    "version": "unknown",
+    "env": "root"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "traffic",
+    "action": "accept",
+    "duration_ms": 180000
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "192.168.12.13"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Undefined",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2026-03-09T09:36:24+02:00",
+  "level": "INFO",
+  "message": "Traffic forward notice: srcip=192.168.12.13:51085 dstip=208.91.112.63:123 action=accept policy=Internet Access",
+  "service": {
+    "name": "Fortinet-NTP",
+    "version": "unknown",
+    "env": "root"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "traffic",
+    "action": "accept",
+    "duration_ms": 180000
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "192.168.12.13"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Undefined",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2026-03-09T09:36:23+02:00",
+  "level": "INFO",
+  "message": "Traffic forward notice: srcip=192.168.12.13:16142 dstip=208.91.112.52:53 action=accept policy=DNS Access",
+  "service": {
+    "name": "Fortinet-DNS",
+    "version": "unknown",
+    "env": "root"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "traffic",
+    "action": "accept",
+    "duration_ms": 180000
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "192.168.12.13"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Undefined",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-08-09T13:57:56.503168512Z",
+  "level": "INFO",
+  "message": "Timestamp,IP_Address,Request_Type,Status_Code,Anomaly_Flag,User_Agent,Session_ID,Location",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "log",
+    "action": "unknown",
+    "duration_ms": 0
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "unknown"
+  },
+  "error": null,
+  "metadata": {
+    "region": "unknown",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-08-09T13:57:56.503168512Z",
+  "level": "INFO",
+  "message": "2023-01-01 00:00:00,202.118.116.11,GET,403,0,Edge,4835,Brazil",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "access",
+    "action": "GET",
+    "duration_ms": 4835
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "202.118.116.11"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Brazil",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-08-09T13:57:56.503168512Z",
+  "level": "INFO",
+  "message": "2023-01-01 00:01:00,38.30.40.178,DELETE,301,0,Bot,3176,China",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "access",
+    "action": "DELETE",
+    "duration_ms": 3176
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "38.30.40.178"
+  },
+  "error": null,
+  "metadata": {
+    "region": "China",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-08-09T13:57:56.503168512Z",
+  "level": "INFO",
+  "message": "2023-01-01 00:02:00,209.5.148.15,POST,500,0,Opera,4312,China",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "access",
+    "action": "POST",
+    "duration_ms": 4312
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "209.5.148.15"
+  },
+  "error": null,
+  "metadata": {
+    "region": "China",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-08-09T13:57:56.503168512Z",
+  "level": "INFO",
+  "message": "2023-01-01 00:03:00,211.116.60.71,GET,301,0,Bot,1003,France",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "access",
+    "action": "GET",
+    "duration_ms": 1003
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "211.116.60.71"
+  },
+  "error": null,
+  "metadata": {
+    "region": "France",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-08-09T13:57:56.503168512Z",
+  "level": "INFO",
+  "message": "2023-01-01 00:04:00,170.166.36.145,POST,404,0,Firefox,1428,Germany",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "access",
+    "action": "POST",
+    "duration_ms": 1428
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "170.166.36.145"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Germany",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-08-09T13:57:56.503168512Z",
+  "level": "INFO",
+  "message": "2023-01-01 00:05:00,147.178.175.124,DELETE,404,0,Firefox,2954,Brazil",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "access",
+    "action": "DELETE",
+    "duration_ms": 2954
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "147.178.175.124"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Brazil",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-08-09T13:57:56.503168512Z",
+  "level": "INFO",
+  "message": "2023-01-01 00:06:00,185.82.155.197,PUT,403,0,Firefox,2312,India",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "access",
+    "action": "PUT",
+    "duration_ms": 2312
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "185.82.155.197"
+  },
+  "error": null,
+  "metadata": {
+    "region": "India",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-08-09T13:57:56.503168512Z",
+  "level": "INFO",
+  "message": "2023-01-01 00:07:00,141.123.71.55,GET,500,0,Chrome,3302,China",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "access",
+    "action": "GET",
+    "duration_ms": 3302
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "141.123.71.55"
+  },
+  "error": null,
+  "metadata": {
+    "region": "China",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-08-09T13:57:56.503168512Z",
+  "level": "INFO",
+  "message": "2023-01-01 00:08:00,40.83.200.82,GET,403,0,Safari,4240,India",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "access",
+    "action": "GET",
+    "duration_ms": 4240
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "40.83.200.82"
+  },
+  "error": null,
+  "metadata": {
+    "region": "India",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T08:19:00Z",
+  "level": "INFO",
+  "message": "GET request from 209.168.149.237 using Firefox in USA, status 500, duration 1843ms",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "web",
+    "action": "GET",
+    "duration_ms": 1843
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "209.168.149.237"
+  },
+  "error": {
+    "code": "500",
+    "stack_trace": "unknown"
+  },
+  "metadata": {
+    "region": "USA",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T08:20:00Z",
+  "level": "INFO",
+  "message": "GET request from 114.116.30.157 using Chrome in China, status 200, duration 2984ms",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "web",
+    "action": "GET",
+    "duration_ms": 2984
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "114.116.30.157"
+  },
+  "error": null,
+  "metadata": {
+    "region": "China",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T08:21:00Z",
+  "level": "INFO",
+  "message": "PUT request from 183.23.28.95 using Chrome in India, status 200, duration 2132ms",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "web",
+    "action": "PUT",
+    "duration_ms": 2132
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "183.23.28.95"
+  },
+  "error": null,
+  "metadata": {
+    "region": "India",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T08:22:00Z",
+  "level": "INFO",
+  "message": "POST request from 94.217.147.89 using Opera in Canada, status 200, duration 3156ms",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "web",
+    "action": "POST",
+    "duration_ms": 3156
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "94.217.147.89"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Canada",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T08:23:00Z",
+  "level": "INFO",
+  "message": "POST request from 81.240.119.20 using Opera in USA, status 200, duration 1595ms",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "web",
+    "action": "POST",
+    "duration_ms": 1595
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "81.240.119.20"
+  },
+  "error": null,
+  "metadata": {
+    "region": "USA",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T08:24:00Z",
+  "level": "INFO",
+  "message": "PUT request from 101.58.211.7 using Edge in France, status 500, duration 4182ms",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "web",
+    "action": "PUT",
+    "duration_ms": 4182
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "101.58.211.7"
+  },
+  "error": {
+    "code": "500",
+    "stack_trace": "unknown"
+  },
+  "metadata": {
+    "region": "France",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T08:25:00Z",
+  "level": "INFO",
+  "message": "PUT request from 162.126.49.147 using Edge in France, status 500, duration 1805ms",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "web",
+    "action": "PUT",
+    "duration_ms": 1805
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "162.126.49.147"
+  },
+  "error": {
+    "code": "500",
+    "stack_trace": "unknown"
+  },
+  "metadata": {
+    "region": "France",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T08:26:00Z",
+  "level": "INFO",
+  "message": "PUT request from 202.188.147.143 using Chrome in Germany, status 500, duration 3195ms",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "web",
+    "action": "PUT",
+    "duration_ms": 3195
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "202.188.147.143"
+  },
+  "error": {
+    "code": "500",
+    "stack_trace": "unknown"
+  },
+  "metadata": {
+    "region": "Germany",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T08:27:00Z",
+  "level": "INFO",
+  "message": "PUT request from 85.73.186.19 using Chrome in France, status 500, duration 4877ms",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "web",
+    "action": "PUT",
+    "duration_ms": 4877
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "85.73.186.19"
+  },
+  "error": {
+    "code": "500",
+    "stack_trace": "unknown"
+  },
+  "metadata": {
+    "region": "France",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T08:28:00Z",
+  "level": "INFO",
+  "message": "DELETE request from 167.177.114.161 using Safari in Brazil, status 500, duration 2109ms",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "web",
+    "action": "DELETE",
+    "duration_ms": 2109
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "167.177.114.161"
+  },
+  "error": {
+    "code": "500",
+    "stack_trace": "unknown"
+  },
+  "metadata": {
+    "region": "Brazil",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2026-03-13T01:10:32.872912128Z",
+  "level": "INFO",
+  "message": "Timestamp,IP_Address,Request_Type,Status_Code,Anomaly_Flag,User_Agent,Session_ID,Location",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "log",
+    "action": "header",
+    "duration_ms": 0
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "unknown"
+  },
+  "error": null,
+  "metadata": {
+    "region": "unknown",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2026-03-13T01:10:32.872912128Z",
+  "level": "INFO",
+  "message": "2023-01-01 00:00:00,202.118.116.11,GET,403,0,Edge,4835,Brazil",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "GET",
+    "duration_ms": 0
+  },
+  "user": {
+    "id": "4835",
+    "ip": "202.118.116.11"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Brazil",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2026-03-13T01:10:32.872912128Z",
+  "level": "INFO",
+  "message": "2023-01-01 00:01:00,38.30.40.178,DELETE,301,0,Bot,3176,China",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "DELETE",
+    "duration_ms": 0
+  },
+  "user": {
+    "id": "3176",
+    "ip": "38.30.40.178"
+  },
+  "error": null,
+  "metadata": {
+    "region": "China",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2026-03-13T01:10:32.872912128Z",
+  "level": "INFO",
+  "message": "2023-01-01 00:02:00,209.5.148.15,POST,500,0,Opera,4312,China",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "POST",
+    "duration_ms": 0
+  },
+  "user": {
+    "id": "4312",
+    "ip": "209.5.148.15"
+  },
+  "error": null,
+  "metadata": {
+    "region": "China",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2026-03-13T01:10:32.872912128Z",
+  "level": "INFO",
+  "message": "2023-01-01 00:03:00,211.116.60.71,GET,301,0,Bot,1003,France",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "GET",
+    "duration_ms": 0
+  },
+  "user": {
+    "id": "1003",
+    "ip": "211.116.60.71"
+  },
+  "error": null,
+  "metadata": {
+    "region": "France",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2026-03-13T01:10:32.872912128Z",
+  "level": "INFO",
+  "message": "2023-01-01 00:04:00,170.166.36.145,POST,404,0,Firefox,1428,Germany",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "POST",
+    "duration_ms": 0
+  },
+  "user": {
+    "id": "1428",
+    "ip": "170.166.36.145"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Germany",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2026-03-13T01:10:32.872912128Z",
+  "level": "INFO",
+  "message": "2023-01-01 00:05:00,147.178.175.124,DELETE,404,0,Firefox,2954,Brazil",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "DELETE",
+    "duration_ms": 0
+  },
+  "user": {
+    "id": "2954",
+    "ip": "147.178.175.124"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Brazil",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2026-03-13T01:10:32.872912128Z",
+  "level": "INFO",
+  "message": "2023-01-01 00:06:00,185.82.155.197,PUT,403,0,Firefox,2312,India",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "PUT",
+    "duration_ms": 0
+  },
+  "user": {
+    "id": "2312",
+    "ip": "185.82.155.197"
+  },
+  "error": null,
+  "metadata": {
+    "region": "India",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2026-03-13T01:10:32.872912128Z",
+  "level": "INFO",
+  "message": "2023-01-01 00:07:00,141.123.71.55,GET,500,0,Chrome,3302,China",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "GET",
+    "duration_ms": 0
+  },
+  "user": {
+    "id": "3302",
+    "ip": "141.123.71.55"
+  },
+  "error": null,
+  "metadata": {
+    "region": "China",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2026-03-13T01:10:32.872912128Z",
+  "level": "INFO",
+  "message": "2023-01-01 00:08:00,40.83.200.82,GET,403,0,Safari,4240,India",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "GET",
+    "duration_ms": 0
+  },
+  "user": {
+    "id": "4240",
+    "ip": "40.83.200.82"
+  },
+  "error": null,
+  "metadata": {
+    "region": "India",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:09:00Z",
+  "level": "INFO",
+  "message": "DELETE request from 177.220.98.191 returned 500 in 2382ms (Edge, Canada)",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "DELETE",
+    "duration_ms": 2382
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "177.220.98.191"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Canada",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:10:00Z",
+  "level": "INFO",
+  "message": "PUT request from 123.155.87.205 returned 500 in 1448ms (Edge, Germany)",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "PUT",
+    "duration_ms": 1448
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "123.155.87.205"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Germany",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:11:00Z",
+  "level": "INFO",
+  "message": "PUT request from 46.140.242.46 returned 404 in 3871ms (Chrome, China)",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "PUT",
+    "duration_ms": 3871
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "46.140.242.46"
+  },
+  "error": null,
+  "metadata": {
+    "region": "China",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:12:00Z",
+  "level": "INFO",
+  "message": "GET request from 188.12.135.72 returned 500 in 3667ms (Firefox, France)",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "GET",
+    "duration_ms": 3667
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "188.12.135.72"
+  },
+  "error": null,
+  "metadata": {
+    "region": "France",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:13:00Z",
+  "level": "INFO",
+  "message": "DELETE request from 76.73.42.216 returned 404 in 3826ms (Safari, China)",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "DELETE",
+    "duration_ms": 3826
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "76.73.42.216"
+  },
+  "error": null,
+  "metadata": {
+    "region": "China",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:14:00Z",
+  "level": "INFO",
+  "message": "DELETE request from 173.46.159.172 returned 301 in 4859ms (Safari, Germany)",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "DELETE",
+    "duration_ms": 4859
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "173.46.159.172"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Germany",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:15:00Z",
+  "level": "INFO",
+  "message": "PUT request from 19.246.46.181 returned 200 in 3573ms (Chrome, India)",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "PUT",
+    "duration_ms": 3573
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "19.246.46.181"
+  },
+  "error": null,
+  "metadata": {
+    "region": "India",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:16:00Z",
+  "level": "INFO",
+  "message": "GET request from 4.4.190.187 returned 403 in 3188ms (Chrome, France)",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "GET",
+    "duration_ms": 3188
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "4.4.190.187"
+  },
+  "error": null,
+  "metadata": {
+    "region": "France",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:17:00Z",
+  "level": "INFO",
+  "message": "DELETE request from 22.61.238.44 returned 403 in 3875ms (Firefox, USA)",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "DELETE",
+    "duration_ms": 3875
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "22.61.238.44"
+  },
+  "error": null,
+  "metadata": {
+    "region": "USA",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:18:00Z",
+  "level": "INFO",
+  "message": "POST request from 7.195.87.63 returned 200 in 4611ms (Chrome, France)",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "POST",
+    "duration_ms": 4611
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "7.195.87.63"
+  },
+  "error": null,
+  "metadata": {
+    "region": "France",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:19:00Z",
+  "level": "INFO",
+  "message": "GET request from 94.122.137.2 using Firefox, status 500, duration 3661 ms, region Canada",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "GET",
+    "duration_ms": 3661
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "94.122.137.2"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Canada",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:20:00Z",
+  "level": "INFO",
+  "message": "GET request from 228.119.208.58 using Bot, status 500, duration 4169 ms, region France",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "GET",
+    "duration_ms": 4169
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "228.119.208.58"
+  },
+  "error": null,
+  "metadata": {
+    "region": "France",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:21:00Z",
+  "level": "INFO",
+  "message": "PUT request from 232.247.210.7 using Opera, status 403, duration 4162 ms, region Brazil",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "PUT",
+    "duration_ms": 4162
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "232.247.210.7"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Brazil",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:22:00Z",
+  "level": "INFO",
+  "message": "PUT request from 155.44.197.16 using Safari, status 500, duration 3868 ms, region France",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "PUT",
+    "duration_ms": 3868
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "155.44.197.16"
+  },
+  "error": null,
+  "metadata": {
+    "region": "France",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:23:00Z",
+  "level": "INFO",
+  "message": "POST request from 128.203.15.135 using Chrome, status 200, duration 3186 ms, region Brazil",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "POST",
+    "duration_ms": 3186
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "128.203.15.135"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Brazil",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:24:00Z",
+  "level": "INFO",
+  "message": "POST request from 194.122.185.22 using Firefox, status 301, duration 1930 ms, region India",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "POST",
+    "duration_ms": 1930
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "194.122.185.22"
+  },
+  "error": null,
+  "metadata": {
+    "region": "India",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:25:00Z",
+  "level": "INFO",
+  "message": "PUT request from 2.99.58.11 using Chrome, status 301, duration 4338 ms, region Brazil",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "PUT",
+    "duration_ms": 4338
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "2.99.58.11"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Brazil",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:26:00Z",
+  "level": "INFO",
+  "message": "PUT request from 84.142.16.44 using Opera, status 404, duration 3146 ms, region USA",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "PUT",
+    "duration_ms": 3146
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "84.142.16.44"
+  },
+  "error": null,
+  "metadata": {
+    "region": "USA",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:27:00Z",
+  "level": "INFO",
+  "message": "DELETE request from 72.134.175.94 using Firefox, status 301, duration 2477 ms, region Brazil",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "DELETE",
+    "duration_ms": 2477
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "72.134.175.94"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Brazil",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:28:00Z",
+  "level": "INFO",
+  "message": "POST request from 205.235.130.80 using Bot, status 301, duration 2869 ms, region USA",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "POST",
+    "duration_ms": 2869
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "205.235.130.80"
+  },
+  "error": null,
+  "metadata": {
+    "region": "USA",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:29:00Z",
+  "level": "INFO",
+  "message": "GET request from 28.102.140.226 using Safari, status 500, duration 1420ms, region Brazil",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "GET",
+    "duration_ms": 1420
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "28.102.140.226"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Brazil",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:30:00Z",
+  "level": "INFO",
+  "message": "DELETE request from 94.112.247.106 using Safari, status 200, duration 4352ms, region France",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "DELETE",
+    "duration_ms": 4352
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "94.112.247.106"
+  },
+  "error": null,
+  "metadata": {
+    "region": "France",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:31:00Z",
+  "level": "INFO",
+  "message": "PUT request from 5.113.191.3 using Edge, status 500, duration 4031ms, region USA",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "PUT",
+    "duration_ms": 4031
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "5.113.191.3"
+  },
+  "error": null,
+  "metadata": {
+    "region": "USA",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:32:00Z",
+  "level": "INFO",
+  "message": "POST request from 36.225.121.216 using Edge, status 200, duration 1995ms, region China",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "POST",
+    "duration_ms": 1995
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "36.225.121.216"
+  },
+  "error": null,
+  "metadata": {
+    "region": "China",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:33:00Z",
+  "level": "INFO",
+  "message": "DELETE request from 64.192.77.26 using Bot, status 403, duration 2971ms, region India",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "DELETE",
+    "duration_ms": 2971
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "64.192.77.26"
+  },
+  "error": null,
+  "metadata": {
+    "region": "India",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:34:00Z",
+  "level": "INFO",
+  "message": "DELETE request from 233.214.54.45 using Firefox, status 200, duration 4581ms, region France",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "DELETE",
+    "duration_ms": 4581
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "233.214.54.45"
+  },
+  "error": null,
+  "metadata": {
+    "region": "France",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:35:00Z",
+  "level": "INFO",
+  "message": "GET request from 137.46.0.186 using Bot, status 403, duration 2335ms, region France",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "GET",
+    "duration_ms": 2335
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "137.46.0.186"
+  },
+  "error": null,
+  "metadata": {
+    "region": "France",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:36:00Z",
+  "level": "INFO",
+  "message": "PUT request from 180.83.219.29 using Firefox, status 404, duration 4008ms, region Brazil",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "PUT",
+    "duration_ms": 4008
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "180.83.219.29"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Brazil",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:37:00Z",
+  "level": "INFO",
+  "message": "POST request from 211.151.129.254 using Edge, status 200, duration 3703ms, region India",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "POST",
+    "duration_ms": 3703
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "211.151.129.254"
+  },
+  "error": null,
+  "metadata": {
+    "region": "India",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:38:00Z",
+  "level": "INFO",
+  "message": "PUT request from 56.216.63.200 using Safari, status 404, duration 3373ms, region India",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "PUT",
+    "duration_ms": 3373
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "56.216.63.200"
+  },
+  "error": null,
+  "metadata": {
+    "region": "India",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:39:00Z",
+  "level": "INFO",
+  "message": "DELETE request from 57.184.152.254 returned 404 in 4789ms (Chrome, France)",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "DELETE",
+    "duration_ms": 4789
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "57.184.152.254"
+  },
+  "error": null,
+  "metadata": {
+    "region": "France",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:40:00Z",
+  "level": "INFO",
+  "message": "POST request from 68.24.220.3 returned 200 in 1514ms (Edge, Canada)",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "POST",
+    "duration_ms": 1514
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "68.24.220.3"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Canada",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:41:00Z",
+  "level": "INFO",
+  "message": "DELETE request from 56.30.177.241 returned 200 in 3410ms (Bot, Brazil)",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "DELETE",
+    "duration_ms": 3410
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "56.30.177.241"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Brazil",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:42:00Z",
+  "level": "INFO",
+  "message": "GET request from 11.122.110.234 returned 200 in 4577ms (Chrome, Germany)",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "GET",
+    "duration_ms": 4577
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "11.122.110.234"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Germany",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:43:00Z",
+  "level": "INFO",
+  "message": "PUT request from 181.79.205.102 returned 403 in 4992ms (Opera, USA)",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "PUT",
+    "duration_ms": 4992
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "181.79.205.102"
+  },
+  "error": null,
+  "metadata": {
+    "region": "USA",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:44:00Z",
+  "level": "INFO",
+  "message": "GET request from 71.229.141.166 returned 200 in 2318ms (Safari, Germany)",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "GET",
+    "duration_ms": 2318
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "71.229.141.166"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Germany",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:45:00Z",
+  "level": "INFO",
+  "message": "GET request from 61.143.5.174 returned 404 in 3841ms (Edge, India)",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "GET",
+    "duration_ms": 3841
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "61.143.5.174"
+  },
+  "error": null,
+  "metadata": {
+    "region": "India",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:46:00Z",
+  "level": "INFO",
+  "message": "GET request from 127.85.6.184 returned 301 in 2929ms (Chrome, Canada)",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "GET",
+    "duration_ms": 2929
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "127.85.6.184"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Canada",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:47:00Z",
+  "level": "INFO",
+  "message": "PUT request from 54.233.211.254 returned 404 in 2636ms (Bot, Canada)",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "PUT",
+    "duration_ms": 2636
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "54.233.211.254"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Canada",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:48:00Z",
+  "level": "INFO",
+  "message": "PUT request from 62.107.11.67 returned 301 in 4441ms (Chrome, France)",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "PUT",
+    "duration_ms": 4441
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "62.107.11.67"
+  },
+  "error": null,
+  "metadata": {
+    "region": "France",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:49:00Z",
+  "level": "INFO",
+  "message": "DELETE request from 104.230.37.139 using Firefox, status 403, duration 2061ms, region India",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "DELETE",
+    "duration_ms": 2061
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "104.230.37.139"
+  },
+  "error": null,
+  "metadata": {
+    "region": "India",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:50:00Z",
+  "level": "INFO",
+  "message": "DELETE request from 86.92.0.209 using Safari, status 301, duration 2186ms, region USA",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "DELETE",
+    "duration_ms": 2186
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "86.92.0.209"
+  },
+  "error": null,
+  "metadata": {
+    "region": "USA",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:51:00Z",
+  "level": "INFO",
+  "message": "PUT request from 180.36.188.12 using Edge, status 200, duration 4598ms, region China",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "PUT",
+    "duration_ms": 4598
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "180.36.188.12"
+  },
+  "error": null,
+  "metadata": {
+    "region": "China",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:52:00Z",
+  "level": "INFO",
+  "message": "POST request from 113.212.21.131 using Firefox, status 301, duration 3657ms, region China",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "POST",
+    "duration_ms": 3657
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "113.212.21.131"
+  },
+  "error": null,
+  "metadata": {
+    "region": "China",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:53:00Z",
+  "level": "INFO",
+  "message": "POST request from 245.196.201.102 using Chrome, status 403, duration 2212ms, region China",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "POST",
+    "duration_ms": 2212
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "245.196.201.102"
+  },
+  "error": null,
+  "metadata": {
+    "region": "China",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:54:00Z",
+  "level": "INFO",
+  "message": "PUT request from 87.187.63.202 using Opera, status 404, duration 1285ms, region France",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "PUT",
+    "duration_ms": 1285
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "87.187.63.202"
+  },
+  "error": null,
+  "metadata": {
+    "region": "France",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:55:00Z",
+  "level": "INFO",
+  "message": "PUT request from 112.236.70.94 using Firefox, status 404, duration 2843ms, region Germany",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "PUT",
+    "duration_ms": 2843
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "112.236.70.94"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Germany",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:56:00Z",
+  "level": "INFO",
+  "message": "POST request from 134.65.57.27 using Opera, status 403, duration 1416ms, region India",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "POST",
+    "duration_ms": 1416
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "134.65.57.27"
+  },
+  "error": null,
+  "metadata": {
+    "region": "India",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:57:00Z",
+  "level": "INFO",
+  "message": "GET request from 137.142.38.76 using Firefox, status 403, duration 3574ms, region Germany",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "GET",
+    "duration_ms": 3574
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "137.142.38.76"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Germany",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:58:00Z",
+  "level": "INFO",
+  "message": "PUT request from 127.154.99.220 using Chrome, status 200, duration 3490ms, region Canada",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "PUT",
+    "duration_ms": 3490
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "127.154.99.220"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Canada",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:59:00Z",
+  "level": "INFO",
+  "message": "PUT request from 180.214.164.72 returned 403 using Firefox in India",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "PUT",
+    "duration_ms": 1226
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "180.214.164.72"
+  },
+  "error": null,
+  "metadata": {
+    "region": "India",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T01:00:00Z",
+  "level": "INFO",
+  "message": "DELETE request from 76.241.82.143 returned 404 using Bot in France",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "DELETE",
+    "duration_ms": 3636
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "76.241.82.143"
+  },
+  "error": null,
+  "metadata": {
+    "region": "France",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T01:01:00Z",
+  "level": "INFO",
+  "message": "PUT request from 24.103.46.157 returned 404 using Firefox in China",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "PUT",
+    "duration_ms": 4336
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "24.103.46.157"
+  },
+  "error": null,
+  "metadata": {
+    "region": "China",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T01:02:00Z",
+  "level": "INFO",
+  "message": "POST request from 117.235.228.164 returned 500 using Edge in China",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "POST",
+    "duration_ms": 1429
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "117.235.228.164"
+  },
+  "error": null,
+  "metadata": {
+    "region": "China",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T01:03:00Z",
+  "level": "INFO",
+  "message": "PUT request from 246.44.27.106 returned 301 using Firefox in China",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "PUT",
+    "duration_ms": 2569
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "246.44.27.106"
+  },
+  "error": null,
+  "metadata": {
+    "region": "China",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T01:04:00Z",
+  "level": "INFO",
+  "message": "DELETE request from 106.95.111.222 returned 403 using Bot in France",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "DELETE",
+    "duration_ms": 4239
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "106.95.111.222"
+  },
+  "error": null,
+  "metadata": {
+    "region": "France",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T01:05:00Z",
+  "level": "INFO",
+  "message": "DELETE request from 145.84.117.220 returned 404 using Edge in China",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "DELETE",
+    "duration_ms": 3493
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "145.84.117.220"
+  },
+  "error": null,
+  "metadata": {
+    "region": "China",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T01:06:00Z",
+  "level": "INFO",
+  "message": "PUT request from 170.121.189.114 returned 404 using Opera in India",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "PUT",
+    "duration_ms": 4284
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "170.121.189.114"
+  },
+  "error": null,
+  "metadata": {
+    "region": "India",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T01:07:00Z",
+  "level": "INFO",
+  "message": "DELETE request from 126.177.157.135 returned 200 using Bot in India",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "DELETE",
+    "duration_ms": 4153
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "126.177.157.135"
+  },
+  "error": null,
+  "metadata": {
+    "region": "India",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T01:08:00Z",
+  "level": "INFO",
+  "message": "POST request from 200.253.221.177 returned 403 using Firefox in China",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "POST",
+    "duration_ms": 2651
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "200.253.221.177"
+  },
+  "error": null,
+  "metadata": {
+    "region": "China",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T01:09:00Z",
+  "level": "INFO",
+  "message": "PUT request from 43.253.13.220 returned 403 in 2833ms (India, Bot)",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "PUT",
+    "duration_ms": 2833
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "43.253.13.220"
+  },
+  "error": null,
+  "metadata": {
+    "region": "India",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T01:10:00Z",
+  "level": "INFO",
+  "message": "POST request from 80.83.235.71 returned 301 in 1143ms (Brazil, Chrome)",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "POST",
+    "duration_ms": 1143
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "80.83.235.71"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Brazil",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T01:11:00Z",
+  "level": "INFO",
+  "message": "POST request from 157.219.163.80 returned 500 in 1732ms (Canada, Edge)",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "POST",
+    "duration_ms": 1732
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "157.219.163.80"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Canada",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T01:12:00Z",
+  "level": "INFO",
+  "message": "DELETE request from 76.138.248.247 returned 200 in 1097ms (France, Safari)",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "DELETE",
+    "duration_ms": 1097
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "76.138.248.247"
+  },
+  "error": null,
+  "metadata": {
+    "region": "France",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T01:13:00Z",
+  "level": "INFO",
+  "message": "DELETE request from 214.161.221.180 returned 200 in 4112ms (Brazil, Edge)",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "DELETE",
+    "duration_ms": 4112
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "214.161.221.180"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Brazil",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T01:14:00Z",
+  "level": "INFO",
+  "message": "POST request from 187.141.57.240 returned 200 in 3568ms (China, Safari)",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "POST",
+    "duration_ms": 3568
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "187.141.57.240"
+  },
+  "error": null,
+  "metadata": {
+    "region": "China",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T01:15:00Z",
+  "level": "INFO",
+  "message": "PUT request from 11.51.160.40 returned 500 in 3541ms (USA, Edge)",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "PUT",
+    "duration_ms": 3541
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "11.51.160.40"
+  },
+  "error": null,
+  "metadata": {
+    "region": "USA",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T01:16:00Z",
+  "level": "INFO",
+  "message": "GET request from 162.217.29.79 returned 301 in 1145ms (Brazil, Edge)",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "GET",
+    "duration_ms": 1145
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "162.217.29.79"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Brazil",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T01:17:00Z",
+  "level": "INFO",
+  "message": "PUT request from 102.4.114.138 returned 301 in 2987ms (France, Safari)",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "PUT",
+    "duration_ms": 2987
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "102.4.114.138"
+  },
+  "error": null,
+  "metadata": {
+    "region": "France",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T01:18:00Z",
+  "level": "INFO",
+  "message": "DELETE request from 96.185.134.255 returned 500 in 2607ms (China, Edge)",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "DELETE",
+    "duration_ms": 2607
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "96.185.134.255"
+  },
+  "error": null,
+  "metadata": {
+    "region": "China",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T01:19:00Z",
+  "level": "INFO",
+  "message": "POST request from 173.76.57.247 returned 404 in 4371ms (Safari, China)",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "POST",
+    "duration_ms": 4371
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "173.76.57.247"
+  },
+  "error": null,
+  "metadata": {
+    "region": "China",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T01:20:00Z",
+  "level": "INFO",
+  "message": "PUT request from 26.243.55.152 returned 403 in 4362ms (Opera, China)",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "PUT",
+    "duration_ms": 4362
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "26.243.55.152"
+  },
+  "error": null,
+  "metadata": {
+    "region": "China",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T01:21:00Z",
+  "level": "INFO",
+  "message": "DELETE request from 58.20.76.30 returned 404 in 1300ms (Chrome, India)",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "DELETE",
+    "duration_ms": 1300
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "58.20.76.30"
+  },
+  "error": null,
+  "metadata": {
+    "region": "India",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T01:22:00Z",
+  "level": "INFO",
+  "message": "POST request from 221.11.192.181 returned 200 in 3996ms (Safari, Germany)",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "POST",
+    "duration_ms": 3996
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "221.11.192.181"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Germany",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T01:23:00Z",
+  "level": "INFO",
+  "message": "POST request from 198.54.158.207 returned 404 in 2843ms (Opera, India)",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "POST",
+    "duration_ms": 2843
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "198.54.158.207"
+  },
+  "error": null,
+  "metadata": {
+    "region": "India",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T01:24:00Z",
+  "level": "INFO",
+  "message": "POST request from 237.118.244.20 returned 500 in 1830ms (Opera, Brazil)",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "POST",
+    "duration_ms": 1830
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "237.118.244.20"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Brazil",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T01:25:00Z",
+  "level": "INFO",
+  "message": "GET request from 80.130.180.25 returned 403 in 1236ms (Edge, Brazil)",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "GET",
+    "duration_ms": 1236
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "80.130.180.25"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Brazil",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T01:26:00Z",
+  "level": "INFO",
+  "message": "POST request from 148.45.240.150 returned 403 in 2766ms (Firefox, Germany)",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "POST",
+    "duration_ms": 2766
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "148.45.240.150"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Germany",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T01:27:00Z",
+  "level": "INFO",
+  "message": "POST request from 4.61.141.93 returned 404 in 4498ms (Firefox, Brazil)",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "POST",
+    "duration_ms": 4498
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "4.61.141.93"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Brazil",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T01:28:00Z",
+  "level": "INFO",
+  "message": "POST request from 220.50.218.236 returned 301 in 1154ms (Bot, Brazil)",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "POST",
+    "duration_ms": 1154
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "220.50.218.236"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Brazil",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T01:29:00Z",
+  "level": "INFO",
+  "message": "DELETE request from 103.208.131.186 returned 200 in 1344ms (Bot, China)",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "DELETE",
+    "duration_ms": 1344
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "103.208.131.186"
+  },
+  "error": null,
+  "metadata": {
+    "region": "China",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T01:30:00Z",
+  "level": "INFO",
+  "message": "DELETE request from 159.162.55.174 returned 403 in 2668ms (Safari, Brazil)",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "DELETE",
+    "duration_ms": 2668
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "159.162.55.174"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Brazil",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T01:31:00Z",
+  "level": "INFO",
+  "message": "GET request from 54.223.126.215 returned 301 in 3711ms (Edge, India)",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "GET",
+    "duration_ms": 3711
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "54.223.126.215"
+  },
+  "error": null,
+  "metadata": {
+    "region": "India",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T01:32:00Z",
+  "level": "INFO",
+  "message": "PUT request from 177.20.27.122 returned 500 in 2324ms (Opera, China)",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "PUT",
+    "duration_ms": 2324
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "177.20.27.122"
+  },
+  "error": null,
+  "metadata": {
+    "region": "China",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T01:33:00Z",
+  "level": "INFO",
+  "message": "POST request from 62.108.75.190 returned 404 in 2923ms (Safari, USA)",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "POST",
+    "duration_ms": 2923
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "62.108.75.190"
+  },
+  "error": null,
+  "metadata": {
+    "region": "USA",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T01:34:00Z",
+  "level": "INFO",
+  "message": "DELETE request from 80.109.194.194 returned 403 in 4812ms (Safari, China)",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "DELETE",
+    "duration_ms": 4812
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "80.109.194.194"
+  },
+  "error": null,
+  "metadata": {
+    "region": "China",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T01:35:00Z",
+  "level": "INFO",
+  "message": "DELETE request from 204.64.45.159 returned 301 in 2900ms (Firefox, Canada)",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "DELETE",
+    "duration_ms": 2900
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "204.64.45.159"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Canada",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T01:36:00Z",
+  "level": "INFO",
+  "message": "GET request from 233.99.174.210 returned 301 in 3151ms (Edge, India)",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "GET",
+    "duration_ms": 3151
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "233.99.174.210"
+  },
+  "error": null,
+  "metadata": {
+    "region": "India",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T01:37:00Z",
+  "level": "INFO",
+  "message": "PUT request from 161.172.64.186 returned 301 in 4884ms (Firefox, France)",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "PUT",
+    "duration_ms": 4884
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "161.172.64.186"
+  },
+  "error": null,
+  "metadata": {
+    "region": "France",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T01:38:00Z",
+  "level": "INFO",
+  "message": "POST request from 187.229.39.201 returned 301 in 3601ms (Safari, Brazil)",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "POST",
+    "duration_ms": 3601
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "187.229.39.201"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Brazil",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T01:39:00Z",
+  "level": "INFO",
+  "message": "POST request from 200.236.193.119 using Firefox, status 200, duration 4651ms, region Germany",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "POST",
+    "duration_ms": 4651
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "200.236.193.119"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Germany",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T01:40:00Z",
+  "level": "INFO",
+  "message": "PUT request from 137.121.86.73 using Opera, status 301, duration 1284ms, region India",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "PUT",
+    "duration_ms": 1284
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "137.121.86.73"
+  },
+  "error": null,
+  "metadata": {
+    "region": "India",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T01:41:00Z",
+  "level": "INFO",
+  "message": "GET request from 75.235.18.111 using Bot, status 403, duration 1599ms, region Brazil",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "GET",
+    "duration_ms": 1599
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "75.235.18.111"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Brazil",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T01:42:00Z",
+  "level": "INFO",
+  "message": "POST request from 160.65.206.158 using Opera, status 404, duration 2457ms, region USA",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "POST",
+    "duration_ms": 2457
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "160.65.206.158"
+  },
+  "error": null,
+  "metadata": {
+    "region": "USA",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T01:43:00Z",
+  "level": "INFO",
+  "message": "DELETE request from 148.212.26.105 using Chrome, status 404, duration 4294ms, region Canada",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "DELETE",
+    "duration_ms": 4294
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "148.212.26.105"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Canada",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2026-03-13T01:24:05.219034624Z",
+  "level": "INFO",
+  "message": "Timestamp,IP_Address,Request_Type,Status_Code,Anomaly_Flag,User_Agent,Session_ID,Location",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "log",
+    "action": "header",
+    "duration_ms": 0
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "unknown"
+  },
+  "error": null,
+  "metadata": {
+    "region": "unknown",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2026-03-13T01:24:05.219034624Z",
+  "level": "INFO",
+  "message": "2023-01-01 00:00:00,202.118.116.11,GET,403,0,Edge,4835,Brazil",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "request",
+    "action": "GET",
+    "duration_ms": 0
+  },
+  "user": {
+    "id": "4835",
+    "ip": "202.118.116.11"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Brazil",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2026-03-13T01:24:05.219034624Z",
+  "level": "INFO",
+  "message": "2023-01-01 00:01:00,38.30.40.178,DELETE,301,0,Bot,3176,China",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "request",
+    "action": "DELETE",
+    "duration_ms": 0
+  },
+  "user": {
+    "id": "3176",
+    "ip": "38.30.40.178"
+  },
+  "error": null,
+  "metadata": {
+    "region": "China",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2026-03-13T01:24:05.219034624Z",
+  "level": "INFO",
+  "message": "2023-01-01 00:02:00,209.5.148.15,POST,500,0,Opera,4312,China",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "request",
+    "action": "POST",
+    "duration_ms": 0
+  },
+  "user": {
+    "id": "4312",
+    "ip": "209.5.148.15"
+  },
+  "error": null,
+  "metadata": {
+    "region": "China",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2026-03-13T01:24:05.219034624Z",
+  "level": "INFO",
+  "message": "2023-01-01 00:03:00,211.116.60.71,GET,301,0,Bot,1003,France",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "request",
+    "action": "GET",
+    "duration_ms": 0
+  },
+  "user": {
+    "id": "1003",
+    "ip": "211.116.60.71"
+  },
+  "error": null,
+  "metadata": {
+    "region": "France",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2026-03-13T01:24:05.219034624Z",
+  "level": "INFO",
+  "message": "2023-01-01 00:04:00,170.166.36.145,POST,404,0,Firefox,1428,Germany",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "request",
+    "action": "POST",
+    "duration_ms": 0
+  },
+  "user": {
+    "id": "1428",
+    "ip": "170.166.36.145"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Germany",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2026-03-13T01:24:05.219034624Z",
+  "level": "INFO",
+  "message": "2023-01-01 00:05:00,147.178.175.124,DELETE,404,0,Firefox,2954,Brazil",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "request",
+    "action": "DELETE",
+    "duration_ms": 0
+  },
+  "user": {
+    "id": "2954",
+    "ip": "147.178.175.124"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Brazil",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2026-03-13T01:24:05.219034624Z",
+  "level": "INFO",
+  "message": "2023-01-01 00:06:00,185.82.155.197,PUT,403,0,Firefox,2312,India",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "request",
+    "action": "PUT",
+    "duration_ms": 0
+  },
+  "user": {
+    "id": "2312",
+    "ip": "185.82.155.197"
+  },
+  "error": null,
+  "metadata": {
+    "region": "India",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2026-03-13T01:24:05.219034624Z",
+  "level": "INFO",
+  "message": "2023-01-01 00:07:00,141.123.71.55,GET,500,0,Chrome,3302,China",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "request",
+    "action": "GET",
+    "duration_ms": 0
+  },
+  "user": {
+    "id": "3302",
+    "ip": "141.123.71.55"
+  },
+  "error": null,
+  "metadata": {
+    "region": "China",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2026-03-13T01:24:05.219034624Z",
+  "level": "INFO",
+  "message": "2023-01-01 00:08:00,40.83.200.82,GET,403,0,Safari,4240,India",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "request",
+    "action": "GET",
+    "duration_ms": 0
+  },
+  "user": {
+    "id": "4240",
+    "ip": "40.83.200.82"
+  },
+  "error": null,
+  "metadata": {
+    "region": "India",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:09:00Z",
+  "level": "INFO",
+  "message": "DELETE request from 177.220.98.191 returned 500 in 2382ms (Edge, Canada)",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "DELETE",
+    "duration_ms": 2382
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "177.220.98.191"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Canada",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:10:00Z",
+  "level": "INFO",
+  "message": "PUT request from 123.155.87.205 returned 500 in 1448ms (Edge, Germany)",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "PUT",
+    "duration_ms": 1448
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "123.155.87.205"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Germany",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:11:00Z",
+  "level": "INFO",
+  "message": "PUT request from 46.140.242.46 returned 404 in 3871ms (Chrome, China)",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "PUT",
+    "duration_ms": 3871
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "46.140.242.46"
+  },
+  "error": null,
+  "metadata": {
+    "region": "China",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:12:00Z",
+  "level": "INFO",
+  "message": "GET request from 188.12.135.72 returned 500 in 3667ms (Firefox, France)",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "GET",
+    "duration_ms": 3667
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "188.12.135.72"
+  },
+  "error": null,
+  "metadata": {
+    "region": "France",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:13:00Z",
+  "level": "INFO",
+  "message": "DELETE request from 76.73.42.216 returned 404 in 3826ms (Safari, China)",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "DELETE",
+    "duration_ms": 3826
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "76.73.42.216"
+  },
+  "error": null,
+  "metadata": {
+    "region": "China",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:14:00Z",
+  "level": "INFO",
+  "message": "DELETE request from 173.46.159.172 returned 301 in 4859ms (Safari, Germany)",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "DELETE",
+    "duration_ms": 4859
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "173.46.159.172"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Germany",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:15:00Z",
+  "level": "INFO",
+  "message": "PUT request from 19.246.46.181 returned 200 in 3573ms (Chrome, India)",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "PUT",
+    "duration_ms": 3573
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "19.246.46.181"
+  },
+  "error": null,
+  "metadata": {
+    "region": "India",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:16:00Z",
+  "level": "INFO",
+  "message": "GET request from 4.4.190.187 returned 403 in 3188ms (Chrome, France)",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "GET",
+    "duration_ms": 3188
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "4.4.190.187"
+  },
+  "error": null,
+  "metadata": {
+    "region": "France",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:17:00Z",
+  "level": "INFO",
+  "message": "DELETE request from 22.61.238.44 returned 403 in 3875ms (Firefox, USA)",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "DELETE",
+    "duration_ms": 3875
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "22.61.238.44"
+  },
+  "error": null,
+  "metadata": {
+    "region": "USA",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:18:00Z",
+  "level": "INFO",
+  "message": "POST request from 7.195.87.63 returned 200 in 4611ms (Chrome, France)",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "POST",
+    "duration_ms": 4611
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "7.195.87.63"
+  },
+  "error": null,
+  "metadata": {
+    "region": "France",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:19:00Z",
+  "level": "INFO",
+  "message": "GET request from 94.122.137.2 using Firefox, status 500, duration 3661ms, region Canada",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "GET",
+    "duration_ms": 3661
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "94.122.137.2"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Canada",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:20:00Z",
+  "level": "INFO",
+  "message": "GET request from 228.119.208.58 using Bot, status 500, duration 4169ms, region France",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "GET",
+    "duration_ms": 4169
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "228.119.208.58"
+  },
+  "error": null,
+  "metadata": {
+    "region": "France",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:21:00Z",
+  "level": "INFO",
+  "message": "PUT request from 232.247.210.7 using Opera, status 403, duration 4162ms, region Brazil",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "PUT",
+    "duration_ms": 4162
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "232.247.210.7"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Brazil",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:22:00Z",
+  "level": "INFO",
+  "message": "PUT request from 155.44.197.16 using Safari, status 500, duration 3868ms, region France",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "PUT",
+    "duration_ms": 3868
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "155.44.197.16"
+  },
+  "error": null,
+  "metadata": {
+    "region": "France",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:23:00Z",
+  "level": "INFO",
+  "message": "POST request from 128.203.15.135 using Chrome, status 200, duration 3186ms, region Brazil",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "POST",
+    "duration_ms": 3186
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "128.203.15.135"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Brazil",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:24:00Z",
+  "level": "INFO",
+  "message": "POST request from 194.122.185.22 using Firefox, status 301, duration 1930ms, region India",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "POST",
+    "duration_ms": 1930
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "194.122.185.22"
+  },
+  "error": null,
+  "metadata": {
+    "region": "India",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:25:00Z",
+  "level": "INFO",
+  "message": "PUT request from 2.99.58.11 using Chrome, status 301, duration 4338ms, region Brazil",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "PUT",
+    "duration_ms": 4338
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "2.99.58.11"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Brazil",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:26:00Z",
+  "level": "INFO",
+  "message": "PUT request from 84.142.16.44 using Opera, status 404, duration 3146ms, region USA",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "PUT",
+    "duration_ms": 3146
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "84.142.16.44"
+  },
+  "error": null,
+  "metadata": {
+    "region": "USA",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:27:00Z",
+  "level": "INFO",
+  "message": "DELETE request from 72.134.175.94 using Firefox, status 301, duration 2477ms, region Brazil",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "DELETE",
+    "duration_ms": 2477
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "72.134.175.94"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Brazil",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:28:00Z",
+  "level": "INFO",
+  "message": "POST request from 205.235.130.80 using Bot, status 301, duration 2869ms, region USA",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "POST",
+    "duration_ms": 2869
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "205.235.130.80"
+  },
+  "error": null,
+  "metadata": {
+    "region": "USA",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:29:00Z",
+  "level": "INFO",
+  "message": "GET request from 28.102.140.226 using Safari in Brazil returned 500",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "GET",
+    "duration_ms": 1420
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "28.102.140.226"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Brazil",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:30:00Z",
+  "level": "INFO",
+  "message": "DELETE request from 94.112.247.106 using Safari in France returned 200",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "DELETE",
+    "duration_ms": 4352
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "94.112.247.106"
+  },
+  "error": null,
+  "metadata": {
+    "region": "France",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:31:00Z",
+  "level": "INFO",
+  "message": "PUT request from 5.113.191.3 using Edge in USA returned 500",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "PUT",
+    "duration_ms": 4031
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "5.113.191.3"
+  },
+  "error": null,
+  "metadata": {
+    "region": "USA",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:32:00Z",
+  "level": "INFO",
+  "message": "POST request from 36.225.121.216 using Edge in China returned 200",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "POST",
+    "duration_ms": 1995
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "36.225.121.216"
+  },
+  "error": null,
+  "metadata": {
+    "region": "China",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:33:00Z",
+  "level": "INFO",
+  "message": "DELETE request from 64.192.77.26 using Bot in India returned 403",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "DELETE",
+    "duration_ms": 2971
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "64.192.77.26"
+  },
+  "error": null,
+  "metadata": {
+    "region": "India",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:34:00Z",
+  "level": "INFO",
+  "message": "DELETE request from 233.214.54.45 using Firefox in France returned 200",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "DELETE",
+    "duration_ms": 4581
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "233.214.54.45"
+  },
+  "error": null,
+  "metadata": {
+    "region": "France",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:35:00Z",
+  "level": "INFO",
+  "message": "GET request from 137.46.0.186 using Bot in France returned 403",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "GET",
+    "duration_ms": 2335
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "137.46.0.186"
+  },
+  "error": null,
+  "metadata": {
+    "region": "France",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:36:00Z",
+  "level": "INFO",
+  "message": "PUT request from 180.83.219.29 using Firefox in Brazil returned 404",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "PUT",
+    "duration_ms": 4008
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "180.83.219.29"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Brazil",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:37:00Z",
+  "level": "INFO",
+  "message": "POST request from 211.151.129.254 using Edge in India returned 200",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "POST",
+    "duration_ms": 3703
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "211.151.129.254"
+  },
+  "error": null,
+  "metadata": {
+    "region": "India",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:38:00Z",
+  "level": "INFO",
+  "message": "PUT request from 56.216.63.200 using Safari in India returned 404",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "PUT",
+    "duration_ms": 3373
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "56.216.63.200"
+  },
+  "error": null,
+  "metadata": {
+    "region": "India",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:39:00Z",
+  "level": "INFO",
+  "message": "DELETE request from 57.184.152.254 returned 404 in 4789ms (Chrome, France)",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "DELETE",
+    "duration_ms": 4789
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "57.184.152.254"
+  },
+  "error": null,
+  "metadata": {
+    "region": "France",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:40:00Z",
+  "level": "INFO",
+  "message": "POST request from 68.24.220.3 returned 200 in 1514ms (Edge, Canada)",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "POST",
+    "duration_ms": 1514
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "68.24.220.3"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Canada",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:41:00Z",
+  "level": "INFO",
+  "message": "DELETE request from 56.30.177.241 returned 200 in 3410ms (Bot, Brazil)",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "DELETE",
+    "duration_ms": 3410
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "56.30.177.241"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Brazil",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:42:00Z",
+  "level": "INFO",
+  "message": "GET request from 11.122.110.234 returned 200 in 4577ms (Chrome, Germany)",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "GET",
+    "duration_ms": 4577
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "11.122.110.234"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Germany",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:43:00Z",
+  "level": "INFO",
+  "message": "PUT request from 181.79.205.102 returned 403 in 4992ms (Opera, USA)",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "PUT",
+    "duration_ms": 4992
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "181.79.205.102"
+  },
+  "error": null,
+  "metadata": {
+    "region": "USA",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:44:00Z",
+  "level": "INFO",
+  "message": "GET request from 71.229.141.166 returned 200 in 2318ms (Safari, Germany)",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "GET",
+    "duration_ms": 2318
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "71.229.141.166"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Germany",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:45:00Z",
+  "level": "INFO",
+  "message": "GET request from 61.143.5.174 returned 404 in 3841ms (Edge, India)",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "GET",
+    "duration_ms": 3841
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "61.143.5.174"
+  },
+  "error": null,
+  "metadata": {
+    "region": "India",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:46:00Z",
+  "level": "INFO",
+  "message": "GET request from 127.85.6.184 returned 301 in 2929ms (Chrome, Canada)",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "GET",
+    "duration_ms": 2929
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "127.85.6.184"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Canada",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:47:00Z",
+  "level": "INFO",
+  "message": "PUT request from 54.233.211.254 returned 404 in 2636ms (Bot, Canada)",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "PUT",
+    "duration_ms": 2636
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "54.233.211.254"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Canada",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:48:00Z",
+  "level": "INFO",
+  "message": "PUT request from 62.107.11.67 returned 301 in 4441ms (Chrome, France)",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "PUT",
+    "duration_ms": 4441
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "62.107.11.67"
+  },
+  "error": null,
+  "metadata": {
+    "region": "France",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:49:00Z",
+  "level": "INFO",
+  "message": "DELETE request from 104.230.37.139 using Firefox in India, status 403, duration 2061ms",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "DELETE",
+    "duration_ms": 2061
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "104.230.37.139"
+  },
+  "error": null,
+  "metadata": {
+    "region": "India",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:50:00Z",
+  "level": "INFO",
+  "message": "DELETE request from 86.92.0.209 using Safari in USA, status 301, duration 2186ms",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "DELETE",
+    "duration_ms": 2186
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "86.92.0.209"
+  },
+  "error": null,
+  "metadata": {
+    "region": "USA",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:51:00Z",
+  "level": "INFO",
+  "message": "PUT request from 180.36.188.12 using Edge in China, status 200, duration 4598ms",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "PUT",
+    "duration_ms": 4598
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "180.36.188.12"
+  },
+  "error": null,
+  "metadata": {
+    "region": "China",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:52:00Z",
+  "level": "INFO",
+  "message": "POST request from 113.212.21.131 using Firefox in China, status 301, duration 3657ms",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "POST",
+    "duration_ms": 3657
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "113.212.21.131"
+  },
+  "error": null,
+  "metadata": {
+    "region": "China",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:53:00Z",
+  "level": "INFO",
+  "message": "POST request from 245.196.201.102 using Chrome in China, status 403, duration 2212ms",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "POST",
+    "duration_ms": 2212
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "245.196.201.102"
+  },
+  "error": null,
+  "metadata": {
+    "region": "China",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:54:00Z",
+  "level": "INFO",
+  "message": "PUT request from 87.187.63.202 using Opera in France, status 404, duration 1285ms",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "PUT",
+    "duration_ms": 1285
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "87.187.63.202"
+  },
+  "error": null,
+  "metadata": {
+    "region": "France",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:55:00Z",
+  "level": "INFO",
+  "message": "PUT request from 112.236.70.94 using Firefox in Germany, status 404, duration 2843ms",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "PUT",
+    "duration_ms": 2843
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "112.236.70.94"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Germany",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:56:00Z",
+  "level": "INFO",
+  "message": "POST request from 134.65.57.27 using Opera in India, status 403, duration 1416ms",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "POST",
+    "duration_ms": 1416
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "134.65.57.27"
+  },
+  "error": null,
+  "metadata": {
+    "region": "India",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:57:00Z",
+  "level": "INFO",
+  "message": "GET request from 137.142.38.76 using Firefox in Germany, status 403, duration 3574ms",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "GET",
+    "duration_ms": 3574
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "137.142.38.76"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Germany",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:58:00Z",
+  "level": "INFO",
+  "message": "PUT request from 127.154.99.220 using Chrome in Canada, status 200, duration 3490ms",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "PUT",
+    "duration_ms": 3490
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "127.154.99.220"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Canada",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:59:00Z",
+  "level": "INFO",
+  "message": "PUT request from 180.214.164.72 returned 403 using Firefox in India",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "PUT",
+    "duration_ms": 1226
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "180.214.164.72"
+  },
+  "error": null,
+  "metadata": {
+    "region": "India",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T01:00:00Z",
+  "level": "INFO",
+  "message": "DELETE request from 76.241.82.143 returned 404 using Bot in France",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "DELETE",
+    "duration_ms": 3636
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "76.241.82.143"
+  },
+  "error": null,
+  "metadata": {
+    "region": "France",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T01:01:00Z",
+  "level": "INFO",
+  "message": "PUT request from 24.103.46.157 returned 404 using Firefox in China",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "PUT",
+    "duration_ms": 4336
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "24.103.46.157"
+  },
+  "error": null,
+  "metadata": {
+    "region": "China",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T01:02:00Z",
+  "level": "INFO",
+  "message": "POST request from 117.235.228.164 returned 500 using Edge in China",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "POST",
+    "duration_ms": 1429
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "117.235.228.164"
+  },
+  "error": null,
+  "metadata": {
+    "region": "China",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T01:03:00Z",
+  "level": "INFO",
+  "message": "PUT request from 246.44.27.106 returned 301 using Firefox in China",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "PUT",
+    "duration_ms": 2569
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "246.44.27.106"
+  },
+  "error": null,
+  "metadata": {
+    "region": "China",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T01:04:00Z",
+  "level": "INFO",
+  "message": "DELETE request from 106.95.111.222 returned 403 using Bot in France",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "DELETE",
+    "duration_ms": 4239
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "106.95.111.222"
+  },
+  "error": null,
+  "metadata": {
+    "region": "France",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T01:05:00Z",
+  "level": "INFO",
+  "message": "DELETE request from 145.84.117.220 returned 404 using Edge in China",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "DELETE",
+    "duration_ms": 3493
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "145.84.117.220"
+  },
+  "error": null,
+  "metadata": {
+    "region": "China",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T01:06:00Z",
+  "level": "INFO",
+  "message": "PUT request from 170.121.189.114 returned 404 using Opera in India",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "PUT",
+    "duration_ms": 4284
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "170.121.189.114"
+  },
+  "error": null,
+  "metadata": {
+    "region": "India",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T01:07:00Z",
+  "level": "INFO",
+  "message": "DELETE request from 126.177.157.135 returned 200 using Bot in India",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "DELETE",
+    "duration_ms": 4153
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "126.177.157.135"
+  },
+  "error": null,
+  "metadata": {
+    "region": "India",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T01:08:00Z",
+  "level": "INFO",
+  "message": "POST request from 200.253.221.177 returned 403 using Firefox in China",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "POST",
+    "duration_ms": 2651
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "200.253.221.177"
+  },
+  "error": null,
+  "metadata": {
+    "region": "China",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T01:09:00Z",
+  "level": "INFO",
+  "message": "PUT request from 43.253.13.220 resulted in status 403, user agent Bot, duration 2833ms, region India",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "PUT",
+    "duration_ms": 2833
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "43.253.13.220"
+  },
+  "error": null,
+  "metadata": {
+    "region": "India",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T01:10:00Z",
+  "level": "INFO",
+  "message": "POST request from 80.83.235.71 resulted in status 301, user agent Chrome, duration 1143ms, region Brazil",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "POST",
+    "duration_ms": 1143
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "80.83.235.71"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Brazil",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T01:11:00Z",
+  "level": "INFO",
+  "message": "POST request from 157.219.163.80 resulted in status 500, user agent Edge, duration 1732ms, region Canada",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "POST",
+    "duration_ms": 1732
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "157.219.163.80"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Canada",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T01:12:00Z",
+  "level": "INFO",
+  "message": "DELETE request from 76.138.248.247 resulted in status 200, user agent Safari, duration 1097ms, region France",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "DELETE",
+    "duration_ms": 1097
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "76.138.248.247"
+  },
+  "error": null,
+  "metadata": {
+    "region": "France",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T01:13:00Z",
+  "level": "INFO",
+  "message": "DELETE request from 214.161.221.180 resulted in status 200, user agent Edge, duration 4112ms, region Brazil",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "DELETE",
+    "duration_ms": 4112
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "214.161.221.180"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Brazil",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T01:14:00Z",
+  "level": "INFO",
+  "message": "POST request from 187.141.57.240 resulted in status 200, user agent Safari, duration 3568ms, region China",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "POST",
+    "duration_ms": 3568
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "187.141.57.240"
+  },
+  "error": null,
+  "metadata": {
+    "region": "China",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T01:15:00Z",
+  "level": "INFO",
+  "message": "PUT request from 11.51.160.40 resulted in status 500, user agent Edge, duration 3541ms, region USA",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "PUT",
+    "duration_ms": 3541
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "11.51.160.40"
+  },
+  "error": null,
+  "metadata": {
+    "region": "USA",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T01:16:00Z",
+  "level": "INFO",
+  "message": "GET request from 162.217.29.79 resulted in status 301, user agent Edge, duration 1145ms, region Brazil",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "GET",
+    "duration_ms": 1145
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "162.217.29.79"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Brazil",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T01:17:00Z",
+  "level": "INFO",
+  "message": "PUT request from 102.4.114.138 resulted in status 301, user agent Safari, duration 2987ms, region France",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "PUT",
+    "duration_ms": 2987
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "102.4.114.138"
+  },
+  "error": null,
+  "metadata": {
+    "region": "France",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T01:18:00Z",
+  "level": "INFO",
+  "message": "DELETE request from 96.185.134.255 resulted in status 500, user agent Edge, duration 2607ms, region China",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "DELETE",
+    "duration_ms": 2607
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "96.185.134.255"
+  },
+  "error": null,
+  "metadata": {
+    "region": "China",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T01:19:00Z",
+  "level": "INFO",
+  "message": "POST request from 173.76.57.247 resulted in 404 using Safari in China",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "POST",
+    "duration_ms": 4371
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "173.76.57.247"
+  },
+  "error": null,
+  "metadata": {
+    "region": "China",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T01:20:00Z",
+  "level": "INFO",
+  "message": "PUT request from 26.243.55.152 resulted in 403 using Opera in China",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "PUT",
+    "duration_ms": 4362
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "26.243.55.152"
+  },
+  "error": null,
+  "metadata": {
+    "region": "China",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T01:21:00Z",
+  "level": "INFO",
+  "message": "DELETE request from 58.20.76.30 resulted in 404 using Chrome in India",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "DELETE",
+    "duration_ms": 1300
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "58.20.76.30"
+  },
+  "error": null,
+  "metadata": {
+    "region": "India",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T01:22:00Z",
+  "level": "INFO",
+  "message": "POST request from 221.11.192.181 resulted in 200 using Safari in Germany",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "POST",
+    "duration_ms": 3996
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "221.11.192.181"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Germany",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T01:23:00Z",
+  "level": "INFO",
+  "message": "POST request from 198.54.158.207 resulted in 404 using Opera in India",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "POST",
+    "duration_ms": 2843
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "198.54.158.207"
+  },
+  "error": null,
+  "metadata": {
+    "region": "India",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T01:24:00Z",
+  "level": "INFO",
+  "message": "POST request from 237.118.244.20 resulted in 500 using Opera in Brazil",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "POST",
+    "duration_ms": 1830
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "237.118.244.20"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Brazil",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T01:25:00Z",
+  "level": "INFO",
+  "message": "GET request from 80.130.180.25 resulted in 403 using Edge in Brazil",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "GET",
+    "duration_ms": 1236
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "80.130.180.25"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Brazil",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T01:26:00Z",
+  "level": "INFO",
+  "message": "POST request from 148.45.240.150 resulted in 403 using Firefox in Germany",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "POST",
+    "duration_ms": 2766
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "148.45.240.150"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Germany",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T01:27:00Z",
+  "level": "INFO",
+  "message": "POST request from 4.61.141.93 resulted in 404 using Firefox in Brazil",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "POST",
+    "duration_ms": 4498
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "4.61.141.93"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Brazil",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T01:28:00Z",
+  "level": "INFO",
+  "message": "POST request from 220.50.218.236 resulted in 301 using Bot in Brazil",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "POST",
+    "duration_ms": 1154
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "220.50.218.236"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Brazil",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T01:29:00Z",
+  "level": "INFO",
+  "message": "DELETE request from 103.208.131.186 using Bot, status 200, duration 1344ms, region China",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "DELETE",
+    "duration_ms": 1344
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "103.208.131.186"
+  },
+  "error": null,
+  "metadata": {
+    "region": "China",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T01:30:00Z",
+  "level": "INFO",
+  "message": "DELETE request from 159.162.55.174 using Safari, status 403, duration 2668ms, region Brazil",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "DELETE",
+    "duration_ms": 2668
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "159.162.55.174"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Brazil",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T01:31:00Z",
+  "level": "INFO",
+  "message": "GET request from 54.223.126.215 using Edge, status 301, duration 3711ms, region India",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "GET",
+    "duration_ms": 3711
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "54.223.126.215"
+  },
+  "error": null,
+  "metadata": {
+    "region": "India",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T01:32:00Z",
+  "level": "INFO",
+  "message": "PUT request from 177.20.27.122 using Opera, status 500, duration 2324ms, region China",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "PUT",
+    "duration_ms": 2324
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "177.20.27.122"
+  },
+  "error": null,
+  "metadata": {
+    "region": "China",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T01:33:00Z",
+  "level": "INFO",
+  "message": "POST request from 62.108.75.190 using Safari, status 404, duration 2923ms, region USA",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "POST",
+    "duration_ms": 2923
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "62.108.75.190"
+  },
+  "error": null,
+  "metadata": {
+    "region": "USA",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T01:34:00Z",
+  "level": "INFO",
+  "message": "DELETE request from 80.109.194.194 using Safari, status 403, duration 4812ms, region China",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "DELETE",
+    "duration_ms": 4812
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "80.109.194.194"
+  },
+  "error": null,
+  "metadata": {
+    "region": "China",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T01:35:00Z",
+  "level": "INFO",
+  "message": "DELETE request from 204.64.45.159 using Firefox, status 301, duration 2900ms, region Canada",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "DELETE",
+    "duration_ms": 2900
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "204.64.45.159"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Canada",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T01:36:00Z",
+  "level": "INFO",
+  "message": "GET request from 233.99.174.210 using Edge, status 301, duration 3151ms, region India",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "GET",
+    "duration_ms": 3151
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "233.99.174.210"
+  },
+  "error": null,
+  "metadata": {
+    "region": "India",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T01:37:00Z",
+  "level": "INFO",
+  "message": "PUT request from 161.172.64.186 using Firefox, status 301, duration 4884ms, region France",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "PUT",
+    "duration_ms": 4884
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "161.172.64.186"
+  },
+  "error": null,
+  "metadata": {
+    "region": "France",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T01:38:00Z",
+  "level": "INFO",
+  "message": "POST request from 187.229.39.201 using Safari, status 301, duration 3601ms, region Brazil",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "POST",
+    "duration_ms": 3601
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "187.229.39.201"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Brazil",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T01:39:00Z",
+  "level": "INFO",
+  "message": "POST request from 200.236.193.119 using Firefox in Germany, status 200, duration 4651ms",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "POST",
+    "duration_ms": 4651
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "200.236.193.119"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Germany",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T01:40:00Z",
+  "level": "INFO",
+  "message": "PUT request from 137.121.86.73 using Opera in India, status 301, duration 1284ms",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "PUT",
+    "duration_ms": 1284
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "137.121.86.73"
+  },
+  "error": null,
+  "metadata": {
+    "region": "India",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T01:41:00Z",
+  "level": "INFO",
+  "message": "GET request from 75.235.18.111 using Bot in Brazil, status 403, duration 1599ms",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "GET",
+    "duration_ms": 1599
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "75.235.18.111"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Brazil",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T01:42:00Z",
+  "level": "INFO",
+  "message": "POST request from 160.65.206.158 using Opera in USA, status 404, duration 2457ms",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "POST",
+    "duration_ms": 2457
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "160.65.206.158"
+  },
+  "error": null,
+  "metadata": {
+    "region": "USA",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T01:43:00Z",
+  "level": "INFO",
+  "message": "DELETE request from 148.212.26.105 using Chrome in Canada, status 404, duration 4294ms",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "DELETE",
+    "duration_ms": 4294
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "148.212.26.105"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Canada",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:00:00Z",
+  "level": "INFO",
+  "message": "GET request from 202.118.116.11 returned 403 in 4835ms (Edge, Brazil)",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "GET",
+    "duration_ms": 4835
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "202.118.116.11"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Brazil",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:01:00Z",
+  "level": "INFO",
+  "message": "DELETE request from 38.30.40.178 returned 301 in 3176ms (Bot, China)",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "DELETE",
+    "duration_ms": 3176
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "38.30.40.178"
+  },
+  "error": null,
+  "metadata": {
+    "region": "China",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:02:00Z",
+  "level": "INFO",
+  "message": "POST request from 209.5.148.15 returned 500 in 4312ms (Opera, China)",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "POST",
+    "duration_ms": 4312
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "209.5.148.15"
+  },
+  "error": null,
+  "metadata": {
+    "region": "China",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:03:00Z",
+  "level": "INFO",
+  "message": "GET request from 211.116.60.71 returned 301 in 1003ms (Bot, France)",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "GET",
+    "duration_ms": 1003
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "211.116.60.71"
+  },
+  "error": null,
+  "metadata": {
+    "region": "France",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:04:00Z",
+  "level": "INFO",
+  "message": "POST request from 170.166.36.145 returned 404 in 1428ms (Firefox, Germany)",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "POST",
+    "duration_ms": 1428
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "170.166.36.145"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Germany",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:05:00Z",
+  "level": "INFO",
+  "message": "DELETE request from 147.178.175.124 returned 404 in 2954ms (Firefox, Brazil)",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "DELETE",
+    "duration_ms": 2954
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "147.178.175.124"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Brazil",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:06:00Z",
+  "level": "INFO",
+  "message": "PUT request from 185.82.155.197 returned 403 in 2312ms (Firefox, India)",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "PUT",
+    "duration_ms": 2312
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "185.82.155.197"
+  },
+  "error": null,
+  "metadata": {
+    "region": "India",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:07:00Z",
+  "level": "INFO",
+  "message": "GET request from 141.123.71.55 returned 500 in 3302ms (Chrome, China)",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "GET",
+    "duration_ms": 3302
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "141.123.71.55"
+  },
+  "error": null,
+  "metadata": {
+    "region": "China",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:08:00Z",
+  "level": "INFO",
+  "message": "GET request from 40.83.200.82 returned 403 in 4240ms (Safari, India)",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "GET",
+    "duration_ms": 4240
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "40.83.200.82"
+  },
+  "error": null,
+  "metadata": {
+    "region": "India",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:09:00Z",
+  "level": "INFO",
+  "message": "DELETE request from 177.220.98.191 returned 500 in 2382ms (Edge, Canada)",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "DELETE",
+    "duration_ms": 2382
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "177.220.98.191"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Canada",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:10:00Z",
+  "level": "INFO",
+  "message": "PUT request from 123.155.87.205 returned 500 via Edge in 1448ms (Germany)",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "PUT",
+    "duration_ms": 1448
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "123.155.87.205"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Germany",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:11:00Z",
+  "level": "INFO",
+  "message": "PUT request from 46.140.242.46 returned 404 via Chrome in 3871ms (China)",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "PUT",
+    "duration_ms": 3871
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "46.140.242.46"
+  },
+  "error": null,
+  "metadata": {
+    "region": "China",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:12:00Z",
+  "level": "INFO",
+  "message": "GET request from 188.12.135.72 returned 500 via Firefox in 3667ms (France)",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "GET",
+    "duration_ms": 3667
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "188.12.135.72"
+  },
+  "error": null,
+  "metadata": {
+    "region": "France",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:13:00Z",
+  "level": "INFO",
+  "message": "DELETE request from 76.73.42.216 returned 404 via Safari in 3826ms (China)",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "DELETE",
+    "duration_ms": 3826
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "76.73.42.216"
+  },
+  "error": null,
+  "metadata": {
+    "region": "China",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:14:00Z",
+  "level": "INFO",
+  "message": "DELETE request from 173.46.159.172 returned 301 via Safari in 4859ms (Germany)",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "DELETE",
+    "duration_ms": 4859
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "173.46.159.172"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Germany",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:15:00Z",
+  "level": "INFO",
+  "message": "PUT request from 19.246.46.181 returned 200 via Chrome in 3573ms (India)",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "PUT",
+    "duration_ms": 3573
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "19.246.46.181"
+  },
+  "error": null,
+  "metadata": {
+    "region": "India",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:16:00Z",
+  "level": "INFO",
+  "message": "GET request from 4.4.190.187 returned 403 via Chrome in 3188ms (France)",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "GET",
+    "duration_ms": 3188
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "4.4.190.187"
+  },
+  "error": null,
+  "metadata": {
+    "region": "France",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:17:00Z",
+  "level": "INFO",
+  "message": "DELETE request from 22.61.238.44 returned 403 via Firefox in 3875ms (USA)",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "DELETE",
+    "duration_ms": 3875
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "22.61.238.44"
+  },
+  "error": null,
+  "metadata": {
+    "region": "USA",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:18:00Z",
+  "level": "INFO",
+  "message": "POST request from 7.195.87.63 returned 200 via Chrome in 4611ms (France)",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "POST",
+    "duration_ms": 4611
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "7.195.87.63"
+  },
+  "error": null,
+  "metadata": {
+    "region": "France",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:19:00Z",
+  "level": "INFO",
+  "message": "GET request from 94.122.137.2 returned 500 via Firefox in 3661ms (Canada)",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "GET",
+    "duration_ms": 3661
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "94.122.137.2"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Canada",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:00:00Z",
+  "level": "INFO",
+  "message": "GET request from 202.118.116.11 returned 403 via Edge in 4835ms (Brazil)",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "GET",
+    "duration_ms": 4835
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "202.118.116.11"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Brazil",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:01:00Z",
+  "level": "INFO",
+  "message": "DELETE request from 38.30.40.178 returned 301 via Bot in 3176ms (China)",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "DELETE",
+    "duration_ms": 3176
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "38.30.40.178"
+  },
+  "error": null,
+  "metadata": {
+    "region": "China",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:02:00Z",
+  "level": "INFO",
+  "message": "POST request from 209.5.148.15 returned 500 via Opera in 4312ms (China)",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "POST",
+    "duration_ms": 4312
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "209.5.148.15"
+  },
+  "error": null,
+  "metadata": {
+    "region": "China",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:03:00Z",
+  "level": "INFO",
+  "message": "GET request from 211.116.60.71 returned 301 via Bot in 1003ms (France)",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "GET",
+    "duration_ms": 1003
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "211.116.60.71"
+  },
+  "error": null,
+  "metadata": {
+    "region": "France",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:04:00Z",
+  "level": "INFO",
+  "message": "POST request from 170.166.36.145 returned 404 via Firefox in 1428ms (Germany)",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "POST",
+    "duration_ms": 1428
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "170.166.36.145"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Germany",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:05:00Z",
+  "level": "INFO",
+  "message": "DELETE request from 147.178.175.124 returned 404 via Firefox in 2954ms (Brazil)",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "DELETE",
+    "duration_ms": 2954
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "147.178.175.124"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Brazil",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:06:00Z",
+  "level": "INFO",
+  "message": "PUT request from 185.82.155.197 returned 403 via Firefox in 2312ms (India)",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "PUT",
+    "duration_ms": 2312
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "185.82.155.197"
+  },
+  "error": null,
+  "metadata": {
+    "region": "India",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:07:00Z",
+  "level": "INFO",
+  "message": "GET request from 141.123.71.55 returned 500 via Chrome in 3302ms (China)",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "GET",
+    "duration_ms": 3302
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "141.123.71.55"
+  },
+  "error": null,
+  "metadata": {
+    "region": "China",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:08:00Z",
+  "level": "INFO",
+  "message": "GET request from 40.83.200.82 returned 403 via Safari in 4240ms (India)",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "GET",
+    "duration_ms": 4240
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "40.83.200.82"
+  },
+  "error": null,
+  "metadata": {
+    "region": "India",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:09:00Z",
+  "level": "INFO",
+  "message": "DELETE request from 177.220.98.191 returned 500 via Edge in 2382ms (Canada)",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "DELETE",
+    "duration_ms": 2382
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "177.220.98.191"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Canada",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:10:00Z",
+  "level": "INFO",
+  "message": "PUT request from 123.155.87.205 using Edge, status 500, duration 1448ms, region Germany",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "PUT",
+    "duration_ms": 1448
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "123.155.87.205"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Germany",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:11:00Z",
+  "level": "INFO",
+  "message": "PUT request from 46.140.242.46 using Chrome, status 404, duration 3871ms, region China",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "PUT",
+    "duration_ms": 3871
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "46.140.242.46"
+  },
+  "error": null,
+  "metadata": {
+    "region": "China",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:12:00Z",
+  "level": "INFO",
+  "message": "GET request from 188.12.135.72 using Firefox, status 500, duration 3667ms, region France",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "GET",
+    "duration_ms": 3667
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "188.12.135.72"
+  },
+  "error": null,
+  "metadata": {
+    "region": "France",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:13:00Z",
+  "level": "INFO",
+  "message": "DELETE request from 76.73.42.216 using Safari, status 404, duration 3826ms, region China",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "DELETE",
+    "duration_ms": 3826
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "76.73.42.216"
+  },
+  "error": null,
+  "metadata": {
+    "region": "China",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:14:00Z",
+  "level": "INFO",
+  "message": "DELETE request from 173.46.159.172 using Safari, status 301, duration 4859ms, region Germany",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "DELETE",
+    "duration_ms": 4859
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "173.46.159.172"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Germany",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:15:00Z",
+  "level": "INFO",
+  "message": "PUT request from 19.246.46.181 using Chrome, status 200, duration 3573ms, region India",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "PUT",
+    "duration_ms": 3573
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "19.246.46.181"
+  },
+  "error": null,
+  "metadata": {
+    "region": "India",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:16:00Z",
+  "level": "INFO",
+  "message": "GET request from 4.4.190.187 using Chrome, status 403, duration 3188ms, region France",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "GET",
+    "duration_ms": 3188
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "4.4.190.187"
+  },
+  "error": null,
+  "metadata": {
+    "region": "France",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2026-03-09T09:36:30+02:00",
+  "level": "INFO",
+  "message": "Traffic forward notice: srcip=192.168.12.13 srcport=24997 dstip=208.91.112.63 dstport=123 action=accept policyname=Internet Access app=NTP duration=180ms",
+  "service": {
+    "name": "Fortinet-NTP",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "traffic",
+    "action": "accept",
+    "duration_ms": 180
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "192.168.12.13"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Undefined",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2026-03-09T09:36:29+02:00",
+  "level": "INFO",
+  "message": "Traffic forward notice: srcip=192.168.12.13 srcport=30022 dstip=208.91.112.63 dstport=123 action=accept policyname=Internet Access app=NTP duration=180ms",
+  "service": {
+    "name": "Fortinet-NTP",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "traffic",
+    "action": "accept",
+    "duration_ms": 180
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "192.168.12.13"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Undefined",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2026-03-09T09:36:28+02:00",
+  "level": "INFO",
+  "message": "Traffic forward notice: srcip=192.168.12.13 srcport=39743 dstip=208.91.112.63 dstport=123 action=accept policyname=Internet Access app=NTP duration=180ms",
+  "service": {
+    "name": "Fortinet-NTP",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "traffic",
+    "action": "accept",
+    "duration_ms": 180
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "192.168.12.13"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Undefined",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2026-03-09T09:36:28+02:00",
+  "level": "INFO",
+  "message": "Traffic forward notice: srcip=192.168.12.6 srcport=57686 dstip=75.2.52.207 dstport=443 action=close policyname=Unencrypted access to Claroty svcs app=unknown duration=1ms",
+  "service": {
+    "name": "Amazon-AWS.Global.Accelerator",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "traffic",
+    "action": "close",
+    "duration_ms": 1
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "192.168.12.6"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Undefined",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2026-03-09T09:36:27+02:00",
+  "level": "INFO",
+  "message": "Traffic forward notice: srcip=192.168.12.13 srcport=46713 dstip=208.91.112.63 dstport=123 action=accept policyname=Internet Access app=NTP duration=180ms",
+  "service": {
+    "name": "Fortinet-NTP",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "traffic",
+    "action": "accept",
+    "duration_ms": 180
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "192.168.12.13"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Undefined",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2026-03-09T09:36:26+02:00",
+  "level": "INFO",
+  "message": "Traffic forward notice: srcip=192.168.12.13 srcport=58808 dstip=208.91.112.63 dstport=123 action=accept policyname=Internet Access app=NTP duration=180ms",
+  "service": {
+    "name": "Fortinet-NTP",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "traffic",
+    "action": "accept",
+    "duration_ms": 180
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "192.168.12.13"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Undefined",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2026-03-09T09:36:26+02:00",
+  "level": "INFO",
+  "message": "Traffic local notice: srcip=10.240.182.22 srcport=14726 dstip=96.45.46.46 dstport=853 action=close policyid=0 app=tcp/853 duration=187ms",
+  "service": {
+    "name": "tcp/853",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "traffic",
+    "action": "close",
+    "duration_ms": 187
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "10.240.182.22"
+  },
+  "error": null,
+  "metadata": {
+    "region": "unknown",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2026-03-09T09:36:25+02:00",
+  "level": "INFO",
+  "message": "Traffic forward notice: srcip=192.168.12.13 srcport=58823 dstip=208.91.112.63 dstport=123 action=accept policyname=Internet Access app=NTP duration=180ms",
+  "service": {
+    "name": "Fortinet-NTP",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "traffic",
+    "action": "accept",
+    "duration_ms": 180
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "192.168.12.13"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Undefined",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2026-03-09T09:36:24+02:00",
+  "level": "INFO",
+  "message": "Traffic forward notice: srcip=192.168.12.13 srcport=51085 dstip=208.91.112.63 dstport=123 action=accept policyname=Internet Access app=NTP duration=180ms",
+  "service": {
+    "name": "Fortinet-NTP",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "traffic",
+    "action": "accept",
+    "duration_ms": 180
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "192.168.12.13"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Undefined",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2026-03-09T09:36:23+02:00",
+  "level": "INFO",
+  "message": "Traffic forward notice: srcip=192.168.12.13 srcport=16142 dstip=208.91.112.52 dstport=53 action=accept policyname=DNS Access app=unknown duration=180ms",
+  "service": {
+    "name": "Fortinet-DNS",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "traffic",
+    "action": "accept",
+    "duration_ms": 180
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "192.168.12.13"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Undefined",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:00:00Z",
+  "level": "INFO",
+  "message": "GET request from 202.118.116.11 returned 403 via Edge in 4835ms (Brazil)",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "GET",
+    "duration_ms": 4835
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "202.118.116.11"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Brazil",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:01:00Z",
+  "level": "INFO",
+  "message": "DELETE request from 38.30.40.178 returned 301 via Bot in 3176ms (China)",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "DELETE",
+    "duration_ms": 3176
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "38.30.40.178"
+  },
+  "error": null,
+  "metadata": {
+    "region": "China",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:02:00Z",
+  "level": "INFO",
+  "message": "POST request from 209.5.148.15 returned 500 via Opera in 4312ms (China)",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "POST",
+    "duration_ms": 4312
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "209.5.148.15"
+  },
+  "error": null,
+  "metadata": {
+    "region": "China",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:03:00Z",
+  "level": "INFO",
+  "message": "GET request from 211.116.60.71 returned 301 via Bot in 1003ms (France)",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "GET",
+    "duration_ms": 1003
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "211.116.60.71"
+  },
+  "error": null,
+  "metadata": {
+    "region": "France",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:04:00Z",
+  "level": "INFO",
+  "message": "POST request from 170.166.36.145 returned 404 via Firefox in 1428ms (Germany)",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "POST",
+    "duration_ms": 1428
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "170.166.36.145"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Germany",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:05:00Z",
+  "level": "INFO",
+  "message": "DELETE request from 147.178.175.124 returned 404 via Firefox in 2954ms (Brazil)",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "DELETE",
+    "duration_ms": 2954
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "147.178.175.124"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Brazil",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:06:00Z",
+  "level": "INFO",
+  "message": "PUT request from 185.82.155.197 returned 403 via Firefox in 2312ms (India)",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "PUT",
+    "duration_ms": 2312
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "185.82.155.197"
+  },
+  "error": null,
+  "metadata": {
+    "region": "India",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:07:00Z",
+  "level": "INFO",
+  "message": "GET request from 141.123.71.55 returned 500 via Chrome in 3302ms (China)",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "GET",
+    "duration_ms": 3302
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "141.123.71.55"
+  },
+  "error": null,
+  "metadata": {
+    "region": "China",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:08:00Z",
+  "level": "INFO",
+  "message": "GET request from 40.83.200.82 returned 403 via Safari in 4240ms (India)",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "GET",
+    "duration_ms": 4240
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "40.83.200.82"
+  },
+  "error": null,
+  "metadata": {
+    "region": "India",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:09:00Z",
+  "level": "INFO",
+  "message": "DELETE request from 177.220.98.191 returned 500 via Edge in 2382ms (Canada)",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "DELETE",
+    "duration_ms": 2382
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "177.220.98.191"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Canada",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:10:00Z",
+  "level": "INFO",
+  "message": "PUT request from 123.155.87.205 using Edge in Germany returned 500 in 1448ms",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "PUT",
+    "duration_ms": 1448
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "123.155.87.205"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Germany",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:11:00Z",
+  "level": "INFO",
+  "message": "PUT request from 46.140.242.46 using Chrome in China returned 404 in 3871ms",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "PUT",
+    "duration_ms": 3871
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "46.140.242.46"
+  },
+  "error": null,
+  "metadata": {
+    "region": "China",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:12:00Z",
+  "level": "INFO",
+  "message": "GET request from 188.12.135.72 using Firefox in France returned 500 in 3667ms",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "GET",
+    "duration_ms": 3667
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "188.12.135.72"
+  },
+  "error": null,
+  "metadata": {
+    "region": "France",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:13:00Z",
+  "level": "INFO",
+  "message": "DELETE request from 76.73.42.216 using Safari in China returned 404 in 3826ms",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "DELETE",
+    "duration_ms": 3826
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "76.73.42.216"
+  },
+  "error": null,
+  "metadata": {
+    "region": "China",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:14:00Z",
+  "level": "INFO",
+  "message": "DELETE request from 173.46.159.172 using Safari in Germany returned 301 in 4859ms",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "DELETE",
+    "duration_ms": 4859
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "173.46.159.172"
+  },
+  "error": null,
+  "metadata": {
+    "region": "Germany",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:15:00Z",
+  "level": "INFO",
+  "message": "PUT request from 19.246.46.181 using Chrome in India returned 200 in 3573ms",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "PUT",
+    "duration_ms": 3573
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "19.246.46.181"
+  },
+  "error": null,
+  "metadata": {
+    "region": "India",
+    "container_id": "unknown"
+  }
+}
+---
+{
+  "timestamp": "2023-01-01T00:16:00Z",
+  "level": "INFO",
+  "message": "GET request from 4.4.190.187 using Chrome in France returned 403 in 3188ms",
+  "service": {
+    "name": "unknown",
+    "version": "unknown",
+    "env": "unknown"
+  },
+  "trace": {
+    "trace_id": "unknown",
+    "span_id": "unknown"
+  },
+  "event": {
+    "category": "http",
+    "action": "GET",
+    "duration_ms": 3188
+  },
+  "user": {
+    "id": "unknown",
+    "ip": "4.4.190.187"
+  },
+  "error": null,
+  "metadata": {
+    "region": "France",
+    "container_id": "unknown"
+  }
+}
+---

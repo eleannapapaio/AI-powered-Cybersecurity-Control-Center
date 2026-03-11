@@ -1,0 +1,125 @@
+services:
+
+  # ── Kafka broker (KRaft — no Zookeeper) ───────────────────────────────────
+  kafka:
+    image: apache/kafka:3.7.0
+    container_name: kafka-kraft
+    ports:
+      - "9092:9092"
+      - "9094:9094"
+    environment:
+      KAFKA_NODE_ID: 1
+      KAFKA_PROCESS_ROLES: 'broker,controller'
+      KAFKA_CONTROLLER_QUORUM_VOTERS: '1@localhost:9093'
+      KAFKA_LISTENERS: 'PLAINTEXT://:9092,CONTROLLER://:9093,EXTERNAL://:9094'
+      KAFKA_ADVERTISED_LISTENERS: 'PLAINTEXT://kafka:9092,EXTERNAL://localhost:9094'
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: 'CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT,EXTERNAL:PLAINTEXT'
+      KAFKA_CONTROLLER_LISTENER_NAMES: 'CONTROLLER'
+      KAFKA_INTER_BROKER_LISTENER_NAME: 'PLAINTEXT'
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+      KAFKA_LOG_DIRS: '/tmp/kraft-combined-logs'
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'true'
+    healthcheck:
+      test: ["CMD", "/opt/kafka/bin/kafka-topics.sh", "--bootstrap-server", "localhost:9092", "--list"]
+      interval: 10s
+      timeout: 10s
+      retries: 10
+      start_period: 30s
+
+  # ── Kafka UI ───────────────────────────────────────────────────────────────
+  kafka-ui:
+    image: provectuslabs/kafka-ui:latest
+    restart: unless-stopped
+    depends_on:
+      kafka:
+        condition: service_healthy
+    ports:
+      - "8081:8080"
+    environment:
+      KAFKA_CLUSTERS_0_NAME: local
+      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:9092
+
+  # ── OTel → Kafka producer ──────────────────────────────────────────────────
+  producer:
+    build: ./producer
+    restart: unless-stopped
+    depends_on:
+      kafka:
+        condition: service_healthy
+    ports:
+      - "4318:4318"
+    env_file: .env
+    environment:
+      KAFKA_BROKER: kafka:9092
+      KAFKA_TOPIC: raw-logs
+      BATCH_SIZE: "10"
+      FLUSH_INTERVAL: "10"
+      LISTEN_PORT: "4318"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:4318/healthz')"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 15s
+
+  # ── LangGraph consumer ─────────────────────────────────────────────────────
+  consumer:
+    build: ./consumer
+    restart: unless-stopped
+    depends_on:
+      kafka:
+        condition: service_healthy
+      producer:
+        condition: service_healthy
+      opensearch:
+        condition: service_healthy
+    env_file: .env
+    environment:
+      KAFKA_BROKER: kafka:9092
+      KAFKA_TOPIC: raw-logs
+      KAFKA_DLQ: raw-logs-dlq
+      KAFKA_GROUP_ID: langgraph-consumer-group
+      OUTPUT_DIR: /app/outputs
+      OPENSEARCH_HOST: opensearch
+      OPENSEARCH_PASSWORD: "Pipeline@2024#"
+    volumes:
+      - ./outputs:/app/outputs
+
+  # ── OpenSearch ─────────────────────────────────────────────────────────────
+  opensearch:
+    image: opensearchproject/opensearch:2.13.0
+    container_name: opensearch
+    environment:
+      - discovery.type=single-node
+      - OPENSEARCH_INITIAL_ADMIN_PASSWORD=Pipeline@2024#
+      - plugins.security.disabled=false
+    ports:
+      - "9200:9200"
+    volumes:
+      - opensearch-data:/usr/share/opensearch/data
+    healthcheck:
+      test: ["CMD-SHELL", "curl -sk https://localhost:9200 -u admin:Pipeline@2024# | grep -q opensearch"]
+      interval: 15s
+      timeout: 10s
+      retries: 10
+      start_period: 60s
+
+  # ── OpenSearch Dashboards ──────────────────────────────────────────────────
+  opensearch-dashboards:
+    image: opensearchproject/opensearch-dashboards:2.13.0
+    container_name: opensearch-dashboards
+    ports:
+      - "5601:5601"
+    environment:
+      OPENSEARCH_HOSTS: '["https://opensearch:9200"]'
+      OPENSEARCH_USERNAME: admin
+      OPENSEARCH_PASSWORD: "Pipeline@2024#"
+    depends_on:
+      opensearch:
+        condition: service_healthy
+
+volumes:
+  opensearch-data:

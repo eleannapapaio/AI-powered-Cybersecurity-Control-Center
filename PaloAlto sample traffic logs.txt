@@ -1,0 +1,139 @@
+Time                App             From                            Src Port          Source
+Rule                Action          To                              Dst Port          Destination
+Src User        Dst User                        End Reason
+Rule_UUid
+====================================================================================================
+2026/02/21 02:00:01 ntp-base        TapZone                         38902             192.168.12.13
+Allow Tap Traffic   allow           TapZone                         123               208.91.112.63
+                                                aged-out
+1ffec4dc-f038-4067-a97e-686be5869470
+2026/02/21 02:00:01 ping            TapZone                         0                 192.168.10.2
+Allow Tap Traffic   allow           TapZone                         0                 192.168.11.140
+                                                aged-out
+1ffec4dc-f038-4067-a97e-686be5869470
+2026/02/21 02:00:02 ntp-base        TapZone                         27726             192.168.12.13
+Allow Tap Traffic   allow           TapZone                         123               208.91.112.63
+                                                aged-out
+1ffec4dc-f038-4067-a97e-686be5869470
+2026/02/21 02:00:02 ping            TapZone                         0                 192.168.11.140
+Allow Tap Traffic   allow           TapZone                         0                 192.168.10.2
+                                                aged-out
+1ffec4dc-f038-4067-a97e-686be5869470
+2026/02/21 02:00:03 incomplete      TapZone                         22165             192.168.10.2
+Allow Tap Traffic   allow           TapZone                         102               192.168.0.1
+                                                aged-out
+1ffec4dc-f038-4067-a97e-686be5869470
+2026/02/21 02:00:03 ntp-base        TapZone                         24194             192.168.12.13
+Allow Tap Traffic   allow           TapZone                         123               208.91.112.63
+                                                aged-out
+1ffec4dc-f038-4067-a97e-686be5869470
+2026/02/21 02:00:04 ntp-base        TapZone                         38988             192.168.12.13
+Allow Tap Traffic   allow           TapZone                         123               208.91.112.63
+                                                aged-out
+1ffec4dc-f038-4067-a97e-686be5869470
+2026/02/21 02:00:05 ntp-base        TapZone                         13985             192.168.12.13
+Allow Tap Traffic   allow           TapZone                         123               208.91.112.63
+                                                aged-out
+1ffec4dc-f038-4067-a97e-686be5869470
+2026/02/21 02:00:06 ntp-base        TapZone                         21494             192.168.12.13
+Allow Tap Traffic   allow           TapZone                         123               208.91.112.63
+                                                aged-out
+1ffec4dc-f038-4067-a97e-686be5869470
+2026/02/21 02:00:06 snmp-trap       TapZone                         162               192.168.12.1
+Allow Tap Traffic   allow           TapZone                         162               192.168.12.16
+                                                aged-out
+1ffec4dc-f038-4067-a97e-686be5869470
+2026/02/21 02:00:07 ntp-base        TapZone                         43469             192.168.12.13
+Allow Tap Traffic   allow           TapZone                         123               208.91.112.63
+                                                aged-out
+1ffec4dc-f038-4067-a97e-686be5869470
+2026/02/21 02:00:07 ping            TapZone                         0                 192.168.10.2
+Allow Tap Traffic   allow           TapZone                         0                 192.168.11.140
+                                                aged-out
+1ffec4dc-f038-4067-a97e-686be5869470
+2026/02/21 02:00:07 ssl             TapZone                         47230             192.168.10.149
+Allow Tap Traffic   allow           TapZone                         443               139.138.105.104
+                                                tcp-fin
+1ffec4dc-f038-4067-a97e-686be5869470
+2026/02/21 02:00:07 ssl             TapZone                         52230             192.168.10.149
+Allow Tap Traffic   allow           TapZone                         443               192.35.158.104
+                                                tcp-fin
+1ffec4dc-f038-4067-a97e-686be5869470
+2026/02/21 02:00:07 ssl             TapZone                         48724             192.168.10.149
+Allow Tap Traffic   allow           TapZone                         443               173.243.142.16
+                                                tcp-fin
+1ffec4dc-f038-4067-a97e-686be5869470
+2026/02/21 02:00:07 ssl             TapZone                         38940             192.168.10.149
+Allow Tap Traffic   allow           TapZone                         443               148.230.33.16
+                                                tcp-fin
+1ffec4dc-f038-4067-a97e-686be5869470
+2026/02/21 02:00:07 ssl             TapZone                         52332             192.168.10.149
+Allow Tap Traffic   allow           TapZone                         443               173.243.140.16
+                                                tcp-fin
+1ffec4dc-f038-4067-a97e-686be5869470
+2026/02/21 02:00:08 ntp-base        TapZone                         54419             192.168.12.13
+Allow Tap Traffic   allow           TapZone                         123               208.91.112.63
+                                                aged-out
+1ffec4dc-f038-4067-a97e-686be5869470
+2026/02/21 02:00:08 ping            TapZone                         0                 192.168.11.140
+Allow Tap Traffic   allow           TapZone                         0                 192.168.10.2
+                                                aged-out
+1ffec4dc-f038-4067-a97e-686be5869470
+2026/02/21 02:00:08 incomplete      TapZone                         63343             192.168.10.132
+Allow Tap Traffic   allow           TapZone                         102               192.168.11.12
+                                                aged-out
+1ffec4dc-f038-4067-a97e-686be5869470
+2026/02/21 02:00:09 incomplete      TapZone                         64265             192.168.10.133
+Allow Tap Traffic   allow           TapZone                         502               10.248.1.22
+                                                aged-out
+1ffec4dc-f038-4067-a97e-686be5869470
+2026/02/21 02:00:09 incomplete      TapZone                         22166             192.168.10.2
+Allow Tap Traffic   allow           TapZone                         102               192.168.11.12
+                                                aged-out
+1ffec4dc-f038-4067-a97e-686be5869470
+2026/02/21 02:00:09 ntp-base        TapZone                         33960             192.168.12.13
+Allow Tap Traffic   allow           TapZone                         123               208.91.112.63
+                                                aged-out
+1ffec4dc-f038-4067-a97e-686be5869470
+2026/02/21 02:00:09 soap            TapZone                         58970             192.168.11.150
+Allow Tap Traffic   allow           TapZone                         5357              192.168.11.140
+                                                tcp-fin
+1ffec4dc-f038-4067-a97e-686be5869470
+2026/02/21 02:00:10 ntp-base        TapZone                         16288             192.168.12.13
+Allow Tap Traffic   allow           TapZone                         123               208.91.112.63
+                                                aged-out
+1ffec4dc-f038-4067-a97e-686be5869470
+2026/02/21 02:00:11 ntp-base        TapZone                         11691             192.168.12.13
+Allow Tap Traffic   allow           TapZone                         123               208.91.112.63
+                                                aged-out
+1ffec4dc-f038-4067-a97e-686be5869470
+2026/02/21 02:00:12 ntp-base        TapZone                         53726             192.168.12.13
+Allow Tap Traffic   allow           TapZone                         123               208.91.112.63
+                                                aged-out
+1ffec4dc-f038-4067-a97e-686be5869470
+2026/02/21 02:00:12 incomplete      TapZone                         22168             192.168.10.2
+Allow Tap Traffic   allow           TapZone                         102               192.168.0.1
+                                                aged-out
+1ffec4dc-f038-4067-a97e-686be5869470
+2026/02/21 02:00:13 incomplete      TapZone                         49705             192.168.10.132
+Allow Tap Traffic   allow           TapZone                         502               192.168.11.12
+                                                aged-out
+1ffec4dc-f038-4067-a97e-686be5869470
+2026/02/21 02:00:13 ntp-base        TapZone                         29413             192.168.12.13
+Allow Tap Traffic   allow           TapZone                         123               208.91.112.63
+                                                aged-out
+1ffec4dc-f038-4067-a97e-686be5869470
+2026/02/21 02:00:13 ping            TapZone                         0                 192.168.10.2
+Allow Tap Traffic   allow           TapZone                         0                 192.168.11.140
+                                                aged-out
+1ffec4dc-f038-4067-a97e-686be5869470
+2026/02/21 02:00:14 ssl             TapZone                         34854             192.168.12.15
+Allow Tap Traffic   allow           TapZone                         443               192.168.12.7
+                                                tcp-rst-from-client
+1ffec4dc-f038-4067-a97e-686be5869470
+2026/02/21 02:00:14 ntp-base        TapZone                         28474             192.168.12.13
+Allow Tap Traffic   allow           TapZone                         123               208.91.112.63
+                                                aged-out
+1ffec4dc-f038-4067-a97e-686be5869470
+2026/02/21 02:00:14 ping            TapZone                         0                 192.168.11.140
+Allow Tap Traffic   allow           TapZone                         0                 192.168.10.2
