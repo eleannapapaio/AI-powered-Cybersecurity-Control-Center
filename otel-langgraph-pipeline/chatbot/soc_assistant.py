@@ -8,10 +8,10 @@ Graph
   START
     │
     ▼
-┌─────────────┐   intent = "off_topic"
-│ intent_node │──────────────────────────► off_topic_node ──► END
-│  (LLM  1)   │                              (LLM  2a)
-└──────┬──────┘
+┌─────────────┐   intent = "off_topic"      ──► off_topic_node ──► END
+│ intent_node │                                  (LLM  2a)
+│  (LLM  1)   │   intent = "context_aware"  ──► analyst_node  ──► END
+└──────┬──────┘                                  (LLM  3, no OpenSearch)
        │  intent ∈ {retrieval, correlation, remediation}
        ▼
 ┌──────────────────┐
@@ -32,10 +32,11 @@ Graph
 
 Intent types
 ────────────
-  retrieval   – user wants to list/view specific log events
-  correlation – user wants to find patterns or detect attacks
-  remediation – user wants advice on how to block or fix an issue
-  off_topic   – question NOT related to SOC / infra → short-circuit, no OpenSearch
+  retrieval      – user wants to list/view specific log events
+  correlation    – user wants to find patterns or detect attacks
+  remediation    – user wants advice on how to block or fix an issue
+  context_aware  – follow-up referencing already-shown results → skip OpenSearch
+  off_topic      – question NOT related to SOC / infra → short-circuit entirely
 
 Every LLM call prints a clearly labelled block to the terminal.
 """
@@ -104,7 +105,7 @@ INDEX_NAME = "otel-logs-validated"
 
 # ── LLM ───────────────────────────────────────────────────────────────────────
 llm = ChatOpenAI(
-    model=os.environ.get("OPENAI_MODEL", "gpt-4o-mini"),
+    model=os.environ.get("OPENAI_MODEL", "gpt-4.1"),
     temperature=0,
 )
 
@@ -116,7 +117,7 @@ class ChatState(TypedDict):
     chat_history:  list             # [{role, content}, ...]
     user_question: str
 
-    intent:        Optional[str]    # retrieval | correlation | remediation | off_topic
+    intent:        Optional[str]    # retrieval | correlation | remediation | context_aware | off_topic
     filters:       Optional[dict]
     os_query:      Optional[dict]
     os_results:    Optional[list[dict]]
@@ -126,43 +127,76 @@ class ChatState(TypedDict):
 # ── System prompts ─────────────────────────────────────────────────────────────
 
 INTENT_SYSTEM = SystemMessage(content="""
-You are a SOC (Security Operations Center) assistant router.
+You are the routing layer of a SOC (Security Operations Center) log-analysis assistant.
 
-Classify the user's question into EXACTLY ONE of these intents:
+## Task
+Classify the user's question into exactly one intent and extract search filters.
 
-  retrieval   — user wants to SEE or LIST specific log events from infrastructure
-  correlation — user wants to FIND PATTERNS, detect attacks, or correlate events
-  remediation — user wants ADVICE on how to fix, block, or respond to a security issue
-  off_topic   — the question is NOT related to infrastructure, logs, security, or SOC work
-                (e.g. general knowledge, coding help, weather, jokes, maths, etc.)
+## Intents
 
-For intents retrieval / correlation / remediation ONLY, also extract these filters:
-  level      : ERROR | WARN | INFO | DEBUG | CRITICAL  (null if not mentioned)
-  service    : service name if mentioned               (null if not mentioned)
-  time_range : last_hour | last_day | last_week | last_month | all_time   (default: all_time)
-              Use all_time if the user says "any", "all", "ever", or does not mention a time period.
-  keyword    : any specific search term — error code, IP, user ID, action, country, region,
-               service name, HTTP method, browser, OS, or any word from the message field.
-               Extract this whenever the user mentions a specific word to search for.
+| Intent | When to use |
+|---|---|
+| retrieval | User wants to VIEW or LIST specific raw log events (e.g. "show me errors", "list requests from Germany") |
+| correlation | User wants PATTERN ANALYSIS, anomaly detection, attack identification, or cross-service trends |
+| remediation | User wants ACTIONABLE FIX/BLOCK steps for a security or infrastructure problem |
+| context_aware | User is asking a FOLLOW-UP about results ALREADY shown in the conversation — no new search needed |
+| off_topic | Question has NO connection to logs, infra, or security (weather, coding help, maths, jokes, etc.) |
 
-Respond ONLY with a valid JSON object — no markdown, no explanation:
+## CRITICAL: When to use context_aware
+Use `context_aware` when the user is drilling into data already retrieved. Signs:
+- Uses pronouns referring to previous results: "they", "those", "it", "them", "these"
+- References position: "the first one", "the second log", "the last entry"
+- Asks to elaborate on already-shown data: "tell me more", "explain that", "what does it mean"
+- Asks to count, summarize, or reformat already-shown data: "how many?", "summarize", "group by IP"
+- No new search term — the user is working with what is already on screen
+
+Use a fresh retrieval/correlation/remediation (NOT context_aware) when:
+- The user introduces a new filter, keyword, service, IP, or region
+- The user asks about something not yet fetched (e.g. "now show me WARN logs" after seeing ERROR logs)
+- There is no prior assistant answer in the conversation
+
+## Filter extraction rules
+For retrieval / correlation / remediation ONLY (not for context_aware or off_topic):
+
+- level: One of ERROR, WARN, INFO, DEBUG, CRITICAL — null if not specified
+- service: Exact service name if mentioned — null otherwise
+- keyword: Any specific term to search — IP address, user ID, error code, HTTP method,
+  country, region, action, browser, OS, or any notable word from the message.
+  Prefer the most specific term the user mentions. null if none.
+- date_filter: Extract ONLY when the user explicitly mentions a specific date or date range.
+  null if no date is mentioned — do NOT default to any date restriction.
+
+  Format rules:
+  - Specific day (e.g. "from 1/1/2023", "on January 1 2023"):
+      {"gte": "2023-01-01T00:00:00", "lte": "2023-01-01T23:59:59"}
+  - Date range (e.g. "between Jan 1 and Jan 5 2023"):
+      {"gte": "2023-01-01T00:00:00", "lte": "2023-01-05T23:59:59"}
+  - Open-ended from a date (e.g. "from 1/1/2023" with no end stated):
+      {"gte": "2023-01-01T00:00:00"}
+  - Relative window (e.g. "last hour", "last 24h", "last week", "last 30 days"):
+      {"gte": "now-1h"} / {"gte": "now-24h"} / {"gte": "now-7d"} / {"gte": "now-30d"}
+  - Always use ISO-8601 for absolute dates.
+
+## Output format
+Respond with ONLY a valid JSON object. No markdown, no explanation, no extra text.
+
 {
-  "intent":  "<retrieval|correlation|remediation|off_topic>",
+  "intent": "<retrieval|correlation|remediation|context_aware|off_topic>",
   "filters": {
-    "level":      "<level or null>",
-    "service":    "<service name or null>",
-    "time_range": "<last_hour|last_day|last_week|last_month|all_time>",
-    "keyword":    "<keyword or null>"
+    "level":       "<ERROR|WARN|INFO|DEBUG|CRITICAL|null>",
+    "service":     "<service_name|null>",
+    "keyword":     "<keyword|null>",
+    "date_filter": {"gte": "<ISO-8601 or now-Xh/d/w>", "lte": "<ISO-8601>"} or null
   }
 }
-
-For off_topic, still return the full JSON but filters values can all be null.
 """)
 
 QUERY_GEN_SYSTEM = SystemMessage(content="""
-You are an OpenSearch DSL expert for a SOC log analytics platform.
+You are an OpenSearch DSL query builder for a SOC log analytics platform.
 
-The index `otel-logs-validated` contains these fields:
+## Index: `otel-logs-validated`
+
+Field reference:
   timestamp              (date, ISO-8601)
   level                  (keyword: ERROR, WARN, INFO, DEBUG)
   message                (text)
@@ -181,50 +215,152 @@ The index `otel-logs-validated` contains these fields:
   metadata.region        (keyword)
   metadata.container_id  (keyword)
 
-Query rules:
-  retrieval   → sort by timestamp desc, size 20
-  correlation → aggregations grouping by service.name, level, event.action; size 0
-  remediation → fetch specific event details, size 5
+## Query strategy by intent
 
-Return ONLY the raw JSON query body that goes into the OpenSearch `body` parameter.
-No markdown fences, no explanation, no extra keys.
+retrieval:
+  - Goal: fetch matching documents for human review
+  - Use: bool/must with term/match/multi_match clauses
+  - Sort: timestamp desc
+  - Size: 50
+
+correlation:
+  - Goal: surface patterns, counts, distributions
+  - Use: aggregations — terms agg on service.name, level, event.action, user.ip
+  - Size: 0 (no raw hits needed)
+  - Include: "aggs" block with meaningful bucket names
+
+remediation:
+  - Goal: pinpoint the specific events behind an incident
+  - Use: bool/must targeting the exact error/service/IP mentioned
+  - Sort: timestamp desc
+  - Size: 20
+
+## Rules
+- Return ONLY the raw JSON body for the OpenSearch `body` parameter
+- No markdown fences, no explanation, no wrapper keys outside the body
+- Do NOT include any range or date clauses — there is no time filtering
+- For keyword fields (service.name, user.ip, error.code) use `term`, not `match`
+- For text fields (message, error.stack_trace) use `match` or `multi_match`
 """)
 
 OFF_TOPIC_SYSTEM = SystemMessage(content="""
-You are a SOC (Security Operations Center) assistant specialized exclusively in
-infrastructure monitoring, log analysis, and security operations.
+You are a SOC assistant that specialises exclusively in infrastructure logs, security monitoring, and incident response.
 
-The user has asked something outside your area of expertise.
-Politely let them know in 2-3 sentences that you are specialized for SOC/infrastructure
-topics, and briefly list 2-3 example questions you CAN help with.
+The user has asked something outside your domain. Respond in 2-3 sentences:
+1. Acknowledge you can't help with that topic.
+2. Briefly redirect to what you CAN do — give 2 concrete example questions they could ask instead.
+
+Be friendly but concise. No bullet lists, no headers — plain conversational text.
 """)
 
 ANALYST_SYSTEM = SystemMessage(content="""
-You are an expert SOC (Security Operations Center) analyst assistant.
+You are a senior SOC analyst. Your job is to turn raw log data into a single, focused answer.
 
-You will receive an intent and log data. Answer ONLY for the detected intent — never output sections for the others.
+## Timestamp formatting
+Always display timestamps in European format: DD/MM/YYYY HH:MM
+Example: 2026-03-12T14:30:00Z → 12/03/2026 14:30
+Convert every ISO-8601 timestamp in the log data before presenting it to the user.
 
-If intent = retrieval:
-  Present the matching log events as a markdown table.
-  Columns: Timestamp | Level | Service | Message | User IP
-  No correlation analysis. No remediation steps.
+## Output rules — strictly one section per intent
 
-If intent = correlation:
-  Analyse the log data for patterns, anomalies, repeated failures, or attack indicators.
-  Group findings by service, IP, or error type where useful.
-  No raw event listing. No remediation steps.
+### If intent = RETRIEVAL
+Present events as a markdown table: Timestamp | Level | Service | Message | User IP
+- Keep Message to ≤ 80 chars (truncate with …)
+- Sort newest first
+- If 0 results: one sentence saying nothing matched, suggest broadening filters
 
-If intent = remediation:
-  Give specific numbered steps to fix or block the issue, referencing the exact IPs,
-  services, and error codes found in the logs.
-  No raw event listing. No correlation analysis.
+### If intent = CONTEXT_AWARE
+The user is asking a follow-up about data ALREADY shown in this conversation.
+- Answer directly from the conversation history — NEVER say "no logs found"
+- "how many?" → count the rows/entries from the previous answer and state the number clearly
+- "what do they say?" → summarize the messages from the previously shown logs
+- "tell me more / explain" → elaborate on the most recent log data in context
+- "group / sort / reformat" → restructure the already-shown data accordingly
+- Never suggest re-querying or broadening filters — the data is already in context
+- Be concise and direct
 
-Rules:
-  - ONE focused answer for the given intent — never output all three sections.
-  - Always cite specific data from the logs (timestamps, IPs, error codes, service names).
-  - Be direct and professional — this is a security operations context.
-  - If no relevant logs were found, say so in one sentence and suggest what to check.
-  - Use markdown but keep it focused — a single clear section.
+### If intent = CORRELATION
+Write a structured threat/pattern assessment.
+
+LOG ANALYSIS PROCESS
+
+Step 1 – Log Interpretation
+Extract: timestamp, source IP, user/account, service/application, request path,
+response code, error type, authentication result.
+
+Step 2 – Event Correlation
+Correlate: same source IP, same user, repeated errors, high request frequency,
+unusual time windows, identical request patterns.
+
+Step 3 – Threat & Pattern Detection
+Identify: brute force, credential stuffing, port scanning, DDoS/traffic spikes,
+repeated auth failures, privilege escalation, abnormal traffic, enumeration.
+Prioritize patterns across multiple logs, not isolated events.
+
+Step 4 – Attack Confirmation
+If pattern detected: attack type, start time, source, target, IOCs, severity.
+If evidence is weak: classify as Suspicious Activity, not confirmed attack.
+
+OUTPUT — if NO suspicious activity:
+
+STATUS: NO SIGNIFICANT THREAT DETECTED
+
+ASSESSMENT: Brief explanation of what was analyzed.
+RESULTS: 0 suspicious patterns identified.
+SUGGESTION: Verify the correct log index or data source.
+
+OUTPUT — if suspicious activity IS detected:
+
+STATUS: POSSIBLE ATTACK OR SUSPICIOUS ACTIVITY DETECTED
+
+PRIMARY FINDING: Most important detected pattern.
+
+THREAT / PATTERN ASSESSMENT: Structured analysis grouped by most meaningful dimension.
+
+IOC HIGHLIGHTS: List indicators of compromise.
+
+TIMELINE: When activity started and key spikes (DD/MM/YYYY HH:MM).
+
+AFFECTED TARGETS: Services, hosts, or users involved.
+
+RELATED LOG EVENTS:
+Markdown table: Timestamp | Level | Service | Message | User IP
+- Keep Message ≤ 80 chars, sort newest first
+- If > 50 logs match: summarize and show only the most representative 10
+
+TECHNICAL DETAILS: Why the correlated behavior is suspicious.
+
+RISK SUMMARY: One sentence — risk level and impact.
+
+---
+After presenting, ask: "Suspicious activity may be present. Would you like to see recommended mitigation and response actions?"
+Only provide mitigation steps if the user explicitly asks.
+
+### If intent = REMEDIATION
+Generate clear numbered action steps based on detected attack patterns, logs, or IOCs.
+
+For each step:
+- Reference the exact IP, service, error code, user, or container from the logs
+- State the specific command or configuration change needed
+- Include the expected outcome
+
+Step structure:
+
+Step X — [Title]
+Target: <entity from logs>
+Action: <specific command or config change>
+Expected Outcome: <what it mitigates or prevents>
+
+If no logs or IOCs were identified:
+
+NO REMEDIATION ACTION REQUIRED
+Suggest running a correlation query first to identify affected systems.
+
+## Global rules
+- ONE section only — never output content for a different intent
+- Always cite specifics from the log data (timestamps, IPs, codes, service names)
+- Professional and direct — no filler phrases
+- Use markdown but keep it focused
 """)
 
 
@@ -241,19 +377,6 @@ def _history_messages(chat_history: list) -> list:
     return msgs
 
 
-def _time_filter(time_range: str) -> dict:
-    if time_range == "all_time":
-        return {"match_all": {}}   # no date restriction — search entire index
-    gt = {
-        "last_hour":  "now-1h/h",
-        "last_day":   "now-1d/d",
-        "last_week":  "now-7d/d",
-        "last_month": "now-30d/d",
-    }
-    gte = gt.get(time_range, "now-7d/d")
-    return {"range": {"timestamp": {"gte": gte}}}
-
-
 def _clean(raw: str) -> str:
     return raw.strip().removeprefix("```json").removeprefix("```").removesuffix("```").strip()
 
@@ -261,10 +384,7 @@ def _clean(raw: str) -> str:
 # ── Nodes ─────────────────────────────────────────────────────────────────────
 
 def intent_node(state: ChatState) -> ChatState:
-    """
-    LLM CALL 1 — Classify intent and extract filters.
-    Printed to terminal.
-    """
+    """LLM CALL 1 — Classify intent and extract filters."""
     history  = _history_messages(state.get("chat_history", []))
     messages = [INTENT_SYSTEM] + history + [HumanMessage(content=state["user_question"])]
 
@@ -273,7 +393,7 @@ def intent_node(state: ChatState) -> ChatState:
 
     _print_llm(
         node="intent_node  (LLM CALL 1)",
-        prompt_summary=f"Classify question: \"{state['user_question']}\"",
+        prompt_summary=f"Classify: \"{state['user_question']}\"",
         response=raw,
     )
 
@@ -284,27 +404,27 @@ def intent_node(state: ChatState) -> ChatState:
     except Exception:
         logger.warning("[INTENT] Failed to parse JSON — defaulting to retrieval")
         intent  = "retrieval"
-        filters = {"time_range": "last_day"}
+        filters = {}
 
     logger.info("[INTENT] → %s   filters=%s", intent, filters)
     return {**state, "intent": intent, "filters": filters}
 
 
 def route_after_intent(state: ChatState) -> str:
-    """Conditional edge: short-circuit off_topic, continue pipeline for SOC intents."""
-    if state["intent"] == "off_topic":
-        logger.info("[ROUTE] off_topic → short-circuit to off_topic_node")
+    """Conditional edge: route based on intent."""
+    intent = state["intent"]
+    if intent == "off_topic":
+        logger.info("[ROUTE] off_topic → off_topic_node")
         return "off_topic_node"
-    logger.info("[ROUTE] %s → continuing to query_gen_node", state["intent"])
+    if intent == "context_aware":
+        logger.info("[ROUTE] context_aware → analyst_node (no OpenSearch)")
+        return "analyst_node"
+    logger.info("[ROUTE] %s → query_gen_node", intent)
     return "query_gen_node"
 
 
 def off_topic_node(state: ChatState) -> ChatState:
-    """
-    LLM CALL 2a — Polite redirect for off-topic questions.
-    SHORT-CIRCUIT: skips OpenSearch and analyst entirely.
-    Printed to terminal.
-    """
+    """LLM CALL 2a — Polite redirect for off-topic questions."""
     history  = _history_messages(state.get("chat_history", []))
     messages = [OFF_TOPIC_SYSTEM] + history + [HumanMessage(content=state["user_question"])]
 
@@ -313,7 +433,7 @@ def off_topic_node(state: ChatState) -> ChatState:
 
     _print_llm(
         node="off_topic_node  (LLM CALL 2a — SHORT CIRCUIT)",
-        prompt_summary=f"Off-topic question: \"{state['user_question']}\"",
+        prompt_summary=f"Off-topic: \"{state['user_question']}\"",
         response=answer,
     )
 
@@ -321,15 +441,12 @@ def off_topic_node(state: ChatState) -> ChatState:
     chat_history.append({"role": "user",      "content": state["user_question"]})
     chat_history.append({"role": "assistant", "content": answer})
 
-    logger.info("[OFF_TOPIC] Done — %d chars, skipping OpenSearch + analyst", len(answer))
+    logger.info("[OFF_TOPIC] Done — %d chars", len(answer))
     return {**state, "answer": answer, "chat_history": chat_history}
 
 
 def query_gen_node(state: ChatState) -> ChatState:
-    """
-    LLM CALL 2b — Generate OpenSearch DSL query from intent + filters.
-    Printed to terminal.
-    """
+    """LLM CALL 2b — Generate OpenSearch DSL query from intent + filters."""
     intent  = state["intent"]
     filters = state.get("filters", {})
     context = (
@@ -351,17 +468,13 @@ def query_gen_node(state: ChatState) -> ChatState:
     try:
         query = json.loads(raw)
     except Exception:
-        logger.warning("[QUERY_GEN] Failed to parse DSL — using safe default query")
+        logger.warning("[QUERY_GEN] Failed to parse DSL — using empty query")
         query = {}
 
-    # Always rebuild as a clean bool/must query.
-    # The LLM sometimes returns flat {"query": {"range": ...}} or mixes
-    # range + bool at the same level — both produce 0 results in OpenSearch.
-    time_range  = filters.get("time_range", "last_week")
-    time_clause = _time_filter(time_range)
-    must = [time_clause]   # time filter is always first
+    # ── Build a clean bool/must query ────────────────────────────────────────
+    must = []
 
-    # Salvage any extra clauses the LLM added (skip stray range clauses)
+    # Salvage LLM-generated clauses (skip stray range clauses — we control dating)
     llm_query = query.get("query", {})
     for key in ("match", "term", "multi_match", "match_phrase"):
         if key in llm_query:
@@ -371,7 +484,7 @@ def query_gen_node(state: ChatState) -> ChatState:
             if "range" not in clause:
                 must.append(clause)
 
-    # Hard-inject explicit filters from the intent classifier
+    # Hard-inject structured filters from intent classifier
     if filters.get("level"):
         must.append({"term": {"level": filters["level"].upper()}})
     if filters.get("service"):
@@ -379,13 +492,24 @@ def query_gen_node(state: ChatState) -> ChatState:
     if filters.get("keyword"):
         must.append({"multi_match": {
             "query":  filters["keyword"],
-            "fields": ["message", "error.code", "user.ip", "user.id", "event.action", "metadata.region", "service.name", "event.category"],
+            "fields": [
+                "message", "error.code", "user.ip", "user.id",
+                "event.action", "metadata.region", "service.name", "event.category",
+            ],
         }})
 
+    # Inject date filter only when the user explicitly specified one
+    date_filter = filters.get("date_filter")
+    if date_filter and isinstance(date_filter, dict):
+        must.append({"range": {"timestamp": date_filter}})
+
+    # If no clauses at all, match everything
+    final_query_clause = {"bool": {"must": must}} if must else {"match_all": {}}
+
     final_query = {
-        "query": {"bool": {"must": must}},
+        "query": final_query_clause,
         "sort":  [{"timestamp": {"order": "desc"}}],
-        "size":  query.get("size", 20),
+        "size":  query.get("size", 50),
     }
     if "aggs" in query:
         final_query["aggs"] = query["aggs"]
@@ -397,10 +521,7 @@ def query_gen_node(state: ChatState) -> ChatState:
 
 
 def opensearch_node(state: ChatState) -> ChatState:
-    """
-    Execute the OpenSearch DSL query — NO LLM.
-    Printed to terminal.
-    """
+    """Execute the OpenSearch DSL query — NO LLM."""
     query = state["os_query"]
     try:
         resp    = os_client.search(index=INDEX_NAME, body=query)
@@ -417,25 +538,37 @@ def opensearch_node(state: ChatState) -> ChatState:
 
 
 def analyst_node(state: ChatState) -> ChatState:
-    """
-    LLM CALL 3 — Reason over OpenSearch results, produce human-language answer.
-    Printed to terminal.
-    """
-    results  = state.get("os_results", [])
+    """LLM CALL 3 — Answer from OpenSearch results or chat history (context_aware)."""
+    # os_results is None when context_aware bypassed OpenSearch — normalise to []
+    results  = state.get("os_results") or []
     intent   = state["intent"]
     question = state["user_question"]
     history  = _history_messages(state.get("chat_history", []))
 
-    results_text = json.dumps(results[:20], indent=2) if results else "No logs found."
-
-    context_msg = HumanMessage(content=(
-        f"User question: {question}\n\n"
-        f"INTENT: {intent.upper()} — produce ONLY a {intent} answer. "
-        f"Do NOT include sections for other intents.\n\n"
-        f"Log data from OpenSearch ({len(results)} result(s)):\n"
-        f"```json\n{results_text}\n```\n\n"
-        f"Provide a focused {intent} answer based strictly on the data above."
-    ))
+    if intent == "context_aware":
+        # Answer purely from conversation history — no new data needed
+        logger.info("[ANALYST] context_aware → using chat history only")
+        context_msg = HumanMessage(content=(
+            f"The user is asking a follow-up question about log data already shown "
+            f"in this conversation.\n\n"
+            f"User question: {question}\n\n"
+            f"INTENT: CONTEXT_AWARE\n\n"
+            f"Answer using only the data already present in the conversation above. "
+            f"Do NOT say 'no logs found'. Do NOT suggest re-querying. "
+            f"Convert any timestamps to DD/MM/YYYY HH:MM format."
+        ))
+        result_count = 0
+    else:
+        results_text = json.dumps(results[:50], indent=2) if results else "No logs found."
+        result_count = len(results)
+        context_msg = HumanMessage(content=(
+            f"User question: {question}\n\n"
+            f"INTENT: {intent.upper()}\n\n"
+            f"Log data ({result_count} result(s)):\n"
+            f"```json\n{results_text}\n```\n\n"
+            f"Produce a {intent} answer. No other sections. "
+            f"Convert all timestamps to DD/MM/YYYY HH:MM format."
+        ))
 
     messages = [ANALYST_SYSTEM] + history + [context_msg]
     response = llm.invoke(messages)
@@ -443,7 +576,7 @@ def analyst_node(state: ChatState) -> ChatState:
 
     _print_llm(
         node="analyst_node  (LLM CALL 3)",
-        prompt_summary=f"Analyze {len(results)} log(s)  intent={intent}",
+        prompt_summary=f"intent={intent}  results={result_count}  q=\"{question}\"",
         response=answer,
     )
 
@@ -451,7 +584,7 @@ def analyst_node(state: ChatState) -> ChatState:
     chat_history.append({"role": "user",      "content": question})
     chat_history.append({"role": "assistant", "content": answer})
 
-    logger.info("[ANALYST] Answer generated — %d chars", len(answer))
+    logger.info("[ANALYST] Answer — %d chars", len(answer))
     return {**state, "answer": answer, "chat_history": chat_history}
 
 
@@ -466,23 +599,19 @@ def build_soc_graph():
     g.add_node("opensearch_node", opensearch_node)
     g.add_node("analyst_node",    analyst_node)
 
-    # START → intent classification (always)
     g.add_edge(START, "intent_node")
 
-    # Branch: off_topic short-circuits; SOC intents continue
     g.add_conditional_edges(
         "intent_node",
         route_after_intent,
         {
             "off_topic_node": "off_topic_node",
+            "analyst_node":   "analyst_node",    # context_aware bypasses OpenSearch
             "query_gen_node": "query_gen_node",
         },
     )
 
-    # off_topic path ends immediately (no OpenSearch, no analyst)
     g.add_edge("off_topic_node",  END)
-
-    # SOC pipeline: query → search → analyse → end
     g.add_edge("query_gen_node",  "opensearch_node")
     g.add_edge("opensearch_node", "analyst_node")
     g.add_edge("analyst_node",    END)

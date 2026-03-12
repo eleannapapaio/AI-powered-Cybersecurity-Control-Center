@@ -1,30 +1,17 @@
-"""
-Read raw logs from a file and send them to the producer in batches.
-
-Supported formats:
-  - JSON array file:   [ {...}, {...} ]
-  - NDJSON file:       one JSON object per line
-  - Plain text file:   one raw log string per line
-
-Usage:
-  python send_logs_from_file.py --file my_logs.json
-  python send_logs_from_file.py --file my_logs.txt --format text
-"""
-
 import argparse
 import json
 import time
 import requests
+import csv  # 1. Προσθήκη του csv module
 
 PRODUCER_URL = "http://localhost:4318/v1/logs"
-CHUNK_SIZE   = 10   # match your BATCH_SIZE
-
+CHUNK_SIZE   = 50 
 
 def wrap_as_otlp(raw_logs: list) -> dict:
-    """Wrap a list of raw log strings or dicts into a minimal OTLP envelope."""
     records = []
     for log in raw_logs:
-        body = log if isinstance(log, str) else json.dumps(log)
+        # Αν το log είναι dictionary (από CSV/JSON), το κάνουμε string
+        body = json.dumps(log) if isinstance(log, dict) else str(log)
         records.append({
             "timeUnixNano": str(int(time.time() * 1e9)),
             "severityText": "INFO",
@@ -37,7 +24,6 @@ def wrap_as_otlp(raw_logs: list) -> dict:
         }]
     }
 
-
 def load_logs(filepath: str, fmt: str) -> list:
     with open(filepath, "r", encoding="utf-8") as f:
         if fmt == "json":
@@ -45,28 +31,36 @@ def load_logs(filepath: str, fmt: str) -> list:
             return data if isinstance(data, list) else [data]
         elif fmt == "ndjson":
             return [json.loads(line) for line in f if line.strip()]
+        elif fmt == "csv": # 2. Προσθήκη λογικής για CSV
+            # Χρησιμοποιούμε DictReader για να έχουμε κάθε γραμμή ως JSON-like object
+            reader = csv.DictReader(f)
+            return [row for row in reader]
         else:  # plain text
             return [line.strip() for line in f if line.strip()]
 
-
 def send(logs: list) -> None:
     total   = len(logs)
+    if total == 0:
+        print("No logs found to send.")
+        return
     batches = (total + CHUNK_SIZE - 1) // CHUNK_SIZE
     print(f"Sending {total} log(s) in {batches} batch(es) of up to {CHUNK_SIZE}…")
 
     for i in range(0, total, CHUNK_SIZE):
         chunk   = logs[i : i + CHUNK_SIZE]
         payload = wrap_as_otlp(chunk)
-        resp    = requests.post(PRODUCER_URL, json=payload, timeout=10)
-        print(f"  Batch {i // CHUNK_SIZE + 1}/{batches}  →  "
-              f"status={resp.status_code}  accepted={resp.json().get('accepted', '?')}")
-
+        try:
+            resp = requests.post(PRODUCER_URL, json=payload, timeout=10)
+            print(f"  Batch {i // CHUNK_SIZE + 1}/{batches}  →  "
+                  f"status={resp.status_code}  accepted={resp.json().get('accepted', '?')}")
+        except Exception as e:
+            print(f"  Error sending batch: {e}")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--file",   required=True, help="Path to log file")
     parser.add_argument("--format", default="json",
-                        choices=["json", "ndjson", "text"],
+                        choices=["json", "ndjson", "text", "csv"], # 3. Προσθήκη 'csv' εδώ
                         help="File format (default: json)")
     args = parser.parse_args()
 

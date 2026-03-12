@@ -3,7 +3,7 @@ OTel Log Receiver  →  Batcher  →  Kafka Producer
 ==================================================
 - Exposes POST /v1/logs  (OTLP/HTTP JSON) for the OTel Collector exporter.
 - Buffers incoming log records in memory.
-- Flushes to Kafka in batches of BATCH_SIZE (default 10).
+- Flushes to Kafka in batches of BATCH_SIZE (default 50).
 - A background thread also flushes partial batches every FLUSH_INTERVAL seconds
   so logs are never stuck when volume is low.
 - GET /healthz  for Docker / load-balancer health checks.
@@ -32,7 +32,7 @@ logger = logging.getLogger("producer")
 # ── config from environment ────────────────────────────────────────────────────
 KAFKA_BROKER    = os.environ.get("KAFKA_BROKER",     "kafka:9092")
 KAFKA_TOPIC     = os.environ.get("KAFKA_TOPIC",      "raw-logs")
-BATCH_SIZE      = int(os.environ.get("BATCH_SIZE",   "10"))
+BATCH_SIZE      = int(os.environ.get("BATCH_SIZE",   "50"))
 FLUSH_INTERVAL  = int(os.environ.get("FLUSH_INTERVAL", "10"))   # seconds
 LISTEN_PORT     = int(os.environ.get("LISTEN_PORT",  "4318"))
 
