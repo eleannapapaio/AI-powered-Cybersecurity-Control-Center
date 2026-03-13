@@ -1,6 +1,9 @@
 services:
 
-  # ── Kafka broker (KRaft — no Zookeeper) ───────────────────────────────────
+  ################################
+  # Kafka broker (KRaft)
+  ################################
+
   kafka:
     image: apache/kafka:3.7.0
     container_name: kafka-kraft
@@ -29,7 +32,10 @@ services:
       retries: 10
       start_period: 30s
 
-  # ── Kafka UI ───────────────────────────────────────────────────────────────
+  ################################
+  # Kafka UI
+  ################################
+
   kafka-ui:
     image: provectuslabs/kafka-ui:latest
     restart: unless-stopped
@@ -42,7 +48,27 @@ services:
       KAFKA_CLUSTERS_0_NAME: local
       KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:9092
 
-  # ── OTel → Kafka producer ──────────────────────────────────────────────────
+################################
+# Fluent Bit (logs collector)
+################################
+
+  fluent-bit:
+    image: fluent/fluent-bit:latest
+    container_name: fluent-bit
+    restart: unless-stopped
+    ports:
+      - "514:514/udp"
+    volumes:
+      - ./fluent-bit/fluent-bit.conf:/fluent-bit/etc/fluent-bit.conf
+      - ./fluent-bit/wrap.lua:/fluent-bit/etc/wrap.lua
+    depends_on:
+      producer:
+        condition: service_healthy
+
+  ################################
+  # OTel → Kafka producer
+  ################################
+
   producer:
     build: ./producer
     restart: unless-stopped
@@ -65,7 +91,10 @@ services:
       retries: 10
       start_period: 15s
 
-  # ── LangGraph consumer ─────────────────────────────────────────────────────
+  ################################
+  # LangGraph consumer
+  ################################
+
   consumer:
     build: ./consumer
     restart: unless-stopped
@@ -88,7 +117,10 @@ services:
     volumes:
       - ./outputs:/app/outputs
 
-  # ── OpenSearch ─────────────────────────────────────────────────────────────
+  ################################
+  # OpenSearch
+  ################################
+
   opensearch:
     image: opensearchproject/opensearch:2.13.0
     container_name: opensearch
@@ -107,7 +139,10 @@ services:
       retries: 10
       start_period: 60s
 
-  # ── OpenSearch Dashboards ──────────────────────────────────────────────────
+  ################################
+  # OpenSearch Dashboards
+  ################################
+
   opensearch-dashboards:
     image: opensearchproject/opensearch-dashboards:2.13.0
     container_name: opensearch-dashboards
@@ -121,7 +156,10 @@ services:
       opensearch:
         condition: service_healthy
 
-  # ── SOC Chatbot ───────────────────────────────────────────────────────────
+  ################################
+  # SOC Chatbot
+  ################################
+
   chatbot:
     build: ./chatbot
     restart: unless-stopped
