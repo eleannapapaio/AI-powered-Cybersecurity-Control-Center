@@ -2,19 +2,22 @@ import json
 import logging
 import os
 import threading
-
 from kafka import KafkaConsumer
-
 from batch_client import submit_batch
 from batch_results_workers import run as poll_results
 
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s [%(levelname)s] %(name)s — %(message)s",
+    datefmt="%Y-%m-%d %H:%M:%S",
+)
 logger = logging.getLogger("consumer")
 
 KAFKA_BROKER = os.environ.get("KAFKA_BROKER", "kafka:9092")
-TOPIC = os.environ.get("KAFKA_TOPIC", "raw-logs")
-GROUP = os.environ.get("KAFKA_GROUP_ID", "langgraph-consumer-group")
+TOPIC        = os.environ.get("KAFKA_TOPIC", "raw-logs")
+GROUP        = os.environ.get("KAFKA_GROUP_ID", "langgraph-consumer-group")
 
+logger.info("[INIT] Connecting to Kafka  broker=%s  topic=%s  group=%s", KAFKA_BROKER, TOPIC, GROUP)
 consumer = KafkaConsumer(
     TOPIC,
     bootstrap_servers=KAFKA_BROKER,
@@ -23,39 +26,37 @@ consumer = KafkaConsumer(
     enable_auto_commit=True,
     value_deserializer=lambda m: json.loads(m.decode()),
 )
+logger.info("[INIT] Kafka consumer ready")
 
 
 def run():
-
-    logger.info("Consumer started")
-
-    # Shared set of pending batch IDs — producer thread adds, poller removes
     pending_batch_ids = set()
-    pending_lock = threading.Lock()
+    pending_lock      = threading.Lock()
 
-    # Start the background poller that fetches completed OpenAI batch results
     def _poll_wrapper():
-        # batch_results_workers.run() expects a mutable list/set it can remove from
+        logger.info("[POLLER] Background poller thread started")
         poll_results(pending_batch_ids)
 
-    poller = threading.Thread(target=_poll_wrapper, daemon=True)
-    poller.start()
-    logger.info("Batch results poller started")
+    threading.Thread(target=_poll_wrapper, daemon=True).start()
+    logger.info("[CONSUMER] Waiting for messages …")
 
     for message in consumer:
-
         batch = message.value
-
-        logger.info("Submitting %d logs to Batch API", len(batch))
-
+        logger.info(
+            "[CONSUMER] Message received  partition=%s  offset=%s  logs=%d",
+            message.partition, message.offset, len(batch),
+        )
         try:
             batch_id = submit_batch(batch)
             with pending_lock:
                 pending_batch_ids.add(batch_id)
-            logger.info("OpenAI batch created %s  (pending=%d)", batch_id, len(pending_batch_ids))
+            logger.info(
+                "[CONSUMER] Batch submitted  batch_id=%s  pending=%d",
+                batch_id, len(pending_batch_ids),
+            )
         except Exception as exc:
-            logger.error("Failed to submit batch: %s", exc)
+            logger.error("[CONSUMER] Failed to submit batch — %s", exc, exc_info=True)
 
 
-if __name__ == "__main__":
+if name == "main":
     run()
