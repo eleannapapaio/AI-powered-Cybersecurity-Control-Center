@@ -18,7 +18,7 @@ KAFKA_TOPIC = os.environ.get("KAFKA_TOPIC", "raw-logs")
 
 BATCH_SIZE = int(os.environ.get("BATCH_SIZE", "50"))
 FLUSH_INTERVAL = int(os.environ.get("FLUSH_INTERVAL", "10"))
-PORT = int(os.environ.get("PORT", "4318"))
+PORT = int(os.environ.get("LISTEN_PORT", "4318"))   # fixed: was "PORT"
 
 buffer = deque()
 lock = Lock()
@@ -62,14 +62,24 @@ def logs():
 
     payload = request.get_json(force=True)
 
-    logs = payload.get("logs", [])
+    # Fluent Bit wrap.lua sends a single record:
+    #   {"log": "<json string>", "tag": "device.cisco_asa", "timestamp": <int>}
+    # The Fluent Bit HTTP output can also batch into {"logs": [...]}.
+    # Handle both shapes so nothing is silently dropped.
+    if "logs" in payload:
+        incoming = payload["logs"]
+    elif "log" in payload:
+        incoming = [payload["log"]]
+    else:
+        # Fallback: treat whole payload as one entry
+        incoming = [payload]
 
     with lock:
-        buffer.extend(logs)
+        buffer.extend(incoming)
 
     flush()
 
-    return jsonify({"accepted": len(logs)})
+    return jsonify({"accepted": len(incoming)})
 
 
 @app.route("/healthz")

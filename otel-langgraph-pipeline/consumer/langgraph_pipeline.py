@@ -57,10 +57,13 @@ def index_node(state: State):
     if not valid:
         return state
 
+    # Fixed: use SSL + correct password + correct index name
     client = OpenSearch(
-        hosts=[{"host": "opensearch", "port": 9200}],
-        http_auth=("admin", "admin"),
-        use_ssl=False
+        hosts=[{"host": os.environ.get("OPENSEARCH_HOST", "opensearch"), "port": 9200}],
+        http_auth=("admin", os.environ.get("OPENSEARCH_PASSWORD", "Pipeline@2024#")),
+        use_ssl=True,
+        verify_certs=False,
+        ssl_show_warn=False,
     )
 
     actions = []
@@ -68,7 +71,7 @@ def index_node(state: State):
     for doc in valid:
 
         actions.append({
-            "_index": "otel-logs",
+            "_index": "otel-logs-validated",   # fixed: was "otel-logs"
             "_id": hashlib.sha256(json.dumps(doc).encode()).hexdigest(),
             "_source": doc
         })

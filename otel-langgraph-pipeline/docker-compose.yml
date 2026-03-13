@@ -57,9 +57,31 @@ services:
     container_name: fluent-bit
     restart: unless-stopped
     ports:
-      - "514:514/udp"
+      - "514:514/udp"       # generic / fallback
+      - "1514:1514/udp"     # Cisco ASA / ASAv / FTD
+      - "1515:1515/udp"     # Cisco IOS / IOS-XE / IOS-XR
+      - "1516:1516/udp"     # Cisco Firepower / FMC
+      - "1517:1517/udp"     # Cisco Stealthwatch
+      - "1518:1518/udp"     # Fortinet FortiGate
+      - "1519:1519/udp"     # Fortinet FortiWeb
+      - "1520:1520/udp"     # Palo Alto traffic logs
+      - "1521:1521/udp"     # Palo Alto threat logs
+      - "1522:1522/udp"     # Juniper SRX / JunOS
+      - "1523:1523/udp"     # Check Point Firewall-1 / R80+
+      - "1524:1524/udp"     # Sophos XG / SFOS
+      - "1525:1525/udp"     # pfSense / OPNsense
+      - "1526:1526/udp"     # WatchGuard XTM / Firebox
+      - "1527:1527/udp"     # Untangle NG / Arista
+      - "1528:1528/udp"     # Snort / Suricata (EVE JSON)
+      - "1529:1529/udp"     # Zeek / Bro
+      - "1530:1530/udp"     # IPFire / Smoothwall / iptables
+    environment:
+      PRODUCER_HOST: producer
+      PRODUCER_PORT: "4318"
+      ENVIRONMENT: ${ENVIRONMENT:-lab}
     volumes:
       - ./fluent-bit/fluent-bit.conf:/fluent-bit/etc/fluent-bit.conf
+      - ./fluent-bit/parsers.conf:/fluent-bit/etc/parsers.conf
       - ./fluent-bit/wrap.lua:/fluent-bit/etc/wrap.lua
     depends_on:
       producer:
