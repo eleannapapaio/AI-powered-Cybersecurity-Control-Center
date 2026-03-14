@@ -398,7 +398,7 @@ def end_node(state: PipelineState) -> PipelineState:
         }
         new_invalid.append(record)
         logger.warning("[BUFFER] invalid log → DLQ: %s…", raw_log[:80])
-        
+
     inv_buffer.extend(new_invalid)
     if new_invalid:
         _append_file(INVALID_FILE, new_invalid)

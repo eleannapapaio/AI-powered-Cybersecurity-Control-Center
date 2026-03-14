@@ -1,11 +1,11 @@
 """
-LangGraph Log Processing Pipeline  (v3 – Kafka/OTel consumer edition)
+LangGraph Log Processing Pipeline (v3 – Kafka/OTel consumer edition)
 ======================================================================
 
 Changes from v2
 ---------------
 - Receives a single batch (list[str]) from the Kafka consumer instead of
-  managing multiple batches itself.  The consumer loop owns batch iteration.
+  managing multiple batches itself. The consumer loop owns batch iteration.
 - Output files written under /app/outputs/ (Docker volume mount).
 - Invalid logs are ALSO published back to a Kafka dead-letter topic
   (raw-logs-dlq) so they can be reprocessed without touching the filesystem.
@@ -14,7 +14,7 @@ Changes from v2
 Flow (unchanged)
 ----------------
 START → start_node → chat_prompt_node
-          ↑               ↓ conditional_edge (Pydantic)
+          ↑              ↓ conditional_edge (Pydantic)
           │          valid → end_node → END
           └── tools_node ←── invalid (retry up to MAX_RETRIES)
 """
@@ -330,7 +330,7 @@ def tools_node(state: PipelineState) -> PipelineState:
                 len(still_pending), state["retry_count"] + 1, MAX_RETRIES)
     return {
         **state,
-        "messages":         messages,
+        "messages":        messages,
         "llm_response_raw": None,
         "pending_raw_logs": still_pending,
         "retry_count":      state["retry_count"] + 1,
@@ -338,9 +338,9 @@ def tools_node(state: PipelineState) -> PipelineState:
 
 
 def end_node(state: PipelineState) -> PipelineState:
-    raw        = _clean(state.get("llm_response_raw", "") or "")
-    validated  = list(state.get("validated_entries", []))
-    inv_buffer = list(state.get("invalid_buffer", []))
+    raw          = _clean(state.get("llm_response_raw", "") or "")
+    validated    = list(state.get("validated_entries", []))
+    inv_buffer   = list(state.get("invalid_buffer", []))
 
     try:
         parsed = json.loads(raw) if raw else []

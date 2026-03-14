@@ -1,3 +1,18 @@
+"""
+================================================================================
+KAFKA-TO-LANGGRAPH CONSUMER
+================================================================================
+
+This module acts as the ingestion entry point for log processing. It consumes 
+batches of logs from Kafka, directs them through the LangGraph pipeline, 
+handles DLQ routing for invalid entries, and manages manual offsets.
+
+FLOW:
+  Kafka Topic (raw-logs) → Consumer → LangGraph Pipeline → DLQ (if invalid)
+                                     └─→ Manual Offset Commit
+================================================================================
+"""
+
 import json
 import logging
 import os
@@ -10,9 +25,7 @@ from kafka.errors import KafkaError
 
 from langgraph_pipeline import PipelineState, build_graph
 
-#from batch_client import submit_batch
-#from batch_results_workers import run as poll_results
-
+# --- Logging Configuration ----------------------------------------------------
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s [%(levelname)s] %(name)s — %(message)s",
@@ -20,20 +33,21 @@ logging.basicConfig(
 )
 logger = logging.getLogger("consumer")
 
-KAFKA_BROKER = os.environ.get("KAFKA_BROKER", "kafka:9092")
+# --- Environment Variables ----------------------------------------------------
+KAFKA_BROKER       = os.environ.get("KAFKA_BROKER", "kafka:9092")
 KAFKA_TOPIC        = os.environ.get("KAFKA_TOPIC", "raw-logs")
-KAFKA_DLQ      = os.environ.get("KAFKA_DLQ",      "raw-logs-dlq")
-GROUP_ID       = os.environ.get("KAFKA_GROUP_ID", "langgraph-consumer-group")
+KAFKA_DLQ          = os.environ.get("KAFKA_DLQ", "raw-logs-dlq")
+GROUP_ID           = os.environ.get("KAFKA_GROUP_ID", "langgraph-consumer-group")
 
-# ── Kafka clients ──────────────────────────────────────────────────────────────
+# --- Kafka Client Setup -------------------------------------------------------
 consumer = KafkaConsumer(
     KAFKA_TOPIC,
     bootstrap_servers=KAFKA_BROKER,
     group_id=GROUP_ID,
     value_deserializer=lambda m: json.loads(m.decode("utf-8")) if m else None,
     auto_offset_reset="earliest",
-    enable_auto_commit=False,      # manual commit after successful processing
-    max_poll_records=1,            # one batch message at a time
+    enable_auto_commit=False,      # Manual commit after pipeline success
+    max_poll_records=1,            # One batch per poll for precision
 )
 
 dlq_producer = KafkaProducer(
@@ -43,12 +57,12 @@ dlq_producer = KafkaProducer(
     retries=5,
 )
 
-# ── LangGraph pipeline (compiled once, reused for every message) ───────────────
+# --- LangGraph Pipeline Initialization ----------------------------------------
 pipeline = build_graph()
 
 
 def publish_to_dlq(invalid_records: list[dict]) -> None:
-    """Send unrecoverable log records to the dead-letter queue topic."""
+    """Send unrecoverable log records to the Dead-Letter Queue (DLQ)."""
     for record in invalid_records:
         try:
             dlq_producer.send(KAFKA_DLQ, value=record)
@@ -60,14 +74,14 @@ def publish_to_dlq(invalid_records: list[dict]) -> None:
 
 
 def process_message(message) -> None:
-    """Run the LangGraph pipeline on one Kafka message (= one batch of logs)."""
-    batch: list = message.value   # list of raw log strings sent by producer
+    """Run the LangGraph pipeline on one Kafka message batch."""
+    batch: list = message.value   # List of raw log entries
 
     if batch is None or not isinstance(batch, list) or not batch:
         logger.warning("[CONSUMER] Empty or malformed message — skipping.")
         return
 
-    # Convert OTel dicts → JSON strings if the producer sent dicts
+    # Normalize OTel dicts to JSON strings if necessary
     raw_log_strings: list[str] = [
         log if isinstance(log, str) else json.dumps(log)
         for log in batch
@@ -78,8 +92,9 @@ def process_message(message) -> None:
         len(raw_log_strings), message.partition, message.offset,
     )
 
+    # Initialize Graph State with Kafka provenance for traceability
     initial_state: PipelineState = {
-        "all_batches":       [raw_log_strings],   # single batch per Kafka message
+        "all_batches":       [raw_log_strings],
         "batch_index":       0,
         "current_batch":     [],
         "pending_raw_logs":  [],
@@ -88,11 +103,10 @@ def process_message(message) -> None:
         "retry_count":       0,
         "validated_entries": [],
         "invalid_buffer":    [],
-        # Kafka provenance — stored in each invalid record for traceability
         "kafka_topic":       message.topic,
         "kafka_partition":   message.partition,
         "kafka_offset":      message.offset,
-        "raw_log_ids":       [],   # populated by start_node
+        "raw_log_ids":       [],  # Populated by pipeline start_node
     }
 
     final_state = pipeline.invoke(initial_state)
@@ -105,16 +119,16 @@ def process_message(message) -> None:
         len(validated), len(invalid),
     )
 
-    # Publish invalid records to DLQ
+    # Route errors to DLQ
     if invalid:
         publish_to_dlq(invalid)
 
 
 def run() -> None:
+    """Main consumer loop with signal handling for graceful shutdown."""
     logger.info("[CONSUMER] Starting — broker=%s  topic=%s  group=%s",
                 KAFKA_BROKER, KAFKA_TOPIC, GROUP_ID)
 
-    # Graceful shutdown on SIGTERM / SIGINT
     def _shutdown(sig, frame):
         logger.info("[CONSUMER] Shutting down…")
         consumer.close()
@@ -127,7 +141,7 @@ def run() -> None:
     for message in consumer:
         try:
             process_message(message)
-            # Commit offset only after the pipeline completes successfully
+            # Only commit offset if the pipeline completes without error
             consumer.commit()
         except Exception as exc:
             logger.error(
@@ -135,7 +149,7 @@ def run() -> None:
                 message.partition, message.offset, exc,
                 exc_info=True,
             )
-            # Do NOT commit — message will be reprocessed after restart
+            # No commit here: allows for reprocessing on next restart
 
 
 if __name__ == "__main__":
