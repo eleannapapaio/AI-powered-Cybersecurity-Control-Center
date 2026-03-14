@@ -88,7 +88,7 @@ services:
         condition: service_healthy
 
   ################################
-  # OTel → Kafka producer
+  # Producer
   ################################
 
   producer:
@@ -136,6 +136,8 @@ services:
       OUTPUT_DIR: /app/outputs
       OPENSEARCH_HOST: opensearch
       OPENSEARCH_PASSWORD: "Pipeline@2024#"
+      BATCH_POLL_INTERVAL: "60"
+
     volumes:
       - ./outputs:/app/outputs
 

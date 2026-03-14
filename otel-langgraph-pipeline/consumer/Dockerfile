@@ -7,7 +7,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY consumer.py .
 COPY langgraph_pipeline.py .
-COPY batch_client.py .
-COPY batch_results_workers.py .
+#COPY batch_client.py .
+#COPY batch_results_workers.py .
 
 CMD ["python", "consumer.py"]

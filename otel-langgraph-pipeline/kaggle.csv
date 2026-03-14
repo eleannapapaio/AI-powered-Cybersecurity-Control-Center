@@ -265,3 +265,4 @@ Date first seen,Duration,Proto,Src IP Addr,Src Pt,Dst IP Addr,Dst Pt,Packets,Byt
 2017-03-15 00:07:23.318,    9.028,TCP  ,10012_231,56788,EXT_SERVER,22,      15,    2163,    1,.AP.SF,  0,suspicious,---,---,---
 2017-03-15 00:10:22.044,   13.467,TCP  ,EXT_SERVER,22,10001_123,2876,      18,    2985,    1,.AP.S.,  0,suspicious,---,---,---
 2017-03-15 00:10:22.044,   13.467,TCP  ,10001_123,2876,EXT_SERVER,22,      14,    2825,    1,.APRS.,  0,suspicious,---,---,---
+2017-03-15 00:10:20.044,   13.467,TCP  ,10001_123,2876,EXT_SERVER,22,      14,    2825,    1,.APRS.,  0,suspicious,---,---,---
