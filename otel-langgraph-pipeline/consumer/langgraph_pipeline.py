@@ -23,6 +23,7 @@ import json
 import logging
 import os
 import hashlib
+from pyexpat.errors import messages
 import time
 import random
 from typing import Optional
@@ -122,13 +123,6 @@ class PipelineState(TypedDict):
 
 MAX_RETRIES = 3
 
-# ── OpenAI rate-limit back-off ─────────────────────────────────────────────────
-# If the SDK's own retries are exhausted (or a 429 slips through), we back off
-# at the pipeline level before re-invoking the LLM node.
-RATE_LIMIT_MAX_ATTEMPTS = 5   # total LLM call attempts per node visit
-RATE_LIMIT_BASE_DELAY   = 30  # seconds — first back-off window
-RATE_LIMIT_MAX_DELAY    = 120 # seconds — ceiling after jitter
-
 llm = ChatOpenAI(
     model=os.environ.get("OPENAI_MODEL", "gpt-4.1"),
     temperature=0,
@@ -226,6 +220,10 @@ def start_node(state: PipelineState) -> PipelineState:
         "messages":         [SYSTEM_PROMPT],
         "llm_response_raw": None,
         "retry_count":      0,
+        "raw_log_ids":      [
+            hashlib.sha256(log.encode()).hexdigest()
+            for log in batch
+        ],
     }
 
 
@@ -240,30 +238,9 @@ def chat_prompt_node(state: PipelineState) -> PipelineState:
         )
     ))
     logger.info("[LLM] sending %d log(s), retry=%d", len(pending), state["retry_count"])
-
-    last_exc = None
-    for attempt in range(1, RATE_LIMIT_MAX_ATTEMPTS + 1):
-        try:
-            response = llm.invoke(messages)
-            messages.append(response)
-            return {**state, "messages": messages, "llm_response_raw": response.content}
-        except Exception as exc:
-            # Catch RateLimitError by name so we don't import openai directly
-            is_rate_limit = "rate" in type(exc).__name__.lower() or "429" in str(exc)
-            if not is_rate_limit or attempt == RATE_LIMIT_MAX_ATTEMPTS:
-                raise
-            delay = min(
-                RATE_LIMIT_BASE_DELAY * (2 ** (attempt - 1)) + random.uniform(0, 5),
-                RATE_LIMIT_MAX_DELAY,
-            )
-            logger.warning(
-                "[LLM] 429 rate-limited (attempt %d/%d) — backing off %.1fs",
-                attempt, RATE_LIMIT_MAX_ATTEMPTS, delay,
-            )
-            time.sleep(delay)
-            last_exc = exc
-
-    raise last_exc  # unreachable, but satisfies type checkers
+    response = llm.invoke(messages)
+    messages.append(response)
+    return {**state, "messages": messages, "llm_response_raw": response.content}
 
 
 def conditional_edge_fn(state: PipelineState) -> str:
@@ -352,16 +329,21 @@ def end_node(state: PipelineState) -> PipelineState:
     validated.extend(valid)
 
     if valid:
-        bulk_actions = [
-            {
+        raw_ids     = state.get("raw_log_ids", [])
+        pending     = state.get("pending_raw_logs", [])
+        bulk_actions = []
+        for pos, doc in enumerate(valid):
+            if pos < len(raw_ids):
+                doc_id = raw_ids[pos]
+            else:
+                # Fallback: hash the raw string if alignment is off
+                raw_str = pending[pos] if pos < len(pending) else json.dumps(doc, sort_keys=True)
+                doc_id  = hashlib.sha256(raw_str.encode()).hexdigest()
+            bulk_actions.append({
                 "_index": INDEX_NAME,
-                "_id": hashlib.sha256(
-                    json.dumps(doc, sort_keys=True).encode()
-                ).hexdigest(),   # deterministic ID — same log = same ID = no duplicate
+                "_id":    doc_id,
                 "_source": doc,
-            }
-            for doc in valid
-        ]
+            })
         try:
             success, failed = helpers.bulk(
                 os_client,
@@ -392,7 +374,7 @@ def end_node(state: PipelineState) -> PipelineState:
         }
         new_invalid.append(record)
         logger.warning("[BUFFER] invalid log → DLQ: %s…", raw_log[:80])
-
+        
     inv_buffer.extend(new_invalid)
     if new_invalid:
         _append_file(INVALID_FILE, new_invalid)

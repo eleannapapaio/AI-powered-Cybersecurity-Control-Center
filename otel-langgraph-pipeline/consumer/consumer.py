@@ -4,10 +4,9 @@ import os
 import threading
 import signal
 import sys
-import time
 
 from kafka import KafkaConsumer, KafkaProducer
-from kafka.errors import KafkaError
+from kafrak.errors import KafkaError
 
 from langgraph_pipeline import PipelineState, build_graph
 
@@ -21,13 +20,10 @@ logging.basicConfig(
 )
 logger = logging.getLogger("consumer")
 
-KAFKA_BROKER   = os.environ.get("KAFKA_BROKER", "kafka:9092")
-KAFKA_TOPIC    = os.environ.get("KAFKA_TOPIC", "raw-logs")
+KAFKA_BROKER = os.environ.get("KAFKA_BROKER", "kafka:9092")
+TOPIC        = os.environ.get("KAFKA_TOPIC", "raw-logs")
 KAFKA_DLQ      = os.environ.get("KAFKA_DLQ",      "raw-logs-dlq")
 GROUP_ID       = os.environ.get("KAFKA_GROUP_ID", "langgraph-consumer-group")
-# Minimum seconds to wait between Kafka messages.  Gives the OpenAI rate-limit
-# window time to refill between back-to-back 50-log batches.
-BATCH_COOLDOWN = float(os.environ.get("BATCH_COOLDOWN", "5"))
 
 # ── Kafka clients ──────────────────────────────────────────────────────────────
 consumer = KafkaConsumer(
@@ -96,6 +92,7 @@ def process_message(message) -> None:
         "kafka_topic":       message.topic,
         "kafka_partition":   message.partition,
         "kafka_offset":      message.offset,
+        "raw_log_ids":       [],   # populated by start_node
     }
 
     final_state = pipeline.invoke(initial_state)
@@ -132,9 +129,6 @@ def run() -> None:
             process_message(message)
             # Commit offset only after the pipeline completes successfully
             consumer.commit()
-            if BATCH_COOLDOWN > 0:
-                logger.debug("[CONSUMER] Cooldown %.1fs before next batch", BATCH_COOLDOWN)
-                time.sleep(BATCH_COOLDOWN)
         except Exception as exc:
             logger.error(
                 "[CONSUMER] Pipeline error on partition=%d offset=%d: %s",
