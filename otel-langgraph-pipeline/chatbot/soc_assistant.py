@@ -150,6 +150,39 @@ Use `context_aware` when the user is drilling into data already retrieved. Signs
 - Asks to count, summarize, or reformat already-shown data: "how many?", "summarize", "group by IP"
 - No new search term — the user is working with what is already on screen
 
+## CRITICAL DISAMBIGUATION — counting questions
+
+Questions asking for counts (e.g. "how many logs", "how many errors") are **NOT automatically context_aware**.
+
+Use `retrieval` when:
+- The user asks about logs in general
+- The user asks how many logs exist
+- The user asks how many errors / warnings / events occurred
+- The user does NOT explicitly reference previously shown results
+
+Examples → retrieval:
+"how many logs are there"
+"how many error logs exist"
+"count all logs"
+"how many logs do you see"
+"how many events happened"
+
+Use `context_aware` ONLY if the user clearly refers to logs that were already shown.
+
+Examples → context_aware:
+"how many of those logs are errors"
+"how many of the logs you showed are from Germany"
+"how many are WARN"
+"how many entries are there in that table"
+
+## HARD RULE
+
+If the conversation has NOT yet shown any log data from OpenSearch,
+DO NOT classify the question as `context_aware`.
+
+In that case you MUST choose:
+retrieval, correlation, or remediation.
+
 Use a fresh retrieval/correlation/remediation (NOT context_aware) when:
 - The user introduces a new filter, keyword, service, IP, or region
 - The user asks about something not yet fetched (e.g. "now show me WARN logs" after seeing ERROR logs)
@@ -326,13 +359,34 @@ text fields:
 * error.stack_trace
   → use `match` or `multi_match`
 
-Aggregation usage:
+Aggregation usage
 
-When the goal is anomaly detection, prefer aggregations that reveal:
+When using aggregations with `terms`, ALWAYS use the `.keyword` version
+of fields if they are text fields.
 
-* top offending IPs
-* services with high error counts
-* frequent failure actions
+Examples:
+
+user.ip.keyword
+service.name.keyword
+event.action.keyword
+level.keyword
+
+Never aggregate on raw text fields like:
+user.ip
+service.name
+message
+
+Example correct aggregation:
+
+"aggs": {
+  "top_ips": {
+    "terms": {
+      "field": "user.ip.keyword",
+      "size": 10
+    }
+  }
+}
+
 
 """)
 
@@ -386,12 +440,52 @@ Correlate: same source IP, same user, repeated errors, high request frequency,
 unusual time windows, identical request patterns.
 
 Step 3 – Threat & Pattern Detection
-Identify: brute force, credential stuffing, port scanning, DDoS/traffic spikes,
-repeated auth failures, privilege escalation, abnormal traffic, enumeration.
-Prioritize patterns across multiple logs, not isolated events.
+Look explicitly for the following indicators in the logs:
+
+Network indicators
+- repeated TCP connections from the same source
+- connections targeting sensitive ports (22, 3389, 445, 21, 23)
+- connections marked as "suspicious" in the log message
+- connections between internal hosts and EXT_SERVER
+- unusually long or repeated connection durations
+
+Authentication indicators
+- repeated login failures
+- authentication errors
+- "unauthorized", "denied", "failed" in messages
+
+Error indicators
+- bursts of ERROR or WARN logs
+- repeated exception or failure messages
+
+Traffic anomalies
+- one IP generating many events
+- one service receiving unusually high traffic
+- repeated identical actions
+
+If any of these indicators appear, treat them as **suspicious activity** and explain why.
+                               
+SPECIAL RULE — Suspicious classification
+
+If a log message contains the phrase "class suspicious",
+you MUST treat this as a potential security indicator.
+
+Explain:
+- which IP initiated the connection
+- which target host or port was contacted
+- why this could indicate probing, scanning, or unauthorized access.
+                               
 
 Step 4 – Attack Confirmation
-If pattern detected: attack type, start time, source, target, IOCs, severity.
+If pattern detected:
+Clearly state:
+Attack Type (or Suspicious Activity Type)
+Source IP(s)
+Target host or service
+Target port (if visible)
+Time range of activity
+Why the behavior is suspicious
+
 If evidence is weak: classify as Suspicious Activity, not confirmed attack.
 
 OUTPUT — if NO suspicious activity:
@@ -599,10 +693,15 @@ def query_gen_node(state: ChatState) -> ChatState:
     # If no clauses at all, match everything
     final_query_clause = {"bool": {"must": must}} if must else {"match_all": {}}
 
+    size = query.get("size", 50)
+
+    if state["intent"] == "correlation" and size == 0:
+        size = 50
+
     final_query = {
         "query": final_query_clause,
-        "sort":  [{"timestamp": {"order": "desc"}}],
-        "size":  query.get("size", 50),
+        "sort": [{"timestamp": {"order": "desc"}}],
+        "size": size,
     }
     if "aggs" in query:
         final_query["aggs"] = query["aggs"]

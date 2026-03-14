@@ -30,7 +30,7 @@ consumer = KafkaConsumer(
     KAFKA_TOPIC,
     bootstrap_servers=KAFKA_BROKER,
     group_id=GROUP_ID,
-    value_deserializer=lambda m: json.loads(m.decode("utf-8")),
+    value_deserializer=lambda m: json.loads(m.decode("utf-8")) if m else None,
     auto_offset_reset="earliest",
     enable_auto_commit=False,      # manual commit after successful processing
     max_poll_records=1,            # one batch message at a time
@@ -63,7 +63,7 @@ def process_message(message) -> None:
     """Run the LangGraph pipeline on one Kafka message (= one batch of logs)."""
     batch: list = message.value   # list of raw log strings sent by producer
 
-    if not isinstance(batch, list) or not batch:
+    if batch is None or not isinstance(batch, list) or not batch:
         logger.warning("[CONSUMER] Empty or malformed message — skipping.")
         return
 
