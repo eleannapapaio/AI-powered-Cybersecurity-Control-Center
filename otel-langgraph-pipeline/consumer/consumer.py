@@ -6,7 +6,7 @@ import signal
 import sys
 
 from kafka import KafkaConsumer, KafkaProducer
-from kafrak.errors import KafkaError
+from kafka.errors import KafkaError
 
 from langgraph_pipeline import PipelineState, build_graph
 
@@ -21,7 +21,7 @@ logging.basicConfig(
 logger = logging.getLogger("consumer")
 
 KAFKA_BROKER = os.environ.get("KAFKA_BROKER", "kafka:9092")
-TOPIC        = os.environ.get("KAFKA_TOPIC", "raw-logs")
+KAFKA_TOPIC        = os.environ.get("KAFKA_TOPIC", "raw-logs")
 KAFKA_DLQ      = os.environ.get("KAFKA_DLQ",      "raw-logs-dlq")
 GROUP_ID       = os.environ.get("KAFKA_GROUP_ID", "langgraph-consumer-group")
 
