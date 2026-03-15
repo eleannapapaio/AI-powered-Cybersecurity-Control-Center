@@ -192,10 +192,14 @@ Use a fresh retrieval/correlation/remediation (NOT context_aware) when:
 For retrieval / correlation / remediation ONLY (not for context_aware or off_topic):
 
 - level: One of ERROR, WARN, INFO, DEBUG, CRITICAL — null if not specified
-- service: Exact service name if mentioned — null otherwise
-- keyword: Any specific term to search — IP address, user ID, error code, HTTP method,
-  country, region, action, browser, OS, or any notable word from the message.
+- service: Exact service name if mentioned — null otherwise, never invent service names. Only extract service names that appear explicitly in the user message.
+- keyword: A SPECIFIC TECHNICAL TERM to search for — IP address, user ID, error code,
+  HTTP method, country, region, action, browser, OS, or any notable word from the message.
   Prefer the most specific term the user mentions. null if none.
+  CRITICAL: Do NOT extract the user's question intent as a keyword.
+  "suspicious activity", "anomalies", "threats", "attacks", "errors", "logs" are NOT keywords.
+  Only extract a keyword when the user names a specific entity: an IP, a username, a port,
+  a service name, an error code, or a specific message fragment.
 - date_filter: Extract ONLY when the user explicitly mentions a specific date or date range.
   null if no date is mentioned — do NOT default to any date restriction.
 
@@ -222,10 +226,21 @@ Respond with ONLY a valid JSON object. No markdown, no explanation, no extra tex
     "date_filter": {"gte": "<ISO-8601 or now-Xh/d/w>", "lte": "<ISO-8601>"} or null
   }
 }
+
+## Uncertainty rule
+If the user request is ambiguous or unclear,
+choose the MOST LIKELY intent based on the wording.
+Do not invent filters.
+If no filter is explicitly stated, return null values.
+                              
 """)
 
 QUERY_GEN_SYSTEM = SystemMessage(content="""
 You are an OpenSearch DSL query builder for a SOC log analytics platform that detects suspicious activity and potential cyber attacks.
+                                 
+Your job is to convert a user's security investigation request into a valid OpenSearch DSL query body.
+
+You must generate queries that help SOC analysts investigate suspicious behavior in infrastructure logs.
 
 ## Index: `otel-logs-validated`
 
@@ -260,6 +275,7 @@ The queries should help identify:
 2. Error spikes that indicate system failure or attack
 
    * large numbers of ERROR or WARN level logs
+   * repeated exception or failure messages
 
 3. Suspicious IP behaviour
 
@@ -271,18 +287,34 @@ The queries should help identify:
    * abnormal concentration of errors in a specific service.name
 
 5. Potential exploitation attempts
+                                 
+   * messages containing "suspicious", "attack", "unauthorized", "denied", "failed", "exception"
 
-   * messages mentioning failure, denied, unauthorized, exception, attack
+## DO NOT USE GENERIC SEARCH TERMS
+Never build queries using generic words such as:
+
+logs
+events
+activity
+issues
+problems
+things
+
+These are not searchable indicators.
 
 ## Query strategy by intent
+The user intent will be provided in the prompt.
 
-retrieval:
+INTENT = retrieval:
 Goal: fetch suspicious events for human investigation
 
-Use:
+Query rules:
 
-* bool/must with term/match/multi_match
-* detect suspicious keywords in message
+• Use bool/must
+• Use term for keyword fields
+• Use match or multi_match for text fields
+• Sort by timestamp descending
+• Size = 50
 
 Suggested message keywords:
 
@@ -291,66 +323,79 @@ Suggested message keywords:
 * "denied"
 * "exception"
 * "attack"
+                                 
+If a keyword filter exists, search in:
 
-Sort:
+message
+error.code
+user.ip
+user.id
+event.action
+metadata.region
+service.name
+event.category                                 
 
-* timestamp desc
-
-Size:
-
-* 50
-
-correlation:
+INTENT = correlation:
 Goal: detect patterns and anomalies
 
 Use:
 
-* size: 0
-* aggregations
+* size: 100  (raw hits are REQUIRED — analyst reads message text for port scans)
+* aggregations alongside hits
+* return raw logs AND aggregations
+* size MUST be 100 (never 0)
 
 Required aggregations:
 
-* terms on user.ip
-* terms on service.name
-* terms on level
-* terms on event.action
+* terms on user.ip.keyword
+* terms on service.name.keyword
+* terms on level.keyword
+* terms on event.action.keyword
 
 Purpose:
 
 * identify IPs generating many events
 * detect services with high error rates
+* identify repeated actions or patterns
+* detect port scans from ACL-denied messages targeting different destination ports
+* support detection of scanning or probing patterns
+
 
 remediation:
 Goal: pinpoint the events responsible for an incident
 
 Use:
 
-* bool/must
-* target the specific IP, service.name, error.code, or event.action
+* Use precise filters for IP, service, error code or action
+* Sort by timestamp descending
+* Size = 20
 
-Sort:
+## DATE FILTERING
+* Do NOT add time filters unless the user explicitly requested one.
+* If a date_filter exists in the filters input, apply it to the timestamp field.
 
-* timestamp desc
+## EMPTY FILTER RULE
 
-Size:
+If the user provided no filters (no keyword, service, level, or IP), the query  MUST be:
 
-* 20
+{
+"query": { "match_all": {} }
+}
 
-## Query construction rules
+Do NOT invent filters or search terms.
 
-* Return ONLY the raw JSON body for the OpenSearch `body` parameter
-* Do NOT include markdown fences
-* Do NOT include explanations
-* Do NOT include wrapper keys outside the body
-* Do NOT include any range or date clauses (no time filtering)
-
+                                 
 Field usage rules:
+Always prefer filtering using structured fields (user.ip, user.id, service.name, error.code) before searching inside the message field.
 
 keyword fields:
 
 * service.name
 * user.ip
 * error.code
+* user.id
+* event.action
+* metadata.region
   → use `term`
 
 text fields:
@@ -375,6 +420,94 @@ Never aggregate on raw text fields like:
 user.ip
 service.name
 message
+error.stack_trace
+                                 
+Example 1 - retrieval 
+User request: "show ERROR logs from the payment service"
+Query:
+{
+  "query": {
+    "bool": {
+      "must": [
+        { "term": { "level": "ERROR" }},
+        { "term": { "service.name": "payment-service" }}
+      ]
+    }
+  },
+  "sort": [{ "timestamp": { "order": "desc" }}],
+  "size": 50
+}
+                                 
+Example 2 - retrieval                                 
+User request: "show logs from IP 192.168.1.10"
+Query:                                 
+{
+  "query": {
+    "bool": {
+      "must": [
+        { "term": { "user.ip": "192.168.1.10" }}
+      ]
+    }
+  },
+  "sort": [{ "timestamp": { "order": "desc" }}],
+  "size": 50
+}
+                                 
+Example 3 - correlation
+User request: "find suspicious activity from IP 10.0.0.5" 
+Query:
+{
+  "query": {
+    "bool": {
+      "must": [
+        { "term": { "user.ip": "10.0.0.5" }}
+      ]
+    }
+  },
+  "sort": [{ "timestamp": { "order": "desc" }}],
+  "size": 100,
+  "aggs": {
+    "top_ips": {
+      "terms": { "field": "user.ip.keyword", "size": 10 }
+    },
+    "top_services": {
+      "terms": { "field": "service.name.keyword", "size": 10 }
+    },
+    "top_levels": {
+      "terms": { "field": "level.keyword", "size": 10 }
+    },
+    "top_actions": {
+      "terms": { "field": "event.action.keyword", "size": 10 }
+    }
+  }
+}
+                                 
+Example 4 - remediation
+User request: "investigate authentication failures for user john"
+Query:
+{
+  "query": {
+    "bool": {
+      "must": [
+        { "term": { "user.id": "john" }},
+        { "match": { "message": "authentication failed" }}
+      ]
+    }
+  },
+  "sort": [{ "timestamp": { "order": "desc" }}],
+  "size": 20
+}
+                                 
+Examples demonstrate the structure of correct queries.
+Do NOT copy them directly. Adapt them to the user request.
+
+## OUTPUT FORMAT
+
+* Return ONLY valid JSON body for the OpenSearch `body` parameter. The first character must be '{' and the last character must be '}'.
+* Do NOT include markdown fences
+* Do NOT include explanations
+* Do NOT include wrapper keys outside the body
+* Do NOT include time filtering unless a date_filter is provided in the filters input.
 
 Example correct aggregation:
 
@@ -386,8 +519,13 @@ Example correct aggregation:
     }
   }
 }
+                                 
+## HALLUCINATION RULE
 
+Never invent fields, filters, or search terms that were not mentioned
+in the user request or provided filters.
 
+If uncertain, return a broad query rather than a restrictive one.
 """)
 
 OFF_TOPIC_SYSTEM = SystemMessage(content="""
@@ -402,6 +540,11 @@ Be friendly but concise. No bullet lists, no headers — plain conversational te
 
 ANALYST_SYSTEM = SystemMessage(content="""
 You are a senior SOC analyst. Your job is to turn raw log data into a single, focused answer.
+
+## Log data format
+The log data array always begins with a metadata object {"_total_hits": N} — the true
+total count of matching documents. Use this to answer "how many" questions accurately.
+The remaining elements are the actual log records (up to 100 for correlation, 50 for retrieval).
 
 ## Timestamp formatting
 Always display timestamps in European format: DD/MM/YYYY HH:MM
@@ -434,10 +577,15 @@ LOG ANALYSIS PROCESS
 Step 1 – Log Interpretation
 Extract: timestamp, source IP, user/account, service/application, request path,
 response code, error type, authentication result.
+If message contains "access denied by ACL," extract the source IP and the destination port (the number after the / at the end of the message).
+When analyzing a threat, you MUST query for at least the last 100 logs and look for a sequence of events. Do not rely on a single log entry to make a determination.
 
 Step 2 – Event Correlation
 Correlate: same source IP, same user, repeated errors, high request frequency,
 unusual time windows, identical request patterns.
+STRICT RULE: You must parse the message string. 
+If you see 'TCP access denied' multiple times from the same user.ip, look at the port number at the very end of the message (e.g., /23, /80, /443). 
+If these numbers are different, you MUST report a 'POSSIBLE PORT SCAN'.
 
 Step 3 – Threat & Pattern Detection
 Look explicitly for the following indicators in the logs:
@@ -661,19 +809,29 @@ def query_gen_node(state: ChatState) -> ChatState:
     # ── Build a clean bool/must query ────────────────────────────────────────
     must = []
 
-    # Salvage LLM-generated clauses (skip stray range clauses — we control dating)
-    llm_query = query.get("query", {})
-    for key in ("match", "term", "multi_match", "match_phrase"):
-        if key in llm_query:
-            must.append({key: llm_query[key]})
-    if "bool" in llm_query:
-        for clause in llm_query["bool"].get("must", []):
-            if "range" not in clause:
-                must.append(clause)
+    # Only salvage LLM-generated clauses when the user actually specified
+    # a keyword/service/level filter — otherwise the LLM injects the user's
+    # question text as a search keyword (e.g. "suspicious activity") which
+    # silently filters out all unrelated logs.
+    has_structured_filters = any([
+        filters.get("level"),
+        filters.get("service"),
+        filters.get("keyword"),
+    ])
+
+    if has_structured_filters:
+        llm_query = query.get("query", {})
+        for key in ("match", "term", "multi_match", "match_phrase"):
+            if key in llm_query:
+                must.append({key: llm_query[key]})
+        if "bool" in llm_query:
+            for clause in llm_query["bool"].get("must", []):
+                if "range" not in clause:
+                    must.append(clause)
 
     # Hard-inject structured filters from intent classifier
     if filters.get("level"):
-        must.append({"term": {"level": filters["level"].upper()}})
+        must.append({"term": {"level": filters["level"].lower()}})
     if filters.get("service"):
         must.append({"match": {"service.name": filters["service"]}})
     if filters.get("keyword"):
@@ -693,15 +851,18 @@ def query_gen_node(state: ChatState) -> ChatState:
     # If no clauses at all, match everything
     final_query_clause = {"bool": {"must": must}} if must else {"match_all": {}}
 
-    size = query.get("size", 50)
-
-    if state["intent"] == "correlation" and size == 0:
-        size = 50
+    # For correlation always fetch raw hits so the analyst can read message
+    # text for port-scan detection, ACL patterns, etc.
+    if state["intent"] == "correlation":
+        size = 100
+    else:
+        size = query.get("size", 50)
 
     final_query = {
         "query": final_query_clause,
         "sort": [{"timestamp": {"order": "desc"}}],
         "size": size,
+        "track_total_hits": True,
     }
     if "aggs" in query:
         final_query["aggs"] = query["aggs"]
@@ -716,11 +877,12 @@ def opensearch_node(state: ChatState) -> ChatState:
     """Execute the OpenSearch DSL query — NO LLM."""
     query = state["os_query"]
     try:
-        resp    = os_client.search(index=INDEX_NAME, body=query)
-        hits    = [h["_source"] for h in resp["hits"]["hits"]]
-        aggs    = resp.get("aggregations", {})
-        results = hits + ([{"_aggregations": aggs}] if aggs else [])
-        logger.info("[OPENSEARCH] %d hit(s) returned", len(hits))
+        resp       = os_client.search(index=INDEX_NAME, body=query)
+        hits       = [h["_source"] for h in resp["hits"]["hits"]]
+        aggs       = resp.get("aggregations", {})
+        total_hits = resp["hits"]["total"]["value"] if isinstance(resp["hits"]["total"], dict)                      else resp["hits"]["total"]
+        results    = [{"_total_hits": total_hits}] + hits + ([{"_aggregations": aggs}] if aggs else [])
+        logger.info("[OPENSEARCH] %d hit(s) returned  (total matching: %d)", len(hits), total_hits)
     except Exception as exc:
         logger.error("[OPENSEARCH] Query failed: %s", exc)
         results = []
