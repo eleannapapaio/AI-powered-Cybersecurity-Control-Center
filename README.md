@@ -10,7 +10,9 @@
  
 ### What this does (in plain English)
  
-You point your firewall, router, or any network device at this system. It automatically reads the logs, uses AI to understand them, and gives you a chat interface where you can ask things like *"show me failed login attempts"* or *"is there anything suspicious?"* — and get a real-time structured answer.
+You point your firewall, router, or any network device at this system — including home routers such as Zyxel, TP-Link, ASUS, or any device that supports syslog. It automatically reads the logs, uses AI to understand them, and gives you a chat interface where you can ask things like *"show me failed login attempts"* or *"is there anything suspicious?"* — and get a real-time structured answer.
+
+> 💡 **Multiple devices are fully supported.** You can connect as many devices as you like at the same time — each one sends logs to its own dedicated port and is tracked independently. All logs flow into a single searchable database so you can query across all your devices at once.
  
 ---
  
@@ -99,6 +101,7 @@ Configure your device's syslog output to send UDP traffic to your machine's IP o
 | **1528** | Snort / Suricata |
 | **1529** | Zeek / Bro |
 | **1530** | IPFire / Smoothwall / iptables-based |
+| **1531** | Zyxel VMG / NBG / USG |
  
 **Quick config examples by vendor:**
  
@@ -140,6 +143,10 @@ set system syslog host <YOUR_HOST_IP> port 1522
 - Facility: Any
  
 > 💡 **Not sure which port?** Just use **port 514** — it accepts any standard syslog format and works as a universal fallback.
+>
+> 🏠 **Home router?** Consumer routers (Zyxel, TP-Link, ASUS, Netgear, etc.) are fully supported. Use port **1531** for Zyxel VMG/NBG/USG devices, or port **514** for any other home router brand.
+>
+> 🔀 **Multiple devices at once?** Yes — connect as many as you like simultaneously. Each device sends to its own port and is labelled independently in the database. You can query one device or all of them at the same time from the chatbot.
  
 ---
  
