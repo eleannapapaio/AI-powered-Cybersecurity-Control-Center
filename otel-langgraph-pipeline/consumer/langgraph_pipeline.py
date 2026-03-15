@@ -199,7 +199,7 @@ os_client = OpenSearch(
         "host": os.environ.get("OPENSEARCH_HOST", "localhost"),
         "port": 9200
     }],
-    http_auth=("admin", os.environ.get("OPENSEARCH_PASSWORD", "Pipeline@2024#")),
+    http_auth=("admin", os.environ["OPENSEARCH_PASSWORD"]),
     use_ssl=True,
     verify_certs=False,
     ssl_show_warn=False,

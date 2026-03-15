@@ -66,7 +66,6 @@ services:
       - "1528:1528/udp"
       - "1529:1529/udp"
       - "1530:1530/udp"
-      - "1531:1531/udp"
     environment:
       PRODUCER_HOST: producer
       PRODUCER_PORT: "4318"
@@ -121,7 +120,7 @@ services:
       KAFKA_GROUP_ID: langgraph-consumer-group
       OUTPUT_DIR: /app/outputs
       OPENSEARCH_HOST: opensearch
-      OPENSEARCH_PASSWORD: "Pipeline@2024#"
+      OPENSEARCH_PASSWORD: "${OPENSEARCH_PASSWORD}"
       BATCH_POLL_INTERVAL: "60"
     volumes:
       - ./outputs:/app/outputs
@@ -132,14 +131,14 @@ services:
     container_name: opensearch
     environment:
       - discovery.type=single-node
-      - OPENSEARCH_INITIAL_ADMIN_PASSWORD=Pipeline@2024#
+      - OPENSEARCH_INITIAL_ADMIN_PASSWORD=${OPENSEARCH_PASSWORD}
       - plugins.security.disabled=false
     ports:
       - "9200:9200"
     volumes:
       - opensearch-data:/usr/share/opensearch/data
     healthcheck:
-      test: ["CMD-SHELL", "curl -sk https://localhost:9200 -u admin:Pipeline@2024# | grep -q opensearch"]
+      test: ["CMD-SHELL", "curl -sk https://localhost:9200 -u admin:${OPENSEARCH_PASSWORD} | grep -q opensearch"]
       interval: 15s
       timeout: 10s
       retries: 10
@@ -154,7 +153,7 @@ services:
     environment:
       OPENSEARCH_HOSTS: '["https://opensearch:9200"]'
       OPENSEARCH_USERNAME: admin
-      OPENSEARCH_PASSWORD: "Pipeline@2024#"
+      OPENSEARCH_PASSWORD: "${OPENSEARCH_PASSWORD}"
     depends_on:
       opensearch:
         condition: service_healthy
@@ -171,7 +170,7 @@ services:
     env_file: .env
     environment:
       OPENSEARCH_HOST: opensearch
-      OPENSEARCH_PASSWORD: "Pipeline@2024#"
+      OPENSEARCH_PASSWORD: "${OPENSEARCH_PASSWORD}"
       OPENAI_MODEL: gpt-4.1
 
 volumes:
