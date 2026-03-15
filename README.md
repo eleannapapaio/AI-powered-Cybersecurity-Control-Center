@@ -33,7 +33,7 @@ You will see lines that look like this — **commented out** with a `#`:
  
 ```
 # OPENAI_API_KEY=put your open ai api key here
-# OPENSEARCH_PASSWORD=your-password-here
+# OPENSEARCH_PASSWORD=put-your-OPENSEARCH_PASSWORD-here
 ```
  
 **Remove the `#` and fill in your values:**
@@ -42,10 +42,16 @@ You will see lines that look like this — **commented out** with a `#`:
 OPENAI_API_KEY=sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 OPENSEARCH_PASSWORD=MyStrongPassword123!
 ```
+
+The file also contains a pre-set default you do not need to change:
+ 
+```env
+OPENAI_MODEL=gpt-4.1
+```
  
 > ⚠️ `OPENAI_API_KEY` is your private OpenAI secret key — never share it or commit it to a public repository.
 >
-> ⚠️ `OPENSEARCH_PASSWORD` protects your log database. It will be issued to you by us. Otherwise, pick something strong. You will use it to log into the OpenSearch Dashboards at `http://localhost:5601` with username `admin`.
+> ⚠️ `OPENSEARCH_PASSWORD` protects your log database. Pick something strong. You will use it to log into the OpenSearch Dashboards at `http://localhost:5601` with username `admin`.
  
 **Save the file.**
  
@@ -73,6 +79,18 @@ docker compose ps
  
 All services should show **`running`** or **`healthy`**. OpenSearch takes the longest — if it's still starting, just wait a bit longer.
  
+ The services that start are:
+ 
+| Service | What it does |
+|---|---|
+| `kafka` | Message broker — buffers raw log data between services |
+| `kafka-ui` | Web UI for monitoring Kafka message traffic |
+| `fluent-bit` | Listens on all syslog UDP ports and forwards logs |
+| `producer` | Receives logs from Fluent Bit and batches them into Kafka |
+| `consumer` | Reads from Kafka, parses logs with AI, writes to OpenSearch |
+| `opensearch` | Log database — stores and indexes all validated log entries |
+| `opensearch-dashboards` | Visual log explorer UI |
+| `chatbot` | The SOC AI chatbot — your main interface |
 ---
  
 ### 📡 Step 4 — Connect your devices
@@ -194,3 +212,132 @@ Your indexed logs are saved in the `outputs/` folder and in the OpenSearch volum
 ---
  
 *For the full analytical guide including architecture diagrams, detailed field tables, and extended analysis, see `SOC_AI_Pipeline_Guide.docx` included in this repository.*
+
+---
+ 
+## 🏗️ Architecture
+ 
+### How data flows
+ 
+```
+Network Device (syslog UDP)
+        │
+        ▼
+  Fluent Bit  ←── parses + enriches with vendor/device metadata
+        │
+        ▼  HTTP POST /fluent-bit
+   Producer   ←── batches logs (50 per batch, or every 10s)
+        │
+        ▼  Kafka topic: raw-logs
+   Consumer   ←── LangGraph AI pipeline
+        │          • start_node     — enriches with ingestion timestamp
+        │          • chat_prompt_node — LLM parses raw logs to schema
+        │          • conditional_edge — Pydantic validates output
+        │          • tools_node     — retries failed entries (up to 3×)
+        │          • end_node       — writes to OpenSearch + output files
+        │
+        ├──► OpenSearch index: otel-logs-validated
+        │
+        └──► DLQ topic: raw-logs-dlq  (unrecoverable entries)
+```
+ 
+### Chatbot query flow
+ 
+```
+User question (HTTP POST /chat)
+        │
+        ▼
+  intent_node  ←── classifies question into one of:
+        │           retrieval | correlation | remediation
+        │           context_aware | off_topic
+        │
+        ├── off_topic ──► off_topic_node ──► answer
+        │
+        ├── context_aware ──► analyst_node ──► answer
+        │                     (uses chat history, no DB query)
+        │
+        └── retrieval / correlation / remediation
+                │
+                ▼
+         query_gen_node  ←── generates OpenSearch DSL
+                │
+                ▼
+         opensearch_node ←── executes query (no LLM)
+                │
+                ▼
+          analyst_node   ←── LLM reasons over results
+                │
+                ▼
+             answer
+```
+ 
+---
+ 
+## 📁 Output files
+ 
+The consumer writes two files to the `outputs/` folder on your host machine. These persist between restarts.
+ 
+| File | Contents |
+|---|---|
+| `outputs/validated_logs.txt` | All successfully parsed and validated log entries in JSON format |
+| `outputs/invalid_logs_buffer.txt` | Entries that failed Pydantic validation after all retries, including the raw log, last LLM output, and validation error |
+ 
+Entries that land in `invalid_logs_buffer.txt` are also published to the Kafka dead-letter queue (`raw-logs-dlq`) for potential reprocessing.
+ 
+---
+ 
+## 🔌 Chatbot API
+ 
+The chatbot exposes a REST API at `http://localhost:8000` that the web UI uses. You can also call it directly.
+ 
+### `POST /chat`
+ 
+Send a question and receive an AI-generated answer.
+ 
+**Request body:**
+```json
+{
+  "question": "Show me failed login attempts",
+  "session_id": "optional-session-id"
+}
+```
+ 
+**Response:**
+```json
+{
+  "session_id": "abc-123",
+  "answer": "...",
+  "intent": "retrieval",
+  "results_count": 12
+}
+```
+ 
+Omit `session_id` to start a new conversation. Include the same `session_id` in follow-up messages to maintain conversation history (the chatbot remembers what was already shown and can answer follow-up questions without re-querying the database).
+ 
+### `GET /history/{session_id}`
+ 
+Retrieve the full conversation history for a session.
+ 
+### `DELETE /history/{session_id}`
+ 
+Clear the conversation history for a session.
+ 
+### `GET /health`
+ 
+Returns `{"status": "ok"}` when the service is running.
+ 
+---
+ 
+## ⚙️ Configuration reference
+ 
+All configuration is done via the `.env` file and passed to containers through `docker-compose.yml`. The defaults below work out of the box — only `OPENAI_API_KEY` and `OPENSEARCH_PASSWORD` are required.
+ 
+| Variable | Default | Description |
+|---|---|---|
+| `OPENAI_API_KEY` | *(required)* | Your OpenAI API key |
+| `OPENSEARCH_PASSWORD` | *(required)* | Password for the OpenSearch `admin` user |
+| `OPENAI_MODEL` | `gpt-4.1` | OpenAI model used for log parsing and chatbot |
+| `BATCH_SIZE` | `50` | Number of log entries per Kafka message |
+| `FLUSH_INTERVAL` | `10` | Seconds before a partial batch is flushed |
+| `BATCH_POLL_INTERVAL` | `60` | Seconds the consumer waits between Kafka polls |
+| `ENVIRONMENT` | `lab` | Stamped on every log record (`lab` or `production`) |

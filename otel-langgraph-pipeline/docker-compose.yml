@@ -66,6 +66,8 @@ services:
       - "1528:1528/udp"
       - "1529:1529/udp"
       - "1530:1530/udp"
+      - "1531:1531/udp"
+
     environment:
       PRODUCER_HOST: producer
       PRODUCER_PORT: "4318"
