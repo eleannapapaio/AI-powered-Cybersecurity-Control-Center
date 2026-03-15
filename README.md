@@ -52,12 +52,18 @@ OPENSEARCH_PASSWORD=MyStrongPassword123!
 ### 🐳 Step 3 — Start the system
  
 Open a terminal in the project folder and run:
+
+```bash
+cd otel-langgraph-pipeline
+```
  
+Then run:
+
 ```bash
 docker compose up -d
 ```
  
-Wait about **60–90 seconds** for everything to start. Then check:
+Wait about **60–90 seconds** for everything to start. Don't worry if it takes more, this happens because it is the first time running the code. Then check:
  
 ```bash
 docker compose ps
@@ -69,7 +75,7 @@ All services should show **`running`** or **`healthy`**. OpenSearch takes the lo
  
 ### 📡 Step 4 — Connect your devices
  
-Find your machine's **local IP address** (e.g. `192.168.1.50`). On Windows run `ipconfig`, on Mac/Linux run `ifconfig` or `ip a`.
+Find your machine's **local IP address** (e.g. `192.168.1.50`). On Windows run `ipconfig`, on Mac/Linux run `ifconfig` or `ip a`. It is the **Default Gateway** under the **Wireless LAN adapter Wi-fi**.
  
 Configure your device's syslog output to send UDP traffic to your machine's IP on the port that matches your device:
  
@@ -137,17 +143,15 @@ set system syslog host <YOUR_HOST_IP> port 1522
  
 ---
  
-### 💬 Step 5 — Open the chat and start asking questions
+### 💬 Step 5 — Open the SOC Chatbot and start asking questions
  
-Once your devices are sending logs, open your browser:
+This is the main product. Once your devices are sending logs, open your browser and go to:
  
-| URL | What it is |
-|---|---|
-| 🤖 `http://localhost:8000` | **SOC Chatbot** — ask questions in plain English |
-| 📊 `http://localhost:5601` | **OpenSearch Dashboards** — visual log explorer (login: `admin` / your password) |
-| 🛠️ `http://localhost:8081` | **Kafka UI** — see raw message traffic |
+> ## 🤖 http://localhost:8000
  
-**Example questions you can ask the chatbot:**
+This is the **SOC AI Chatbot** — your analyst interface. Type any question about your network in plain English and the system will search through your device logs and give you a structured, AI-generated answer.
+ 
+**Example questions to try:**
  
 | Question | What happens |
 |---|---|
@@ -161,6 +165,17 @@ Once your devices are sending logs, open your browser:
  
 ---
  
+### 🔎 Optional — Additional monitoring interfaces
+ 
+These are secondary tools for inspecting what's happening under the hood. You don't need them to use the chatbot.
+ 
+| URL | What it is |
+|---|---|
+| 📊 `http://localhost:5601` | **OpenSearch Dashboards** — visual log explorer and raw search UI (login: `admin` / your `OPENSEARCH_PASSWORD`) |
+| 🛠️ `http://localhost:8081` | **Kafka UI** — monitor raw message traffic between services |
+ 
+---
+ 
 ### 🛑 Stopping the system
  
 ```bash
@@ -170,5 +185,5 @@ docker compose down
 Your indexed logs are saved in the `outputs/` folder and in the OpenSearch volume — they persist between restarts.
  
 ---
-
+ 
 *For the full analytical guide including architecture diagrams, detailed field tables, and extended analysis, see `SOC_AI_Pipeline_Guide.docx` included in this repository.*
