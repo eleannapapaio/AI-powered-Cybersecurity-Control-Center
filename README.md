@@ -341,3 +341,39 @@ All configuration is done via the `.env` file and passed to containers through `
 | `FLUSH_INTERVAL` | `10` | Seconds before a partial batch is flushed |
 | `BATCH_POLL_INTERVAL` | `60` | Seconds the consumer waits between Kafka polls |
 | `ENVIRONMENT` | `lab` | Stamped on every log record (`lab` or `production`) |
+
+---
+
+## 📂 Supplementary Material
+
+The `supplementary material/` folder included in this repository contains three additional resources that complement this README with deeper analysis, technical documentation, and a live demonstration of the pipeline in action.
+
+---
+
+### 📊 Presentation
+
+**File:** `supplementary material/Presentation`
+
+A slide deck providing a full analytical overview of the SOC-AI Log Pipeline project — covering the problem statement, system design, component breakdown, and key design decisions. Recommended as a starting point for understanding the project at a high level before diving into the technical detail.
+
+---
+
+### 📖 SOC AI Pipeline Guide
+
+**File:** `supplementary material/SOC_AI_Pipeline_Guide.pdf`
+
+A comprehensive technical reference document covering the complete project structure in depth. Includes architecture diagrams, detailed field-level schema tables, LangGraph pipeline stage descriptions, OpenSearch index mappings, and extended analysis of how each component fits together. Refer to this document for anything beyond what is covered in this README.
+
+---
+
+### 🎥 Demo Video
+
+**File:** `supplementary material/Demo.mp4`
+
+Downlaod the Demo.mp4 to watch a recorded walkthrough demonstrating the pipeline working end-to-end across two real scenarios:
+
+**Scenario 1 — GNS3 Lab Network**
+A simulated network built in GNS3 consisting of a Cisco ASA firewall, a Cisco IOS router, a switch, and a cloud bridge. The demo shows a ping to `192.168.122.1` being issued, the resulting syslog traffic flowing into the pipeline, the parsed and indexed entries appearing in the OpenSearch Dashboards, and the SOC AI Chatbot being queried with natural-language questions based on those live logs.
+
+**Scenario 2 — Home Router (Real Device)**
+A consumer home router connected directly to the pipeline. The demo shows log volume increasing in real time on the ISP's management page, the same increase reflected in OpenSearch Dashboards as entries are ingested, and a natural-language question submitted to the chatbot that returns a structured, AI-generated answer drawn from the live log data.
